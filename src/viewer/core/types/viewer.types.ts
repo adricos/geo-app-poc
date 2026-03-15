@@ -1,8 +1,3 @@
-export interface ViewerRuntimeState {
-  ready: boolean;
-  engine: 'maplibre' | 'cesium';
-}
-
 /** Feature picked from the map (e.g. via queryRenderedFeatures). Used by property insights. */
 export interface SelectedMapFeature {
   id: string;

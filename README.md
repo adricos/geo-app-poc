@@ -119,7 +119,6 @@ src/
     core/
       contracts/
         viewer-adapter.ts
-        viewer-events.ts
         viewer-layer.ts
       context/
         use-viewer-registry.ts

@@ -6,12 +6,4 @@ export class ViewerRegistry {
   registerLayer(layer: ViewerLayerDefinition) {
     this.layers.set(layer.id, layer);
   }
-
-  getLayer(id: string) {
-    return this.layers.get(id) ?? null;
-  }
-
-  listLayers() {
-    return Array.from(this.layers.values());
-  }
 }
