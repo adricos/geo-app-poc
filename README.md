@@ -1,0 +1,377 @@
+# Geo App
+
+## Purpose
+
+This project is a React + TypeScript geospatial application that supports **MapLibre (2D)**, **Mapbox (2D)**, and **Cesium (3D)** viewers behind a shared abstraction. The app is MapLibre-first for day-to-day 2D workflows, with Mapbox and Cesium available as alternative 2D and 3D options.
+
+The implementation includes:
+
+* a modular application shell with a viewer switcher (MapLibre / Mapbox / Cesium)
+* a viewer abstraction layer (contracts, store, registry)
+* **MapLibre** implementation using `react-map-gl` (maplibre), with a consolidated map controls widget (style + layers)
+* **Mapbox** implementation using `react-map-gl` (mapbox) + mapbox-gl; same style/layer widget pattern (requires Mapbox access token)
+* **Cesium** implementation using Resium, with the same style/layer controls pattern
+* map style presets per viewer (MapLibre, Mapbox, Cesium) stored separately in the viewer store
+* separation between domain logic, viewer infrastructure, and user-facing features
+
+---
+
+## Architectural decisions
+
+### 1. MapLibre first, Mapbox and Cesium available
+
+The primary rendering engine is **MapLibre GL JS** via **`react-map-gl`**, with **Mapbox** (also via **`react-map-gl`**) and **Cesium** (via **Resium**) as additional viewers. The sidebar lets users switch between “MapLibre (2D)”, “Mapbox (2D)”, and “Cesium (3D)”.
+
+MapLibre remains the default because the main workflows are:
+
+* map-first 2D
+* imagery and boundary overlays
+* parcel/property exploration
+* customer-facing SaaS workflows
+
+Cesium is implemented so 3D globe use cases are supported without restructuring the app. Feature logic depends on `viewer/core` contracts so it can stay engine-agnostic where possible.
+
+### 2. One application, modular internals
+
+The project is intentionally a **single frontend application** rather than multiple apps or microfrontends.
+
+Reasoning:
+
+* same team ownership
+* simpler routing, auth, state, and deployment model
+* lower coordination overhead
+* better developer experience during the early product phase
+
+If the 3D experience later becomes substantial enough, it can be introduced as a dedicated module or route without restructuring the whole app.
+
+### 3. Viewer abstraction boundary
+
+A shared viewer contract lives under `src/viewer/core/contracts`.
+
+Feature modules should depend on this abstraction instead of directly depending on the underlying rendering engine.
+
+This makes the codebase more resilient if:
+
+* the rendering engine changes
+* a second rendering engine is added
+* common feature logic needs to work across 2D and 3D viewers
+
+This does **not** make engine migration free, but it reduces the blast radius.
+
+### 4. Clear separation of concerns
+
+The project is organized into distinct layers:
+
+* `app/` → bootstrap, providers, composition
+* `shared/` → generic application-wide utilities and shell components
+* `domain/` → business/domain models and schemas
+* `viewer/` → viewer contracts and concrete implementations
+* `features/` → user-facing product capabilities
+
+The intent is to keep:
+
+* domain concepts out of viewer internals
+* feature behavior out of shared utilities
+* engine-specific code out of feature modules
+
+### 5. Kebab-case for files and folders
+
+To reduce inconsistency across contributors and avoid case-sensitivity issues across filesystems, the project uses:
+
+* **kebab-case** for files and folders
+* **PascalCase** for React component/type exports
+* **camelCase** for functions and hooks
+
+---
+
+## Project structure
+
+```text
+src/
+  app/
+    app.tsx
+    main.tsx
+    providers/
+      app-providers.tsx
+    router/
+
+  shared/
+    config/
+      env.ts
+      map-style-presets.ts
+    ui/
+      shell.tsx
+    state/
+      viewer-store.ts
+    lib/
+
+  domain/
+    property/
+      property.types.ts
+      property.schemas.ts
+    imagery/
+      imagery.types.ts
+      imagery.schemas.ts
+    annotation/
+      annotation.types.ts
+
+  viewer/
+    core/
+      contracts/
+        viewer-adapter.ts
+        viewer-events.ts
+        viewer-layer.ts
+      context/
+        use-viewer-registry.ts
+        viewer-registry-context.tsx
+      types/
+        geo.types.ts
+        viewer.types.ts
+      services/
+        viewer-registry.ts
+
+    maplibre/
+      components/
+        map-libre-viewer.tsx
+        map-controls-widget.tsx
+      adapter/
+        map-libre-viewer-adapter.ts
+      hooks/
+        use-map-libre-viewer-adapter.ts
+
+    mapbox/
+      components/
+        mapbox-viewer.tsx
+        mapbox-map-controls-widget.tsx
+      adapter/
+        mapbox-viewer-adapter.ts
+      config/
+        mapbox-style-presets.ts
+      hooks/
+        use-mapbox-viewer-adapter.ts
+
+    cesium/
+      components/
+        cesium-viewer.tsx
+        cesium-map-controls-widget.tsx
+      config/
+        cesium-imagery-presets.ts
+      adapter/
+        cesium-viewer-adapter.ts
+      hooks/
+        use-cesium-viewer-adapter.ts
+
+  features/
+    property-insights/
+      components/
+        property-insights-panel.tsx
+      hooks/
+      api/
+
+    (map-explorer, measurements, annotations: placeholders)
+```
+
+---
+
+## Technology stack
+
+### Core
+
+* **React**
+* **TypeScript**
+* **Vite**
+
+### Viewer
+
+* **MapLibre GL JS** + **react-map-gl** (maplibre) — default 2D map
+* **Mapbox GL JS** + **react-map-gl** (mapbox) — optional 2D map (requires `VITE_MAPBOX_ACCESS_TOKEN`)
+* **Cesium** + **Resium** — 3D globe
+* **vite-plugin-cesium** — Cesium build and assets for Vite
+
+### State / data / validation
+
+* **@tanstack/react-query**
+* **zustand**
+* **zod**
+
+### Planned extension points
+
+* **deck.gl** for advanced overlay rendering
+* **Turf** for client-side geospatial calculations
+* **Terra Draw** for drawing/editing workflows
+
+---
+
+## Requirements
+
+* **Node.js 20+**
+* **npm 10+**
+
+---
+
+## Installation
+
+From the project root:
+
+```bash
+npm install
+```
+
+---
+
+## Running the application
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Run type checking:
+
+```bash
+npm run typecheck
+```
+
+Run tests:
+
+```bash
+npm run test
+```
+
+Run tests with coverage (report in `coverage/` and terminal summary):
+
+```bash
+npm run test:coverage
+```
+
+Coverage uses Vitest’s v8 provider; reports include text summary, HTML (`coverage/index.html`), and lcov. Only `src/` is measured; test files and config are excluded.
+
+Build for production:
+
+```bash
+npm run build
+```
+
+Preview the production build:
+
+```bash
+npm run preview
+```
+
+---
+
+## Environment variables
+
+The project currently supports:
+
+| Variable | Description |
+|----------|-------------|
+| `VITE_MAP_STYLE_URL` | Optional. Overrides the selected map style for MapLibre when set. When unset, the app uses the chosen preset from the viewer store for MapLibre (Mapbox and Cesium use their own store keys). |
+| `VITE_CESIUM_ION_ACCESS_TOKEN` | Optional. Cesium Ion default access token. When set, enables Ion imagery and terrain in the Cesium (3D) viewer. Get a token at [ion.cesium.com/tokens](https://ion.cesium.com/tokens). |
+| `VITE_ARCGIS_ACCESS_TOKEN` | Optional. ArcGIS API key. When set, assigned to `Cesium.ArcGisMapService.defaultAccessToken` so the app stops using the default token and the warning goes away. Get a key at [developers.arcgis.com](https://developers.arcgis.com). |
+| `VITE_MAPBOX_ACCESS_TOKEN` | Required for the Mapbox (2D) viewer. When set, the Mapbox viewer is usable; otherwise a placeholder message is shown. Get a token at [account.mapbox.com/access-tokens](https://account.mapbox.com/access-tokens/). |
+
+Create a local environment file if needed:
+
+```bash
+cp .env.example .env.local
+```
+
+Example:
+
+```bash
+VITE_MAP_STYLE_URL=https://demotiles.maplibre.org/style.json
+# Optional, for Cesium (3D viewer)
+VITE_CESIUM_ION_ACCESS_TOKEN=your_ion_token_here
+VITE_ARCGIS_ACCESS_TOKEN=your_arcgis_key_here
+# Required for Mapbox (2D) viewer
+VITE_MAPBOX_ACCESS_TOKEN=your_mapbox_token_here
+```
+
+---
+
+## Current state of the scaffold
+
+What is implemented:
+
+* Vite + React + TypeScript setup
+* App shell with optional viewer switcher (MapLibre / Mapbox / Cesium)
+* Query client provider and environment parsing (Zod)
+* Viewer adapter contract and viewer store (Zustand); camera and map style key in store
+* **MapLibre**: `MapLibreViewer`, `MapLibreViewerAdapter`, and a consolidated **map controls widget** (icon → style dropdown → full panel with layer list, tri-state select all/none, friendly layer names)
+* **Mapbox**: `MapboxViewer`, `MapboxViewerAdapter`, and **MapboxMapControlsWidget** (same pattern; requires `VITE_MAPBOX_ACCESS_TOKEN`). Mapbox style presets (default, streets, satellite, satellite-streets, outdoors, light, dark) via `mapStyleKeyMapbox`.
+* **Cesium**: `CesiumViewer`, `CesiumViewerAdapter`, and the same **map controls widget** pattern (style presets, imagery layer visibility)
+* **MapLibre** style presets (default, streets, satellite, terrain, dark) via style JSON URLs; **Mapbox** style presets via Mapbox Styles API; **Cesium** imagery presets (same labels plus optional “Cesium World Imagery” when Ion token is set). Each viewer has its own store key (`mapStyleKey` / `mapStyleKeyMapbox` / `mapStyleKeyCesium`) so switching viewers keeps the correct style per engine.
+* Viewer registry and layer registration (used by MapLibre)
+
+What is still thin or placeholder:
+
+* Highlight strategy
+* Feature interaction model (click-to-inspect, etc.)
+* Domain schemas beyond placeholders
+* deck.gl, Terra Draw, drawing/editing workflows
+
+---
+
+## Engineering guidelines
+
+### Feature modules should not depend directly on a specific viewer engine
+
+Prefer this:
+
+* feature logic depends on `viewer/core/contracts` and the viewer store
+* engine-specific behavior stays inside `viewer/maplibre`, `viewer/mapbox`, or `viewer/cesium`
+
+Avoid this:
+
+* importing `maplibre-gl`, `mapbox-gl`, or `cesium`/`resium` directly inside business feature modules unless there is a very strong reason
+
+### Keep `shared/` small
+
+`shared/` should not become a catch-all folder.
+
+Before adding code there, ask whether it really belongs in:
+
+* `domain/`
+* `viewer/`
+* `features/`
+
+### Keep viewer engine code in viewer/maplibre, viewer/mapbox, and viewer/cesium
+
+MapLibre, Mapbox, and Cesium are implemented. All engine-specific code (adapters, controls, imagery/style config) lives under `viewer/maplibre`, `viewer/mapbox`, or `viewer/cesium`. Shared concepts (style key, camera, adapter interface) live in `viewer/core` and the viewer store.
+
+### Prefer explicit contracts over implicit coupling
+
+If a feature needs something from the viewer, define it as a contract in `viewer/core` before wiring it to a specific engine.
+
+---
+
+## Suggested next steps
+
+Recommended next implementation steps:
+
+1. Extend the source/layer registration model in `viewer/core` and align Cesium with it where useful
+2. Implement feature highlighting strategy for MapLibre (and Cesium if needed)
+3. Add click-to-inspect or selection behavior
+4. Introduce domain schemas for property and imagery data
+5. Add deck.gl only when overlay requirements justify it
+6. Optionally add Cesium Ion terrain or more imagery options when 3D requirements grow
+
+---
+
+## Notes for contributors
+
+When contributing:
+
+* keep file and folder names in kebab-case
+* preserve separation between feature code and engine-specific code
+* prefer small, explicit abstractions over premature generalization
+* avoid introducing Cesium-specific assumptions into shared viewer contracts unless they are truly cross-engine concepts
+
+If you need to add a new viewer capability, start by asking:
+
+1. Is this engine-agnostic? → put it in `viewer/core` or the viewer store.
+2. Is it specific to MapLibre, Mapbox, or Cesium? → keep it in `viewer/maplibre`, `viewer/mapbox`, or `viewer/cesium` respectively.
+
+That discipline keeps the project flexible as it grows.
