@@ -75,7 +75,7 @@ export function MapboxViewer() {
       if (f) {
         setSelectedFeature({
           id: String(f.id ?? (f.properties && (f.properties as Record<string, unknown>).id) ?? ''),
-          source: f.source,
+          source: f.source ?? '',
           sourceLayer: f.sourceLayer ?? undefined,
           layer: typeof f.layer === 'object' && f.layer && 'id' in f.layer ? String((f.layer as { id: string }).id) : undefined,
           properties: { ...positionProps, ...((f.properties as Record<string, unknown>) ?? {}) },
