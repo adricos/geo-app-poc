@@ -1,6 +1,7 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import * as Cesium from 'cesium';
 import { Viewer, ImageryLayer, useCesium } from 'resium';
+import type { ImageryProvider } from 'cesium';
 import { env } from '@/shared/config/env';
 import { useViewerStore } from '@/shared/state/viewer-store';
 import { useCesiumViewerAdapter } from '@/viewer/cesium/hooks/use-cesium-viewer-adapter';
@@ -43,16 +44,27 @@ function CesiumViewerInner() {
 
 export function CesiumViewer() {
   const mapStyleKeyCesium = useViewerStore((s) => s.mapStyleKeyCesium);
+  const [imageryProvider, setImageryProvider] = useState<ImageryProvider | null>(null);
 
-  const imageryProvider = useMemo(
-    () => createCesiumImageryProvider(mapStyleKeyCesium),
-    [mapStyleKeyCesium],
-  );
+  useEffect(() => {
+    const result = createCesiumImageryProvider(mapStyleKeyCesium);
+    if (result instanceof Promise) {
+      let cancelled = false;
+      result.then((p) => {
+        if (!cancelled) setImageryProvider(p);
+      });
+      return () => {
+        cancelled = true;
+      };
+    }
+    setImageryProvider(result);
+    return undefined;
+  }, [mapStyleKeyCesium]);
 
   return (
     <div className="map-root" role="application" aria-label="3D Map">
       <Viewer full>
-        <ImageryLayer imageryProvider={imageryProvider} />
+        {imageryProvider && <ImageryLayer imageryProvider={imageryProvider} />}
         <CesiumViewerInner />
       </Viewer>
     </div>

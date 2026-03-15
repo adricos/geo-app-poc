@@ -39,8 +39,10 @@ function createOsmProvider(): ImageryProvider {
   });
 }
 
-/** Create a Cesium imagery provider for the given preset key. Uses default (OSM) if Ion key is chosen but no token is set. */
-export function createCesiumImageryProvider(key: CesiumImageryPresetKey): ImageryProvider {
+/** Create a Cesium imagery provider for the given preset key. Uses default (OSM) if Ion key is chosen but no token is set. Returns a Promise for ion-world-imagery (use fromAssetId). */
+export function createCesiumImageryProvider(
+  key: CesiumImageryPresetKey,
+): ImageryProvider | Promise<ImageryProvider> {
   if (key === 'ion-world-imagery' && !env.cesiumIonAccessToken) {
     return createOsmProvider();
   }
@@ -51,7 +53,7 @@ export function createCesiumImageryProvider(key: CesiumImageryPresetKey): Imager
         credit: 'Esri',
       });
     case 'ion-world-imagery':
-      return new Cesium.IonImageryProvider({ assetId: 2 });
+      return Cesium.IonImageryProvider.fromAssetId(2);
     case 'default':
     case 'streets':
     case 'dark':

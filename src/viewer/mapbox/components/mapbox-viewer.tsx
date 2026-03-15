@@ -58,10 +58,11 @@ export function MapboxViewer() {
     (e: { point: { x: number; y: number }; lngLat?: { lng: number; lat: number } }) => {
       const map = mapRef?.getMap();
       if (!map) return;
-      const lngLat = e.lngLat ?? map.unproject(e.point);
+      const point: [number, number] = [e.point.x, e.point.y];
+      const lngLat = e.lngLat ?? map.unproject(point);
       const lat = lngLat.lat;
       const lng = lngLat.lng;
-      const features = map.queryRenderedFeatures(e.point);
+      const features = map.queryRenderedFeatures(point);
       const f = features[0];
       const positionProps: Record<string, unknown> = {
         latitude: lat,

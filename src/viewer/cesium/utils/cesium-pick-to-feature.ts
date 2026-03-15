@@ -37,8 +37,8 @@ export function cesiumPickedToSelectedFeature(picked: unknown): SelectedMapFeatu
       if (value !== undefined && value !== null) properties[id] = value;
     }
     const tilesetName =
-      feature.tileset?.url != null
-        ? feature.tileset.url.split('/').pop() ?? '3D Tiles'
+      feature.tileset?.resource?.url != null
+        ? feature.tileset.resource.url.split('/').pop() ?? '3D Tiles'
         : '3D Tiles';
     return {
       id: String(feature.featureId ?? ''),
