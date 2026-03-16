@@ -24,6 +24,9 @@ interface ViewerStoreState {
   /** Feature selected by clicking the map (MapLibre/Mapbox). Cleared when switching viewer or clicking empty space. */
   selectedFeature: SelectedMapFeature | null;
   setSelectedFeature: (feature: SelectedMapFeature | null) => void;
+  /** Use case: Argentina demographics overlay (deck.gl on 2D, GeoJsonDataSource on Cesium). */
+  argentinaDemographicsEnabled: boolean;
+  setArgentinaDemographicsEnabled: (enabled: boolean) => void;
 }
 
 export const useViewerStore = create<ViewerStoreState>((set) => ({
@@ -39,4 +42,6 @@ export const useViewerStore = create<ViewerStoreState>((set) => ({
   setMapStyleKeyMapbox: (mapStyleKeyMapbox) => set({ mapStyleKeyMapbox }),
   selectedFeature: null,
   setSelectedFeature: (selectedFeature) => set({ selectedFeature }),
+  argentinaDemographicsEnabled: false,
+  setArgentinaDemographicsEnabled: (argentinaDemographicsEnabled) => set({ argentinaDemographicsEnabled }),
 }));

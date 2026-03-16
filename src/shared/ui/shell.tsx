@@ -1,4 +1,5 @@
 import type { PropsWithChildren } from 'react';
+import { ArgentinaDemographicsControl } from '@/features/argentina-demographics/components/argentina-demographics-control';
 import { PropertyInsightsPanel } from '@/features/property-insights/components/property-insights-panel';
 
 export type ViewerType = 'maplibre' | 'mapbox' | 'cesium';
@@ -35,6 +36,7 @@ export function Shell({ children, viewerType = 'maplibre', onViewerTypeChange }:
             </select>
           </div>
         )}
+        <ArgentinaDemographicsControl viewerType={viewerType} />
         <PropertyInsightsPanel />
       </aside>
       <main id="main-content" className="content" role="main">

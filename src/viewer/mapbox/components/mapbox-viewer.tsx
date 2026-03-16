@@ -1,9 +1,12 @@
-import { useMemo, useCallback, useState, useEffect } from 'react';
+import type { ReactNode } from 'react';
+import { useMemo, useCallback, useState, useEffect, useRef } from 'react';
 import Map, { NavigationControl, type ViewState, type ViewStateChangeEvent } from 'react-map-gl/mapbox';
 import type { MapRef } from 'react-map-gl/mapbox';
 import { env } from '@/shared/config/env';
 import { useViewerStore } from '@/shared/state/viewer-store';
 import { useViewerRegistry } from '@/viewer/core/context/use-viewer-registry';
+import { MapOverlayProvider } from '@/viewer/core/context/map-overlay-context';
+import type { Bounds } from '@/viewer/core/types/geo.types';
 import { useMapboxViewerAdapter } from '@/viewer/mapbox/hooks/use-mapbox-viewer-adapter';
 import { getMapboxStyleUrl } from '@/viewer/mapbox/config/mapbox-style-presets';
 import { MapboxMapControlsWidget } from '@/viewer/mapbox/components/mapbox-map-controls-widget';
@@ -17,12 +20,29 @@ const INITIAL_VIEW_STATE: ViewState = {
   padding: { top: 0, bottom: 0, left: 0, right: 0 },
 };
 
-export function MapboxViewer() {
+interface MapboxViewerProps {
+  children?: ReactNode;
+}
+
+export function MapboxViewer({ children }: MapboxViewerProps) {
   const [mapRef, setMapRef] = useState<MapRef | null>(null);
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const [overlaySize, setOverlaySize] = useState({ width: 800, height: 600 });
   const setCamera = useViewerStore((s) => s.setCamera);
   const setSelectedFeature = useViewerStore((s) => s.setSelectedFeature);
   const mapStyleKeyMapbox = useViewerStore((s) => s.mapStyleKeyMapbox);
+  const camera = useViewerStore((s) => s.camera);
   const registry = useViewerRegistry();
+
+  useEffect(() => {
+    const el = mapContainerRef.current;
+    if (!el) return;
+    const updateSize = () => setOverlaySize({ width: el.offsetWidth, height: el.offsetHeight });
+    updateSize();
+    const ro = new ResizeObserver(updateSize);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   useMapboxViewerAdapter(mapRef);
 
@@ -40,7 +60,7 @@ export function MapboxViewer() {
     [mapStyleKeyMapbox],
   );
 
-  const handleMoveEnd = useCallback(
+  const handleViewStateChange = useCallback(
     (event: ViewStateChangeEvent) => {
       const v = event.viewState;
       setCamera({
@@ -52,6 +72,11 @@ export function MapboxViewer() {
       });
     },
     [setCamera],
+  );
+
+  const handleMoveEnd = useCallback(
+    (event: ViewStateChangeEvent) => handleViewStateChange(event),
+    [handleViewStateChange],
   );
 
   const handleClick = useCallback(
@@ -92,6 +117,50 @@ export function MapboxViewer() {
     [mapRef, setSelectedFeature],
   );
 
+  const overlayViewState = useMemo(() => {
+    const c = camera;
+    if (c)
+      return {
+        longitude: c.lng,
+        latitude: c.lat,
+        zoom: c.zoom,
+        bearing: c.bearing ?? 0,
+        pitch: c.pitch ?? 0,
+      };
+    return {
+      longitude: INITIAL_VIEW_STATE.longitude,
+      latitude: INITIAL_VIEW_STATE.latitude,
+      zoom: INITIAL_VIEW_STATE.zoom,
+      bearing: INITIAL_VIEW_STATE.bearing ?? 0,
+      pitch: INITIAL_VIEW_STATE.pitch ?? 0,
+    };
+  }, [camera]);
+
+  const requestFitBounds = useCallback(
+    (bounds: Bounds, options?: { padding?: number; maxZoom?: number }) => {
+      const map = mapRef?.getMap();
+      if (!map) return;
+      map.fitBounds(
+        [
+          [bounds[0], bounds[1]],
+          [bounds[2], bounds[3]],
+        ],
+        { padding: options?.padding ?? 48, maxZoom: options?.maxZoom },
+      );
+    },
+    [mapRef],
+  );
+
+  const overlayContextValue = useMemo(
+    () => ({
+      viewState: overlayViewState,
+      width: overlaySize.width,
+      height: overlaySize.height,
+      requestFitBounds,
+    }),
+    [overlayViewState, overlaySize.width, overlaySize.height, requestFitBounds],
+  );
+
   if (!env.mapboxAccessToken) {
     return (
       <div className="map-root" role="application" aria-label="Map">
@@ -105,7 +174,13 @@ export function MapboxViewer() {
   }
 
   return (
-    <div className="map-root" role="application" aria-label="Map">
+    <div
+      ref={mapContainerRef}
+      className="map-root"
+      role="application"
+      aria-label="Map"
+      style={{ position: 'relative', width: '100%', height: '100%' }}
+    >
       <Map
         ref={(instance) => setMapRef(instance)}
         mapboxAccessToken={env.mapboxAccessToken}
@@ -114,11 +189,27 @@ export function MapboxViewer() {
         reuseMaps
         initialViewState={INITIAL_VIEW_STATE}
         onMoveEnd={handleMoveEnd}
+        onMove={handleViewStateChange}
         onClick={handleClick}
       >
         <NavigationControl position="top-right" />
         <MapboxMapControlsWidget />
       </Map>
+      {children != null && (
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            pointerEvents: 'none',
+            zIndex: 5,
+          }}
+          aria-hidden
+        >
+          <MapOverlayProvider value={overlayContextValue}>
+            {children}
+          </MapOverlayProvider>
+        </div>
+      )}
     </div>
   );
 }

@@ -8,6 +8,8 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': path.resolve(__dirname, './src'),
+            // Ensure mapbox-gl CSS resolves (some setups fail on bare subpath)
+            'mapbox-gl/dist/mapbox-gl.css': path.resolve(__dirname, 'node_modules/mapbox-gl/dist/mapbox-gl.css'),
         },
     },
 });

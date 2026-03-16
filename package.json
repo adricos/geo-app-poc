@@ -15,8 +15,11 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@deck.gl/layers": "^9.2.11",
+    "@deck.gl/react": "^9.2.11",
     "@tanstack/react-query": "^5.90.5",
     "cesium": "^1.126.0",
+    "deck.gl": "^9.2.11",
     "mapbox-gl": "^3.8.0",
     "maplibre-gl": "^5.20.0",
     "react": "^19.1.1",

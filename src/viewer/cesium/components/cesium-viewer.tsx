@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 import * as Cesium from 'cesium';
 import { Viewer, ImageryLayer, useCesium } from 'resium';
@@ -19,7 +20,11 @@ if (env.arcgisAccessToken) {
   Cesium.ArcGisMapService.defaultAccessToken = env.arcgisAccessToken;
 }
 
-function CesiumViewerInner() {
+interface CesiumViewerInnerProps {
+  children?: ReactNode;
+}
+
+function CesiumViewerInner({ children }: CesiumViewerInnerProps) {
   const { viewer } = useCesium();
   const setSelectedFeature = useViewerStore((s) => s.setSelectedFeature);
   useCesiumViewerAdapter(viewer);
@@ -39,10 +44,19 @@ function CesiumViewerInner() {
     return () => handler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK);
   }, [viewer, setSelectedFeature]);
 
-  return <CesiumMapControlsWidget />;
+  return (
+    <>
+      <CesiumMapControlsWidget />
+      {children}
+    </>
+  );
 }
 
-export function CesiumViewer() {
+interface CesiumViewerProps {
+  children?: ReactNode;
+}
+
+export function CesiumViewer({ children }: CesiumViewerProps) {
   const mapStyleKeyCesium = useViewerStore((s) => s.mapStyleKeyCesium);
   const [imageryProvider, setImageryProvider] = useState<ImageryProvider | null>(null);
 
@@ -65,7 +79,7 @@ export function CesiumViewer() {
     <div className="map-root" role="application" aria-label="3D Map">
       <Viewer full>
         {imageryProvider && <ImageryLayer imageryProvider={imageryProvider} />}
-        <CesiumViewerInner />
+        <CesiumViewerInner>{children}</CesiumViewerInner>
       </Viewer>
     </div>
   );
