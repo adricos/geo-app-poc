@@ -1,4 +1,4 @@
-import { createContext, useContext, type ReactNode } from 'react';
+import { createContext, type ReactNode } from 'react';
 import type { Bounds } from '@/viewer/core/types/geo.types';
 
 export interface MapOverlayViewState {
@@ -16,11 +16,7 @@ export interface MapOverlayContextValue {
   requestFitBounds: (bounds: Bounds, options?: { padding?: number; maxZoom?: number }) => void;
 }
 
-const MapOverlayContext = createContext<MapOverlayContextValue | null>(null);
-
-export function useMapOverlay(): MapOverlayContextValue | null {
-  return useContext(MapOverlayContext);
-}
+export const MapOverlayContext = createContext<MapOverlayContextValue | null>(null);
 
 interface MapOverlayProviderProps {
   value: MapOverlayContextValue;

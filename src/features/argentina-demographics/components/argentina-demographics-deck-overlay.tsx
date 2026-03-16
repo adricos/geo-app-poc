@@ -1,7 +1,7 @@
 import { useMemo, useEffect, useRef } from 'react';
 import { DeckGL } from '@deck.gl/react';
 import { GeoJsonLayer } from '@deck.gl/layers';
-import { useMapOverlay } from '@/viewer/core/context/map-overlay-context';
+import { useMapOverlay } from '@/viewer/core/context/use-map-overlay';
 import { useArgentinaDemographicsData } from '../hooks/use-argentina-demographics-data';
 import { rankToRgba } from '../utils/rank-color';
 
