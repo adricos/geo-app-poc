@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useMemo, type ReactNode } from 'react';
+import { createContext, useContext, type ReactNode } from 'react';
 import type { Bounds } from '@/viewer/core/types/geo.types';
 
 export interface MapOverlayViewState {
