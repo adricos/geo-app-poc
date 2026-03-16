@@ -12,6 +12,7 @@ The implementation includes:
 * **Mapbox** implementation using `react-map-gl` (mapbox) + mapbox-gl; same style/layer widget pattern (requires Mapbox access token)
 * **Cesium** implementation using Resium, with the same style/layer controls pattern
 * map style presets per viewer (MapLibre, Mapbox, Cesium) stored separately in the viewer store
+* **Argentina demographics** use case: city-level population (INDEC 2022) as a **deck.gl** overlay on 2D viewers and a **Cesium** GeoJSON layer on the 3D viewer; feature is decoupled from viewers via **MapOverlayContext** and composition (overlay/layer passed as viewer `children` from the app)
 * separation between domain logic, viewer infrastructure, and user-facing features
 
 ---
@@ -121,6 +122,8 @@ src/
         viewer-adapter.ts
         viewer-layer.ts
       context/
+        map-overlay-context.tsx   # 2D overlay viewState + requestFitBounds
+        use-map-overlay.ts
         use-viewer-registry.ts
         viewer-registry-context.tsx
       types/
@@ -161,6 +164,18 @@ src/
         use-cesium-viewer-adapter.ts
 
   features/
+    argentina-demographics/
+      components/
+        argentina-demographics-control.tsx    # sidebar checkbox + legend
+        argentina-demographics-deck-overlay.tsx
+        argentina-demographics-cesium-layer.tsx
+      hooks/
+        use-argentina-demographics-data.ts
+      utils/
+        rank-color.ts
+      data/
+        argentina-localidades.geojson.json
+
     property-insights/
       components/
         property-insights-panel.tsx
@@ -193,11 +208,11 @@ src/
 * **zustand**
 * **zod**
 
-### Planned extension points
+### Overlays and tooling
 
-* **deck.gl** for advanced overlay rendering
-* **Turf** for client-side geospatial calculations
-* **Terra Draw** for drawing/editing workflows
+* **deck.gl** — used for the Argentina demographics overlay on 2D viewers (GeoJsonLayer, rank-based colors, population-proportional radius)
+* **Turf** — planned for client-side geospatial calculations
+* **Terra Draw** — planned for drawing/editing workflows
 
 ---
 
@@ -298,18 +313,23 @@ What is implemented:
 * App shell with optional viewer switcher (MapLibre / Mapbox / Cesium)
 * Query client provider and environment parsing (Zod)
 * Viewer adapter contract and viewer store (Zustand); camera and map style key in store
-* **MapLibre**: `MapLibreViewer`, `MapLibreViewerAdapter`, and a consolidated **map controls widget** (icon → style dropdown → full panel with layer list, tri-state select all/none, friendly layer names)
-* **Mapbox**: `MapboxViewer`, `MapboxViewerAdapter`, and **MapboxMapControlsWidget** (same pattern; requires `VITE_MAPBOX_ACCESS_TOKEN`). Mapbox style presets (default, streets, satellite, satellite-streets, outdoors, light, dark) via `mapStyleKeyMapbox`.
-* **Cesium**: `CesiumViewer`, `CesiumViewerAdapter`, and the same **map controls widget** pattern (style presets, imagery layer visibility)
+* **MapLibre**: `MapLibreViewer`, `MapLibreViewerAdapter`, and a consolidated **map controls widget** (icon → style dropdown → full panel with layer list, tri-state select all/none, friendly layer names). Accepts `children` for overlay composition; provides **MapOverlayContext** (viewState, size, `requestFitBounds`).
+* **Mapbox**: `MapboxViewer`, `MapboxViewerAdapter`, and **MapboxMapControlsWidget** (same pattern; requires `VITE_MAPBOX_ACCESS_TOKEN`). Mapbox style presets (default, streets, satellite, satellite-streets, outdoors, light, dark) via `mapStyleKeyMapbox`. Same overlay `children` + **MapOverlayContext** pattern as MapLibre.
+* **Cesium**: `CesiumViewer`, `CesiumViewerAdapter`, and the same **map controls widget** pattern (style presets, imagery layer visibility). Accepts `children` (e.g. feature layers) for composition.
 * **MapLibre** style presets (default, streets, satellite, terrain, dark) via style JSON URLs; **Mapbox** style presets via Mapbox Styles API; **Cesium** imagery presets (same labels plus optional “Cesium World Imagery” when Ion token is set). Each viewer has its own store key (`mapStyleKey` / `mapStyleKeyMapbox` / `mapStyleKeyCesium`) so switching viewers keeps the correct style per engine.
 * Viewer registry and layer registration (used by MapLibre)
+* **Argentina demographics** feature (decoupled from viewers):
+  * **Data**: city-level GeoJSON (localidades, INDEC 2022) with population; rank computed in `useArgentinaDemographicsData`.
+  * **2D (MapLibre/Mapbox)**: `ArgentinaDemographicsDeckOverlay` — deck.gl GeoJsonLayer, uses `useMapOverlay()` for viewState/size and `requestFitBounds` to fly to Argentina when enabled; circle size by population, color by rank (shared `rankToRgba`).
+  * **3D (Cesium)**: `ArgentinaDemographicsCesiumLayer` — GeoJsonDataSource with ellipses and info balloon; same color/size logic.
+  * **Shell**: `ArgentinaDemographicsControl` in the sidebar (checkbox + legend). App composes overlay/layer as viewer `children` when the store flag is enabled; viewers do not import the feature.
 
 What is still thin or placeholder:
 
 * Highlight strategy
 * Feature interaction model (click-to-inspect, etc.)
 * Domain schemas beyond placeholders
-* deck.gl, Terra Draw, drawing/editing workflows
+* Terra Draw, drawing/editing workflows
 
 ---
 
@@ -354,7 +374,7 @@ Recommended next implementation steps:
 2. Implement feature highlighting strategy for MapLibre (and Cesium if needed)
 3. Add click-to-inspect or selection behavior
 4. Introduce domain schemas for property and imagery data
-5. Add deck.gl only when overlay requirements justify it
+5. Add more overlay use cases via MapOverlayContext (2D) and viewer children (Cesium) as needed
 6. Optionally add Cesium Ion terrain or more imagery options when 3D requirements grow
 
 ---
