@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as Cesium from 'cesium';
 import { Viewer, ImageryLayer, useCesium } from 'resium';
 import type { ImageryProvider } from 'cesium';
@@ -56,9 +56,12 @@ interface CesiumViewerProps {
   children?: ReactNode;
 }
 
+/** Delay mounting Cesium Viewer until the container has non-zero size to avoid WebGL context/resize errors (e.g. maxTextureDimension2D). */
 export function CesiumViewer({ children }: CesiumViewerProps) {
   const mapStyleKeyCesium = useViewerStore((s) => s.mapStyleKeyCesium);
   const [imageryProvider, setImageryProvider] = useState<ImageryProvider | null>(null);
+  const [containerReady, setContainerReady] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const result = createCesiumImageryProvider(mapStyleKeyCesium);
@@ -75,14 +78,43 @@ export function CesiumViewer({ children }: CesiumViewerProps) {
     return undefined;
   }, [mapStyleKeyCesium]);
 
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    let fallbackId: number | null = null;
+    const checkSize = () => {
+      if (el.clientWidth > 0 && el.clientHeight > 0) {
+        if (fallbackId != null) window.clearTimeout(fallbackId);
+        setContainerReady(true);
+        return true;
+      }
+      return false;
+    };
+    if (checkSize()) return;
+    const ro = new ResizeObserver(() => {
+      if (checkSize()) ro.disconnect();
+    });
+    ro.observe(el);
+    fallbackId = window.setTimeout(() => {
+      fallbackId = null;
+      setContainerReady(true);
+    }, 100);
+    return () => {
+      ro.disconnect();
+      if (fallbackId != null) window.clearTimeout(fallbackId);
+    };
+  }, []);
+
   return (
-    <div className="map-root" role="application" aria-label="3D Map">
-      <Viewer full baseLayer={false}>
-        {imageryProvider && (
-          <ImageryLayer key={mapStyleKeyCesium} imageryProvider={imageryProvider} />
-        )}
-        <CesiumViewerInner>{children}</CesiumViewerInner>
-      </Viewer>
+    <div ref={containerRef} className="map-root" role="application" aria-label="3D Map">
+      {containerReady && (
+        <Viewer full baseLayer={false}>
+          {imageryProvider && (
+            <ImageryLayer key={mapStyleKeyCesium} imageryProvider={imageryProvider} />
+          )}
+          <CesiumViewerInner>{children}</CesiumViewerInner>
+        </Viewer>
+      )}
     </div>
   );
 }
