@@ -17,8 +17,7 @@ export function Shell({ children, viewerType = 'maplibre', onViewerTypeChange }:
         Skip to map
       </a>
       <aside className="sidebar" aria-label="App navigation and tools">
-        <h1>Geo App</h1>
-        <p>MapLibre-first viewer shell</p>
+        <h1>Geo App POC</h1>
         {onViewerTypeChange && (
           <div className="viewer-switcher">
             <label htmlFor="viewer-type" className="viewer-switcher__label">
