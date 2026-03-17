@@ -22,8 +22,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -64.181,
-          -31.413
+          -64.1888,
+          -31.4167
         ]
       },
       "properties": {
@@ -38,8 +38,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -60.639,
-          -32.947
+          -60.6397,
+          -32.9443
         ]
       },
       "properties": {
@@ -54,8 +54,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -57.955,
-          -34.921
+          -57.9545,
+          -34.9215
         ]
       },
       "properties": {
@@ -70,8 +70,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -60.7,
-          -32.95
+          -60.7000,
+          -31.6200
         ]
       },
       "properties": {
@@ -86,8 +86,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -68.827,
-          -32.889
+          -68.8458,
+          -32.8895
         ]
       },
       "properties": {
@@ -102,8 +102,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -65.209,
-          -26.824
+          -65.2043,
+          -26.8300
         ]
       },
       "properties": {
@@ -118,8 +118,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -65.411,
-          -24.786
+          -65.4109,
+          -24.7821
         ]
       },
       "properties": {
@@ -134,8 +134,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.384,
-          -34.611
+          -58.2635,
+          -34.7214
         ]
       },
       "properties": {
@@ -150,8 +150,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.516,
-          -34.701
+          -58.5080,
+          -34.4754
         ]
       },
       "properties": {
@@ -166,8 +166,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.449,
-          -34.599
+          -58.3697,
+          -34.6644
         ]
       },
       "properties": {
@@ -182,14 +182,14 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.618,
-          -34.651
+          -63.2388,
+          -32.4137
         ]
       },
       "properties": {
         "id": "villa-nueva",
         "nombre": "Villa Nueva",
-        "provincia": "Buenos Aires",
+        "provincia": "Córdoba",
         "poblacion": 305000
       }
     },
@@ -198,8 +198,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.403,
-          -34.603
+          -58.3900,
+          -34.7000
         ]
       },
       "properties": {
@@ -214,8 +214,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.569,
-          -34.705
+          -58.5791,
+          -34.4267
         ]
       },
       "properties": {
@@ -230,8 +230,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.383,
-          -34.6
+          -58.4077,
+          -34.7607
         ]
       },
       "properties": {
@@ -246,8 +246,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.628,
-          -34.603
+          -58.5670,
+          -34.6730
         ]
       },
       "properties": {
@@ -262,8 +262,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.52,
-          -34.62
+          -58.5458,
+          -34.5804
         ]
       },
       "properties": {
@@ -278,8 +278,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.4,
-          -34.65
+          -58.7300,
+          -34.6600
         ]
       },
       "properties": {
@@ -294,8 +294,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.38,
-          -34.7
+          -58.7900,
+          -34.6200
         ]
       },
       "properties": {
@@ -310,8 +310,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.58,
-          -34.47
+          -58.3965,
+          -34.7506
         ]
       },
       "properties": {
@@ -326,8 +326,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.45,
-          -34.72
+          -58.7400,
+          -34.5100
         ]
       },
       "properties": {
@@ -342,8 +342,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.53,
-          -34.52
+          -58.3965,
+          -34.7506
         ]
       },
       "properties": {
@@ -358,8 +358,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.46,
-          -34.67
+          -58.7100,
+          -34.5400
         ]
       },
       "properties": {
@@ -374,8 +374,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.42,
-          -34.63
+          -58.6200,
+          -34.6500
         ]
       },
       "properties": {
@@ -390,8 +390,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.55,
-          -34.55
+          -58.2100,
+          -34.7700
         ]
       },
       "properties": {
@@ -406,8 +406,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.48,
-          -34.72
+          -58.9100,
+          -34.4600
         ]
       },
       "properties": {
@@ -422,8 +422,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.51,
-          -34.58
+          -58.2600,
+          -34.7800
         ]
       },
       "properties": {
@@ -438,8 +438,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.44,
-          -34.64
+          -58.6800,
+          -34.6600
         ]
       },
       "properties": {
@@ -454,8 +454,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.49,
-          -34.66
+          -58.6700,
+          -34.6500
         ]
       },
       "properties": {
@@ -470,8 +470,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.57,
-          -34.61
+          -58.6000,
+          -34.7000
         ]
       },
       "properties": {
@@ -486,8 +486,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -57.58,
-          -38
+          -57.5576,
+          -38.0040
         ]
       },
       "properties": {
@@ -502,8 +502,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.75,
-          -34.45
+          -62.2700,
+          -38.7200
         ]
       },
       "properties": {
@@ -518,8 +518,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -60.53,
-          -31.75
+          -60.5283,
+          -31.7317
         ]
       },
       "properties": {
@@ -534,8 +534,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.18,
-          -26.18
+          -58.8333,
+          -27.4667
         ]
       },
       "properties": {
@@ -550,8 +550,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -54.58,
-          -25.51
+          -55.8971,
+          -27.3672
         ]
       },
       "properties": {
@@ -566,8 +566,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -65.77,
-          -28.47
+          -64.2647,
+          -27.7951
         ]
       },
       "properties": {
@@ -582,8 +582,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -65.3,
-          -24.19
+          -65.3000,
+          -24.1833
         ]
       },
       "properties": {
@@ -598,8 +598,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -68.52,
-          -31.54
+          -68.5255,
+          -31.5375
         ]
       },
       "properties": {
@@ -614,8 +614,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -66.34,
-          -33.3
+          -66.3377,
+          -33.3000
         ]
       },
       "properties": {
@@ -630,12 +630,12 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -67.58,
-          -33
+          -65.7167,
+          -33.6833
         ]
       },
       "properties": {
-        "id": "san-luis-rio",
+        "id": "villa-mercedes",
         "nombre": "Villa Mercedes",
         "provincia": "San Luis",
         "poblacion": 111391
@@ -646,8 +646,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -63.8,
-          -38.42
+          -68.0641,
+          -38.9516
         ]
       },
       "properties": {
@@ -662,8 +662,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -67.57,
-          -43.3
+          -65.0999,
+          -43.3000
         ]
       },
       "properties": {
@@ -678,8 +678,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -67.58,
-          -39.03
+          -67.5800,
+          -39.0300
         ]
       },
       "properties": {
@@ -694,8 +694,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -67.58,
-          -43.25
+          -65.0427,
+          -42.7663
         ]
       },
       "properties": {
@@ -710,8 +710,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -68.15,
-          -38.73
+          -68.0000,
+          -38.9333
         ]
       },
       "properties": {
@@ -726,8 +726,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -71.25,
-          -41.13
+          -71.3000,
+          -41.1333
         ]
       },
       "properties": {
@@ -742,8 +742,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -68.2,
-          -38.72
+          -62.9900,
+          -40.8100
         ]
       },
       "properties": {
@@ -758,8 +758,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -70.37,
-          -50.34
+          -69.3167,
+          -51.6217
         ]
       },
       "properties": {
@@ -774,8 +774,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -68.3,
-          -54.8
+          -68.3000,
+          -54.8000
         ]
       },
       "properties": {
@@ -790,8 +790,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -60.44,
-          -31.65
+          -58.2333,
+          -32.4833
         ]
       },
       "properties": {
@@ -806,8 +806,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -60.53,
-          -32.95
+          -61.4900,
+          -34.5000
         ]
       },
       "properties": {
@@ -822,8 +822,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -61.7,
-          -33.75
+          -61.9667,
+          -34.6833
         ]
       },
       "properties": {
@@ -838,8 +838,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -60.21,
-          -32.48
+          -58.5167,
+          -33.0000
         ]
       },
       "properties": {
@@ -854,8 +854,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -60.77,
-          -32.05
+          -59.6500,
+          -29.1500
         ]
       },
       "properties": {
@@ -870,8 +870,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -60.69,
-          -32.75
+          -61.5167,
+          -33.3333
         ]
       },
       "properties": {
@@ -886,8 +886,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -64.19,
-          -31.41
+          -64.3500,
+          -33.1250
         ]
       },
       "properties": {
@@ -902,8 +902,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -62.27,
-          -32.41
+          -64.4267,
+          -31.6500
         ]
       },
       "properties": {
@@ -918,8 +918,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -64.5,
-          -31.42
+          -64.4200,
+          -31.6500
         ]
       },
       "properties": {
@@ -934,12 +934,12 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -65.42,
-          -24.79
+          -64.3333,
+          -23.1333
         ]
       },
       "properties": {
-        "id": "orán",
+        "id": "oran",
         "nombre": "San Ramón de la Nueva Orán",
         "provincia": "Salta",
         "poblacion": 87000
@@ -950,8 +950,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -63.8,
-          -22.52
+          -63.8167,
+          -22.5167
         ]
       },
       "properties": {
@@ -966,8 +966,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -64.18,
-          -31.42
+          -62.1000,
+          -32.6833
         ]
       },
       "properties": {
@@ -982,8 +982,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.08,
-          -34.88
+          -59.0333,
+          -34.1000
         ]
       },
       "properties": {
@@ -998,8 +998,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -59.53,
-          -33.25
+          -60.5700,
+          -33.9100
         ]
       },
       "properties": {
@@ -1014,8 +1014,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -60.21,
-          -32.48
+          -60.0167,
+          -35.0167
         ]
       },
       "properties": {
@@ -1030,8 +1030,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.02,
-          -34.87
+          -58.9667,
+          -34.1667
         ]
       },
       "properties": {
@@ -1046,8 +1046,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -60.44,
-          -31.65
+          -59.2500,
+          -29.1500
         ]
       },
       "properties": {
