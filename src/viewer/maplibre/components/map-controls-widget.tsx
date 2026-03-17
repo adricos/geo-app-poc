@@ -196,6 +196,14 @@ export function MapControlsWidget() {
     [setMapStyleKey],
   );
 
+  const handleLayerVisibilityChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const id = e.currentTarget.dataset.layerId;
+      if (id != null) setLayerVisibility(id, e.target.checked);
+    },
+    [setLayerVisibility],
+  );
+
   const showStyles = viewState === 'styles' || viewState === 'full';
   const showLayers = viewState === 'full' && layers.length > 0;
   const chevronDirection: 'right' | 'down' | 'up' =
@@ -295,7 +303,8 @@ export function MapControlsWidget() {
                     <input
                       type="checkbox"
                       checked={isLayerVisible(layer)}
-                      onChange={(e) => setLayerVisibility(layer.id, e.target.checked)}
+                      data-layer-id={layer.id}
+                      onChange={handleLayerVisibilityChange}
                       className={styles.checkbox}
                     />
                     <span className={styles.name}>{getLayerDisplayName(layer)}</span>

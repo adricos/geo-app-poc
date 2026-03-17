@@ -149,6 +149,14 @@ export function CesiumMapControlsWidget() {
     [setMapStyleKeyCesium],
   );
 
+  const handleLayerVisibilityChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const index = e.currentTarget.dataset.layerIndex;
+      if (index != null) setLayerVisibility(Number(index), e.target.checked);
+    },
+    [setLayerVisibility],
+  );
+
   const showStyles = viewState === 'styles' || viewState === 'full';
   const showLayers = viewState === 'full' && layers.length > 0;
   const chevronDirection: 'right' | 'down' | 'up' =
@@ -246,7 +254,8 @@ export function CesiumMapControlsWidget() {
                     <input
                       type="checkbox"
                       checked={layer.show}
-                      onChange={(e) => setLayerVisibility(layer.index, e.target.checked)}
+                      data-layer-index={layer.index}
+                      onChange={handleLayerVisibilityChange}
                       className={styles.checkbox}
                     />
                     <span className={styles.name}>{layer.name}</span>
