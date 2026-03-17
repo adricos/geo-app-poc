@@ -9,6 +9,7 @@ import { useViewerRegistry } from '@/viewer/core/context/use-viewer-registry';
 import { MapOverlayProvider } from '@/viewer/core/context/map-overlay-context';
 import type { Bounds } from '@/viewer/core/types/geo.types';
 import { useMapLibreViewerAdapter } from '@/viewer/maplibre/hooks/use-map-libre-viewer-adapter';
+import { useTerraDraw } from '@/viewer/maplibre/hooks/use-terra-draw';
 import { MapControlsWidget } from '@/viewer/maplibre/components/map-controls-widget';
 
 const INITIAL_VIEW_STATE: ViewState = {
@@ -32,7 +33,10 @@ export function MapLibreViewer({ children }: MapLibreViewerProps) {
   const setSelectedFeature = useViewerStore((s) => s.setSelectedFeature);
   const mapStyleKey = useViewerStore((s) => s.mapStyleKey);
   const camera = useViewerStore((s) => s.camera);
+  const drawingEnabled = useViewerStore((s) => s.drawingEnabled);
   const registry = useViewerRegistry();
+
+  useTerraDraw(mapRef, drawingEnabled);
 
   useEffect(() => {
     const el = mapContainerRef.current;

@@ -8,6 +8,7 @@ import { useViewerRegistry } from '@/viewer/core/context/use-viewer-registry';
 import { MapOverlayProvider } from '@/viewer/core/context/map-overlay-context';
 import type { Bounds } from '@/viewer/core/types/geo.types';
 import { useMapboxViewerAdapter } from '@/viewer/mapbox/hooks/use-mapbox-viewer-adapter';
+import { useTerraDraw } from '@/viewer/mapbox/hooks/use-terra-draw';
 import { getMapboxStyleUrl } from '@/viewer/mapbox/config/mapbox-style-presets';
 import { MapboxMapControlsWidget } from '@/viewer/mapbox/components/mapbox-map-controls-widget';
 
@@ -32,7 +33,10 @@ export function MapboxViewer({ children }: MapboxViewerProps) {
   const setSelectedFeature = useViewerStore((s) => s.setSelectedFeature);
   const mapStyleKeyMapbox = useViewerStore((s) => s.mapStyleKeyMapbox);
   const camera = useViewerStore((s) => s.camera);
+  const drawingEnabled = useViewerStore((s) => s.drawingEnabled);
   const registry = useViewerRegistry();
+
+  useTerraDraw(mapRef, drawingEnabled);
 
   useEffect(() => {
     const el = mapContainerRef.current;

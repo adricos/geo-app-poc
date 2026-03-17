@@ -140,6 +140,7 @@ src/
         map-libre-viewer-adapter.ts
       hooks/
         use-map-libre-viewer-adapter.ts
+        use-terra-draw.ts
 
     mapbox/
       components/
@@ -151,6 +152,7 @@ src/
         mapbox-style-presets.ts
       hooks/
         use-mapbox-viewer-adapter.ts
+        use-terra-draw.ts
 
     cesium/
       components/
@@ -182,6 +184,10 @@ src/
       hooks/
       api/
 
+    drawing/
+      components/
+        drawing-control.tsx      # sidebar: Terra Draw toggle + mode (point/line/polygon)
+
     (map-explorer, measurements, annotations: placeholders)
 ```
 
@@ -212,7 +218,17 @@ src/
 
 * **deck.gl** — used for the Argentina demographics overlay on 2D viewers (GeoJsonLayer, rank-based colors, population-proportional radius)
 * **Turf** — planned for client-side geospatial calculations
-* **Terra Draw** — planned for drawing/editing workflows
+* **Terra Draw** — used for drawing/editing on 2D viewers (MapLibre and Mapbox); see below.
+
+### Terra Draw (implemented)
+
+A simple drawing use case is implemented with Terra Draw on MapLibre and Mapbox:
+
+* **Packages**: `terra-draw`, `terra-draw-maplibre-gl-adapter`, `terra-draw-mapbox-gl-adapter`
+* **Viewer layer**: `viewer/maplibre/hooks/use-terra-draw.ts` and `viewer/mapbox/hooks/use-terra-draw.ts` create the Terra Draw instance after the map’s `style.load` event, with point, linestring, polygon, and select modes. The hooks are used in `MapLibreViewer` and `MapboxViewer` when `drawingEnabled` is true in the viewer store.
+* **State**: `viewer-store` holds `drawingEnabled`, `drawingMode` (`point` | `linestring` | `polygon`).
+* **Feature UI**: `features/drawing/components/drawing-control.tsx` — sidebar checkbox “Terra Draw” and mode dropdown; shows “Not available in 3D” when Cesium is active.
+* **Cesium**: No Terra Draw adapter; the drawing control is disabled for the 3D viewer.
 
 ---
 
@@ -323,13 +339,16 @@ What is implemented:
   * **2D (MapLibre/Mapbox)**: `ArgentinaDemographicsDeckOverlay` — deck.gl GeoJsonLayer, uses `useMapOverlay()` for viewState/size and `requestFitBounds` to fly to Argentina when enabled; circle size by population, color by rank (shared `rankToRgba`).
   * **3D (Cesium)**: `ArgentinaDemographicsCesiumLayer` — GeoJsonDataSource with ellipses and info balloon; same color/size logic.
   * **Shell**: `ArgentinaDemographicsControl` in the sidebar (checkbox + legend). App composes overlay/layer as viewer `children` when the store flag is enabled; viewers do not import the feature.
+* **Terra Draw** (MapLibre/Mapbox only):
+  * **Viewer**: `useTerraDraw(mapRef, drawingEnabled)` in `viewer/maplibre` and `viewer/mapbox` initializes Terra Draw after `style.load`, with point, linestring, polygon, and select modes.
+  * **Store**: `drawingEnabled`, `drawingMode` in the viewer store.
+  * **Shell**: `DrawingControl` in the sidebar (toggle + mode selector). When Cesium is selected, the control shows “Not available in 3D”.
 
 What is still thin or placeholder:
 
 * Highlight strategy
 * Feature interaction model (click-to-inspect, etc.)
 * Domain schemas beyond placeholders
-* Terra Draw, drawing/editing workflows
 
 ---
 

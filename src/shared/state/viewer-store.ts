@@ -27,6 +27,12 @@ interface ViewerStoreState {
   /** Use case: Argentina demographics overlay (deck.gl on 2D, GeoJsonDataSource on Cesium). */
   argentinaDemographicsEnabled: boolean;
   setArgentinaDemographicsEnabled: (enabled: boolean) => void;
+  /** Terra Draw: drawing enabled (MapLibre/Mapbox only). */
+  drawingEnabled: boolean;
+  setDrawingEnabled: (enabled: boolean) => void;
+  /** Terra Draw: current draw mode (point, linestring, polygon). */
+  drawingMode: 'point' | 'linestring' | 'polygon';
+  setDrawingMode: (mode: 'point' | 'linestring' | 'polygon') => void;
 }
 
 export const useViewerStore = create<ViewerStoreState>((set) => ({
@@ -44,4 +50,8 @@ export const useViewerStore = create<ViewerStoreState>((set) => ({
   setSelectedFeature: (selectedFeature) => set({ selectedFeature }),
   argentinaDemographicsEnabled: false,
   setArgentinaDemographicsEnabled: (argentinaDemographicsEnabled) => set({ argentinaDemographicsEnabled }),
+  drawingEnabled: false,
+  setDrawingEnabled: (drawingEnabled) => set({ drawingEnabled }),
+  drawingMode: 'point',
+  setDrawingMode: (drawingMode) => set({ drawingMode }),
 }));
