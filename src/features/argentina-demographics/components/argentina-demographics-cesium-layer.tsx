@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import * as Cesium from 'cesium';
 import { useCesium } from 'resium';
+import { useViewerStore } from '@/shared/state/viewer-store';
 import { useArgentinaDemographicsData } from '../hooks/use-argentina-demographics-data';
 import { rankToRgba } from '../utils/rank-color';
 import './argentina-demographics-tooltip.css';
@@ -38,12 +39,24 @@ function getPopulationExtent(geojson: { features: Array<{ properties?: unknown }
   return [Math.min(...pops), Math.max(...pops)];
 }
 
+
+function removeDataSource(
+  viewer: Cesium.Viewer | undefined,
+  dataSource: Cesium.GeoJsonDataSource | null,
+): void {
+  if (!viewer || !dataSource) return;
+  if (viewer.dataSources.contains(dataSource)) {
+    viewer.dataSources.remove(dataSource);
+  }
+}
+
 /**
  * Cesium analog to the deck.gl Argentina demographics layer.
  * City-level (localidades) by population.
  */
 export function ArgentinaDemographicsCesiumLayer() {
   const { viewer } = useCesium();
+  const enabled = useViewerStore((s) => s.argentinaDemographicsEnabled);
   const { geojson, loading, error } = useArgentinaDemographicsData();
   const dataSourceRef = useRef<Cesium.GeoJsonDataSource | null>(null);
   const cancelledRef = useRef(false);
@@ -53,7 +66,25 @@ export function ArgentinaDemographicsCesiumLayer() {
   const [tooltip, setTooltip] = useState<{ text: string; x: number; y: number } | null>(null);
 
   useEffect(() => {
-    if (!viewer || !geojson || loading || error || n < 2) return;
+    if (!viewer) return;
+
+    const shouldShow = Boolean(enabled && geojson && !loading && !error && n >= 2);
+    if (!shouldShow) {
+      const ds = dataSourceRef.current;
+      removeDataSource(viewer, ds);
+      dataSourceRef.current = null;
+      if (viewer.screenSpaceEventHandler) {
+        viewer.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+      }
+      return;
+    }
+
+    if (!geojson) return;
+
+    // Remove any previous layer so we never stack (e.g. after re-enabling)
+    const prev = dataSourceRef.current;
+    removeDataSource(viewer, prev);
+    dataSourceRef.current = null;
 
     const [minPop, maxPop] = getPopulationExtent(geojson);
     cancelledRef.current = false;
@@ -163,16 +194,13 @@ export function ArgentinaDemographicsCesiumLayer() {
         clearTooltipTimeoutRef.current = null;
       }
       setTooltip(null);
-      const ds = dataSourceRef.current;
-      if (ds && viewer?.dataSources?.contains(ds)) {
-        viewer.dataSources.remove(ds);
-      }
+      removeDataSource(viewer, dataSourceRef.current);
       dataSourceRef.current = null;
       if (viewer?.screenSpaceEventHandler) {
         viewer.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.MOUSE_MOVE);
       }
     };
-  }, [viewer, geojson, loading, error, n]);
+  }, [viewer, geojson, loading, error, n, enabled]);
 
   if (!tooltip) return null;
   return (

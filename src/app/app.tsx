@@ -36,7 +36,8 @@ export function App() {
   }, [viewerType]);
 
   const demographicsOverlay = argentinaDemographicsEnabled ? <ArgentinaDemographicsDeckOverlay /> : null;
-  const demographicsCesiumLayer = argentinaDemographicsEnabled ? <ArgentinaDemographicsCesiumLayer /> : null;
+  /** Always mount Cesium layer when on Cesium; it adds/removes the data source from the store flag so toggling doesn't stack layers. */
+  const demographicsCesiumLayer = <ArgentinaDemographicsCesiumLayer />;
 
   const viewer =
     mountedViewerType === 'maplibre' ? (

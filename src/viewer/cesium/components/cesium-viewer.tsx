@@ -108,7 +108,7 @@ export function CesiumViewer({ children }: CesiumViewerProps) {
   return (
     <div ref={containerRef} className="map-root" role="application" aria-label="3D Map">
       {containerReady && (
-        <Viewer full baseLayer={false}>
+        <Viewer full baseLayer={false} infoBox={false}>
           {imageryProvider && (
             <ImageryLayer key={mapStyleKeyCesium} imageryProvider={imageryProvider} />
           )}
