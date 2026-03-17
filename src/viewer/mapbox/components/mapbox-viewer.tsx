@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { useMemo, useCallback, useState, useEffect, useRef } from 'react';
 import Map, { NavigationControl, type ViewState, type ViewStateChangeEvent } from 'react-map-gl/mapbox';
 import type { MapRef } from 'react-map-gl/mapbox';
+import type { MapPointerMoveHandler } from '@/viewer/core/context/map-overlay-context';
 import { env } from '@/shared/config/env';
 import { useViewerStore } from '@/shared/state/viewer-store';
 import { useViewerRegistry } from '@/viewer/core/context/use-viewer-registry';
@@ -155,14 +156,23 @@ export function MapboxViewer({ children }: MapboxViewerProps) {
     [mapRef],
   );
 
+  const pointerMoveHandlerRef = useRef<MapPointerMoveHandler>(null);
+  const setMapPointerMoveHandler = useCallback((handler: MapPointerMoveHandler) => {
+    pointerMoveHandlerRef.current = handler;
+  }, []);
+  const handleMapPointerMove = useCallback((e: { point: { x: number; y: number } }) => {
+    pointerMoveHandlerRef.current?.(e.point.x, e.point.y);
+  }, []);
+
   const overlayContextValue = useMemo(
     () => ({
       viewState: overlayViewState,
       width: overlaySize.width,
       height: overlaySize.height,
       requestFitBounds,
+      setMapPointerMoveHandler,
     }),
-    [overlayViewState, overlaySize.width, overlaySize.height, requestFitBounds],
+    [overlayViewState, overlaySize.width, overlaySize.height, requestFitBounds, setMapPointerMoveHandler],
   );
 
   if (!env.mapboxAccessToken) {
@@ -193,6 +203,7 @@ export function MapboxViewer({ children }: MapboxViewerProps) {
         initialViewState={INITIAL_VIEW_STATE}
         onMoveEnd={handleMoveEnd}
         onMove={handleViewStateChange}
+        onMouseMove={handleMapPointerMove}
         onClick={handleClick}
       >
         <NavigationControl position="top-right" />

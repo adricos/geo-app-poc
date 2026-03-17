@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { useMemo, useCallback, useState, useEffect, useRef } from 'react';
 import Map, { NavigationControl, type ViewState, type ViewStateChangeEvent } from 'react-map-gl/maplibre';
 import type { MapRef } from 'react-map-gl/maplibre';
+import type { MapPointerMoveHandler } from '@/viewer/core/context/map-overlay-context';
 import { env } from '@/shared/config/env';
 import { getMapStyleUrl } from '@/shared/config/map-style-presets';
 import { useViewerStore } from '@/shared/state/viewer-store';
@@ -155,14 +156,23 @@ export function MapLibreViewer({ children }: MapLibreViewerProps) {
     [mapRef],
   );
 
+  const pointerMoveHandlerRef = useRef<MapPointerMoveHandler>(null);
+  const setMapPointerMoveHandler = useCallback((handler: MapPointerMoveHandler) => {
+    pointerMoveHandlerRef.current = handler;
+  }, []);
+  const handleMapPointerMove = useCallback((e: { point: { x: number; y: number } }) => {
+    pointerMoveHandlerRef.current?.(e.point.x, e.point.y);
+  }, []);
+
   const overlayContextValue = useMemo(
     () => ({
       viewState: overlayViewState,
       width: overlaySize.width,
       height: overlaySize.height,
       requestFitBounds,
+      setMapPointerMoveHandler,
     }),
-    [overlayViewState, overlaySize.width, overlaySize.height, requestFitBounds],
+    [overlayViewState, overlaySize.width, overlaySize.height, requestFitBounds, setMapPointerMoveHandler],
   );
 
   return (
@@ -180,6 +190,7 @@ export function MapLibreViewer({ children }: MapLibreViewerProps) {
         initialViewState={INITIAL_VIEW_STATE}
         onMoveEnd={handleMoveEnd}
         onMove={handleViewStateChange}
+        onMouseMove={handleMapPointerMove}
         onClick={handleClick}
       >
         <NavigationControl position="top-right" />
