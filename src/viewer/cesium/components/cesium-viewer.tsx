@@ -77,8 +77,10 @@ export function CesiumViewer({ children }: CesiumViewerProps) {
 
   return (
     <div className="map-root" role="application" aria-label="3D Map">
-      <Viewer full>
-        {imageryProvider && <ImageryLayer imageryProvider={imageryProvider} />}
+      <Viewer full baseLayer={false}>
+        {imageryProvider && (
+          <ImageryLayer key={mapStyleKeyCesium} imageryProvider={imageryProvider} />
+        )}
         <CesiumViewerInner>{children}</CesiumViewerInner>
       </Viewer>
     </div>
