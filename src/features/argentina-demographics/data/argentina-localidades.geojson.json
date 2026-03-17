@@ -1,71 +1,1061 @@
 {
   "type": "FeatureCollection",
   "features": [
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.3816,-34.6037]},"properties":{"id":"caba","nombre":"Ciudad Autónoma de Buenos Aires","provincia":"CABA","poblacion":3120612,"rank":67}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-64.181,-31.413]},"properties":{"id":"cordoba","nombre":"Córdoba","provincia":"Córdoba","poblacion":1565112,"rank":66}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-60.639,-32.947]},"properties":{"id":"rosario","nombre":"Rosario","provincia":"Santa Fe","poblacion":1342619,"rank":65}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-57.955,-34.921]},"properties":{"id":"la-plata","nombre":"La Plata","provincia":"Buenos Aires","poblacion":772618,"rank":64}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-60.7,-32.95]},"properties":{"id":"santa-fe","nombre":"Santa Fe","provincia":"Santa Fe","poblacion":573448,"rank":63}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-68.827,-32.889]},"properties":{"id":"mendoza","nombre":"Mendoza","provincia":"Mendoza","poblacion":1148220,"rank":62}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-65.209,-26.824]},"properties":{"id":"san-miguel-tucuman","nombre":"San Miguel de Tucumán","provincia":"Tucumán","poblacion":605767,"rank":61}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-65.411,-24.786]},"properties":{"id":"salta","nombre":"Salta","provincia":"Salta","poblacion":535303,"rank":60}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.384,-34.611]},"properties":{"id":"quilmes","nombre":"Quilmes","provincia":"Buenos Aires","poblacion":262379,"rank":59}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.516,-34.701]},"properties":{"id":"san-isidro","nombre":"San Isidro","provincia":"Buenos Aires","poblacion":293212,"rank":58}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.449,-34.599]},"properties":{"id":"avellaneda","nombre":"Avellaneda","provincia":"Buenos Aires","poblacion":342677,"rank":57}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.618,-34.651]},"properties":{"id":"villa-nueva","nombre":"Villa Nueva","provincia":"Buenos Aires","poblacion":305000,"rank":56}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.403,-34.603]},"properties":{"id":"lanus","nombre":"Lanús","provincia":"Buenos Aires","poblacion":459263,"rank":55}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.569,-34.705]},"properties":{"id":"tigre","nombre":"Tigre","provincia":"Buenos Aires","poblacion":376381,"rank":54}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.383,-34.6]},"properties":{"id":"lomas-de-zamora","nombre":"Lomas de Zamora","provincia":"Buenos Aires","poblacion":111897,"rank":53}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.628,-34.603]},"properties":{"id":"la-matanza","nombre":"La Matanza","provincia":"Buenos Aires","poblacion":304000,"rank":52}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.52,-34.62]},"properties":{"id":"san-martin","nombre":"San Martín","provincia":"Buenos Aires","poblacion":414196,"rank":51}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.4,-34.65]},"properties":{"id":"merlo","nombre":"Merlo","provincia":"Buenos Aires","poblacion":244168,"rank":50}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.38,-34.7]},"properties":{"id":"moreno","nombre":"Moreno","provincia":"Buenos Aires","poblacion":198000,"rank":49}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.58,-34.47]},"properties":{"id":"banfield","nombre":"Banfield","provincia":"Buenos Aires","poblacion":223000,"rank":48}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.45,-34.72]},"properties":{"id":"jose-c-paz","nombre":"José C. Paz","provincia":"Buenos Aires","poblacion":265981,"rank":47}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.53,-34.52]},"properties":{"id":"temperley","nombre":"Temperley","provincia":"Buenos Aires","poblacion":121000,"rank":46}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.46,-34.67]},"properties":{"id":"san-miguel","nombre":"San Miguel","provincia":"Buenos Aires","poblacion":281000,"rank":45}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.42,-34.63]},"properties":{"id":"moron","nombre":"Morón","provincia":"Buenos Aires","poblacion":321000,"rank":44}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.55,-34.55]},"properties":{"id":"berazategui","nombre":"Berazategui","provincia":"Buenos Aires","poblacion":324000,"rank":43}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.48,-34.72]},"properties":{"id":"pilar","nombre":"Pilar","provincia":"Buenos Aires","poblacion":299000,"rank":42}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.51,-34.58]},"properties":{"id":"florencio-varela","nombre":"Florencio Varela","provincia":"Buenos Aires","poblacion":426005,"rank":41}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.44,-34.64]},"properties":{"id":"ituzaingo","nombre":"Ituzaingó","provincia":"Buenos Aires","poblacion":168000,"rank":40}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.49,-34.66]},"properties":{"id":"castelar","nombre":"Castelar","provincia":"Buenos Aires","poblacion":104000,"rank":39}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.57,-34.61]},"properties":{"id":"rafael-castillo","nombre":"Rafael Castillo","provincia":"Buenos Aires","poblacion":136000,"rank":38}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-57.58,-38.0]},"properties":{"id":"mar-del-plata","nombre":"Mar del Plata","provincia":"Buenos Aires","poblacion":593337,"rank":37}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.75,-34.45]},"properties":{"id":"bahia-blanca","nombre":"Bahía Blanca","provincia":"Buenos Aires","poblacion":299101,"rank":36}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-60.53,-31.75]},"properties":{"id":"parana","nombre":"Paraná","provincia":"Entre Ríos","poblacion":247863,"rank":35}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.18,-26.18]},"properties":{"id":"corrientes","nombre":"Corrientes","provincia":"Corrientes","poblacion":352646,"rank":34}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-54.58,-25.51]},"properties":{"id":"posadas","nombre":"Posadas","provincia":"Misiones","poblacion":275988,"rank":33}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-65.77,-28.47]},"properties":{"id":"santiago-estero","nombre":"Santiago del Estero","provincia":"Santiago del Estero","poblacion":252192,"rank":31}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-65.30,-24.19]},"properties":{"id":"san-salvador-jujuy","nombre":"San Salvador de Jujuy","provincia":"Jujuy","poblacion":265249,"rank":30}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-68.52,-31.54]},"properties":{"id":"san-juan","nombre":"San Juan","provincia":"San Juan","poblacion":471389,"rank":29}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-66.34,-33.30]},"properties":{"id":"san-luis","nombre":"San Luis","provincia":"San Luis","poblacion":169947,"rank":28}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-67.58,-33.00]},"properties":{"id":"san-luis-rio","nombre":"Villa Mercedes","provincia":"San Luis","poblacion":111391,"rank":27}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-63.80,-38.42]},"properties":{"id":"neuquen","nombre":"Neuquén","provincia":"Neuquén","poblacion":231198,"rank":26}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-67.57,-43.30]},"properties":{"id":"rawson","nombre":"Rawson","provincia":"Chubut","poblacion":26000,"rank":25}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-67.58,-39.03]},"properties":{"id":"general-roca","nombre":"General Roca","provincia":"Río Negro","poblacion":85000,"rank":24}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-67.58,-43.25]},"properties":{"id":"puerto-madryn","nombre":"Puerto Madryn","provincia":"Chubut","poblacion":93300,"rank":23}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-68.15,-38.73]},"properties":{"id":"cipolletti","nombre":"Cipolletti","provincia":"Río Negro","poblacion":87500,"rank":22}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-71.25,-41.13]},"properties":{"id":"san-carlos-bariloche","nombre":"San Carlos de Bariloche","provincia":"Río Negro","poblacion":130000,"rank":21}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-68.20,-38.72]},"properties":{"id":"viedma","nombre":"Viedma","provincia":"Río Negro","poblacion":53000,"rank":20}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-70.37,-50.34]},"properties":{"id":"rio-gallegos","nombre":"Río Gallegos","provincia":"Santa Cruz","poblacion":110000,"rank":19}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-68.30,-54.80]},"properties":{"id":"ushuaia","nombre":"Ushuaia","provincia":"Tierra del Fuego","poblacion":82000,"rank":18}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-60.44,-31.65]},"properties":{"id":"concepcion-uruguay","nombre":"Concepción del Uruguay","provincia":"Entre Ríos","poblacion":49000,"rank":17}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-60.53,-32.95]},"properties":{"id":"rafaela","nombre":"Rafaela","provincia":"Santa Fe","poblacion":100000,"rank":16}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-61.70,-33.75]},"properties":{"id":"venado-tuerto","nombre":"Venado Tuerto","provincia":"Santa Fe","poblacion":82000,"rank":15}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-60.21,-32.48]},"properties":{"id":"gualeguaychu","nombre":"Gualeguaychú","provincia":"Entre Ríos","poblacion":109000,"rank":14}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-60.77,-32.05]},"properties":{"id":"reconquista","nombre":"Reconquista","provincia":"Santa Fe","poblacion":99000,"rank":13}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-60.69,-32.75]},"properties":{"id":"casilda","nombre":"Casilda","provincia":"Santa Fe","poblacion":36000,"rank":12}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-64.19,-31.41]},"properties":{"id":"rio-cuarto","nombre":"Río Cuarto","provincia":"Córdoba","poblacion":163000,"rank":11}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-62.27,-32.41]},"properties":{"id":"villa-maria","nombre":"Villa María","provincia":"Córdoba","poblacion":79600,"rank":10}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-64.50,-31.42]},"properties":{"id":"alta-gracia","nombre":"Alta Gracia","provincia":"Córdoba","poblacion":48000,"rank":9}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-65.42,-24.79]},"properties":{"id":"orán","nombre":"San Ramón de la Nueva Orán","provincia":"Salta","poblacion":87000,"rank":8}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-63.80,-22.52]},"properties":{"id":"tartagal","nombre":"Tartagal","provincia":"Salta","poblacion":70000,"rank":7}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-64.18,-31.42]},"properties":{"id":"marcos-juarez","nombre":"Marcos Juárez","provincia":"Córdoba","poblacion":25000,"rank":6}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.08,-34.88]},"properties":{"id":"zarate","nombre":"Zárate","provincia":"Buenos Aires","poblacion":99000,"rank":5}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-59.53,-33.25]},"properties":{"id":"pergamino","nombre":"Pergamino","provincia":"Buenos Aires","poblacion":91000,"rank":4}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-60.21,-32.48]},"properties":{"id":"chivilcoy","nombre":"Chivilcoy","provincia":"Buenos Aires","poblacion":65000,"rank":3}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-58.02,-34.87]},"properties":{"id":"campana","nombre":"Campana","provincia":"Buenos Aires","poblacion":95000,"rank":2}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[-60.44,-31.65]},"properties":{"id":"goya","nombre":"Goya","provincia":"Corrientes","poblacion":77000,"rank":1}}
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.3816,
+          -34.6037
+        ]
+      },
+      "properties": {
+        "id": "caba",
+        "nombre": "Ciudad Autónoma de Buenos Aires",
+        "provincia": "CABA",
+        "poblacion": 3120612
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -64.181,
+          -31.413
+        ]
+      },
+      "properties": {
+        "id": "cordoba",
+        "nombre": "Córdoba",
+        "provincia": "Córdoba",
+        "poblacion": 1565112
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -60.639,
+          -32.947
+        ]
+      },
+      "properties": {
+        "id": "rosario",
+        "nombre": "Rosario",
+        "provincia": "Santa Fe",
+        "poblacion": 1342619
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -57.955,
+          -34.921
+        ]
+      },
+      "properties": {
+        "id": "la-plata",
+        "nombre": "La Plata",
+        "provincia": "Buenos Aires",
+        "poblacion": 772618
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -60.7,
+          -32.95
+        ]
+      },
+      "properties": {
+        "id": "santa-fe",
+        "nombre": "Santa Fe",
+        "provincia": "Santa Fe",
+        "poblacion": 573448
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -68.827,
+          -32.889
+        ]
+      },
+      "properties": {
+        "id": "mendoza",
+        "nombre": "Mendoza",
+        "provincia": "Mendoza",
+        "poblacion": 1148220
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -65.209,
+          -26.824
+        ]
+      },
+      "properties": {
+        "id": "san-miguel-tucuman",
+        "nombre": "San Miguel de Tucumán",
+        "provincia": "Tucumán",
+        "poblacion": 605767
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -65.411,
+          -24.786
+        ]
+      },
+      "properties": {
+        "id": "salta",
+        "nombre": "Salta",
+        "provincia": "Salta",
+        "poblacion": 535303
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.384,
+          -34.611
+        ]
+      },
+      "properties": {
+        "id": "quilmes",
+        "nombre": "Quilmes",
+        "provincia": "Buenos Aires",
+        "poblacion": 262379
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.516,
+          -34.701
+        ]
+      },
+      "properties": {
+        "id": "san-isidro",
+        "nombre": "San Isidro",
+        "provincia": "Buenos Aires",
+        "poblacion": 293212
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.449,
+          -34.599
+        ]
+      },
+      "properties": {
+        "id": "avellaneda",
+        "nombre": "Avellaneda",
+        "provincia": "Buenos Aires",
+        "poblacion": 342677
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.618,
+          -34.651
+        ]
+      },
+      "properties": {
+        "id": "villa-nueva",
+        "nombre": "Villa Nueva",
+        "provincia": "Buenos Aires",
+        "poblacion": 305000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.403,
+          -34.603
+        ]
+      },
+      "properties": {
+        "id": "lanus",
+        "nombre": "Lanús",
+        "provincia": "Buenos Aires",
+        "poblacion": 459263
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.569,
+          -34.705
+        ]
+      },
+      "properties": {
+        "id": "tigre",
+        "nombre": "Tigre",
+        "provincia": "Buenos Aires",
+        "poblacion": 376381
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.383,
+          -34.6
+        ]
+      },
+      "properties": {
+        "id": "lomas-de-zamora",
+        "nombre": "Lomas de Zamora",
+        "provincia": "Buenos Aires",
+        "poblacion": 111897
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.628,
+          -34.603
+        ]
+      },
+      "properties": {
+        "id": "la-matanza",
+        "nombre": "La Matanza",
+        "provincia": "Buenos Aires",
+        "poblacion": 304000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.52,
+          -34.62
+        ]
+      },
+      "properties": {
+        "id": "san-martin",
+        "nombre": "San Martín",
+        "provincia": "Buenos Aires",
+        "poblacion": 414196
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.4,
+          -34.65
+        ]
+      },
+      "properties": {
+        "id": "merlo",
+        "nombre": "Merlo",
+        "provincia": "Buenos Aires",
+        "poblacion": 244168
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.38,
+          -34.7
+        ]
+      },
+      "properties": {
+        "id": "moreno",
+        "nombre": "Moreno",
+        "provincia": "Buenos Aires",
+        "poblacion": 198000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.58,
+          -34.47
+        ]
+      },
+      "properties": {
+        "id": "banfield",
+        "nombre": "Banfield",
+        "provincia": "Buenos Aires",
+        "poblacion": 223000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.45,
+          -34.72
+        ]
+      },
+      "properties": {
+        "id": "jose-c-paz",
+        "nombre": "José C. Paz",
+        "provincia": "Buenos Aires",
+        "poblacion": 265981
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.53,
+          -34.52
+        ]
+      },
+      "properties": {
+        "id": "temperley",
+        "nombre": "Temperley",
+        "provincia": "Buenos Aires",
+        "poblacion": 121000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.46,
+          -34.67
+        ]
+      },
+      "properties": {
+        "id": "san-miguel",
+        "nombre": "San Miguel",
+        "provincia": "Buenos Aires",
+        "poblacion": 281000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.42,
+          -34.63
+        ]
+      },
+      "properties": {
+        "id": "moron",
+        "nombre": "Morón",
+        "provincia": "Buenos Aires",
+        "poblacion": 321000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.55,
+          -34.55
+        ]
+      },
+      "properties": {
+        "id": "berazategui",
+        "nombre": "Berazategui",
+        "provincia": "Buenos Aires",
+        "poblacion": 324000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.48,
+          -34.72
+        ]
+      },
+      "properties": {
+        "id": "pilar",
+        "nombre": "Pilar",
+        "provincia": "Buenos Aires",
+        "poblacion": 299000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.51,
+          -34.58
+        ]
+      },
+      "properties": {
+        "id": "florencio-varela",
+        "nombre": "Florencio Varela",
+        "provincia": "Buenos Aires",
+        "poblacion": 426005
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.44,
+          -34.64
+        ]
+      },
+      "properties": {
+        "id": "ituzaingo",
+        "nombre": "Ituzaingó",
+        "provincia": "Buenos Aires",
+        "poblacion": 168000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.49,
+          -34.66
+        ]
+      },
+      "properties": {
+        "id": "castelar",
+        "nombre": "Castelar",
+        "provincia": "Buenos Aires",
+        "poblacion": 104000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.57,
+          -34.61
+        ]
+      },
+      "properties": {
+        "id": "rafael-castillo",
+        "nombre": "Rafael Castillo",
+        "provincia": "Buenos Aires",
+        "poblacion": 136000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -57.58,
+          -38
+        ]
+      },
+      "properties": {
+        "id": "mar-del-plata",
+        "nombre": "Mar del Plata",
+        "provincia": "Buenos Aires",
+        "poblacion": 593337
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.75,
+          -34.45
+        ]
+      },
+      "properties": {
+        "id": "bahia-blanca",
+        "nombre": "Bahía Blanca",
+        "provincia": "Buenos Aires",
+        "poblacion": 299101
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -60.53,
+          -31.75
+        ]
+      },
+      "properties": {
+        "id": "parana",
+        "nombre": "Paraná",
+        "provincia": "Entre Ríos",
+        "poblacion": 247863
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.18,
+          -26.18
+        ]
+      },
+      "properties": {
+        "id": "corrientes",
+        "nombre": "Corrientes",
+        "provincia": "Corrientes",
+        "poblacion": 352646
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -54.58,
+          -25.51
+        ]
+      },
+      "properties": {
+        "id": "posadas",
+        "nombre": "Posadas",
+        "provincia": "Misiones",
+        "poblacion": 275988
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -65.77,
+          -28.47
+        ]
+      },
+      "properties": {
+        "id": "santiago-estero",
+        "nombre": "Santiago del Estero",
+        "provincia": "Santiago del Estero",
+        "poblacion": 252192
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -65.3,
+          -24.19
+        ]
+      },
+      "properties": {
+        "id": "san-salvador-jujuy",
+        "nombre": "San Salvador de Jujuy",
+        "provincia": "Jujuy",
+        "poblacion": 265249
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -68.52,
+          -31.54
+        ]
+      },
+      "properties": {
+        "id": "san-juan",
+        "nombre": "San Juan",
+        "provincia": "San Juan",
+        "poblacion": 471389
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.34,
+          -33.3
+        ]
+      },
+      "properties": {
+        "id": "san-luis",
+        "nombre": "San Luis",
+        "provincia": "San Luis",
+        "poblacion": 169947
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -67.58,
+          -33
+        ]
+      },
+      "properties": {
+        "id": "san-luis-rio",
+        "nombre": "Villa Mercedes",
+        "provincia": "San Luis",
+        "poblacion": 111391
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -63.8,
+          -38.42
+        ]
+      },
+      "properties": {
+        "id": "neuquen",
+        "nombre": "Neuquén",
+        "provincia": "Neuquén",
+        "poblacion": 231198
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -67.57,
+          -43.3
+        ]
+      },
+      "properties": {
+        "id": "rawson",
+        "nombre": "Rawson",
+        "provincia": "Chubut",
+        "poblacion": 26000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -67.58,
+          -39.03
+        ]
+      },
+      "properties": {
+        "id": "general-roca",
+        "nombre": "General Roca",
+        "provincia": "Río Negro",
+        "poblacion": 85000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -67.58,
+          -43.25
+        ]
+      },
+      "properties": {
+        "id": "puerto-madryn",
+        "nombre": "Puerto Madryn",
+        "provincia": "Chubut",
+        "poblacion": 93300
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -68.15,
+          -38.73
+        ]
+      },
+      "properties": {
+        "id": "cipolletti",
+        "nombre": "Cipolletti",
+        "provincia": "Río Negro",
+        "poblacion": 87500
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.25,
+          -41.13
+        ]
+      },
+      "properties": {
+        "id": "san-carlos-bariloche",
+        "nombre": "San Carlos de Bariloche",
+        "provincia": "Río Negro",
+        "poblacion": 130000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -68.2,
+          -38.72
+        ]
+      },
+      "properties": {
+        "id": "viedma",
+        "nombre": "Viedma",
+        "provincia": "Río Negro",
+        "poblacion": 53000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.37,
+          -50.34
+        ]
+      },
+      "properties": {
+        "id": "rio-gallegos",
+        "nombre": "Río Gallegos",
+        "provincia": "Santa Cruz",
+        "poblacion": 110000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -68.3,
+          -54.8
+        ]
+      },
+      "properties": {
+        "id": "ushuaia",
+        "nombre": "Ushuaia",
+        "provincia": "Tierra del Fuego",
+        "poblacion": 82000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -60.44,
+          -31.65
+        ]
+      },
+      "properties": {
+        "id": "concepcion-uruguay",
+        "nombre": "Concepción del Uruguay",
+        "provincia": "Entre Ríos",
+        "poblacion": 49000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -60.53,
+          -32.95
+        ]
+      },
+      "properties": {
+        "id": "rafaela",
+        "nombre": "Rafaela",
+        "provincia": "Santa Fe",
+        "poblacion": 100000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -61.7,
+          -33.75
+        ]
+      },
+      "properties": {
+        "id": "venado-tuerto",
+        "nombre": "Venado Tuerto",
+        "provincia": "Santa Fe",
+        "poblacion": 82000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -60.21,
+          -32.48
+        ]
+      },
+      "properties": {
+        "id": "gualeguaychu",
+        "nombre": "Gualeguaychú",
+        "provincia": "Entre Ríos",
+        "poblacion": 109000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -60.77,
+          -32.05
+        ]
+      },
+      "properties": {
+        "id": "reconquista",
+        "nombre": "Reconquista",
+        "provincia": "Santa Fe",
+        "poblacion": 99000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -60.69,
+          -32.75
+        ]
+      },
+      "properties": {
+        "id": "casilda",
+        "nombre": "Casilda",
+        "provincia": "Santa Fe",
+        "poblacion": 36000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -64.19,
+          -31.41
+        ]
+      },
+      "properties": {
+        "id": "rio-cuarto",
+        "nombre": "Río Cuarto",
+        "provincia": "Córdoba",
+        "poblacion": 163000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -62.27,
+          -32.41
+        ]
+      },
+      "properties": {
+        "id": "villa-maria",
+        "nombre": "Villa María",
+        "provincia": "Córdoba",
+        "poblacion": 79600
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -64.5,
+          -31.42
+        ]
+      },
+      "properties": {
+        "id": "alta-gracia",
+        "nombre": "Alta Gracia",
+        "provincia": "Córdoba",
+        "poblacion": 48000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -65.42,
+          -24.79
+        ]
+      },
+      "properties": {
+        "id": "orán",
+        "nombre": "San Ramón de la Nueva Orán",
+        "provincia": "Salta",
+        "poblacion": 87000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -63.8,
+          -22.52
+        ]
+      },
+      "properties": {
+        "id": "tartagal",
+        "nombre": "Tartagal",
+        "provincia": "Salta",
+        "poblacion": 70000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -64.18,
+          -31.42
+        ]
+      },
+      "properties": {
+        "id": "marcos-juarez",
+        "nombre": "Marcos Juárez",
+        "provincia": "Córdoba",
+        "poblacion": 25000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.08,
+          -34.88
+        ]
+      },
+      "properties": {
+        "id": "zarate",
+        "nombre": "Zárate",
+        "provincia": "Buenos Aires",
+        "poblacion": 99000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -59.53,
+          -33.25
+        ]
+      },
+      "properties": {
+        "id": "pergamino",
+        "nombre": "Pergamino",
+        "provincia": "Buenos Aires",
+        "poblacion": 91000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -60.21,
+          -32.48
+        ]
+      },
+      "properties": {
+        "id": "chivilcoy",
+        "nombre": "Chivilcoy",
+        "provincia": "Buenos Aires",
+        "poblacion": 65000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -58.02,
+          -34.87
+        ]
+      },
+      "properties": {
+        "id": "campana",
+        "nombre": "Campana",
+        "provincia": "Buenos Aires",
+        "poblacion": 95000
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -60.44,
+          -31.65
+        ]
+      },
+      "properties": {
+        "id": "goya",
+        "nombre": "Goya",
+        "provincia": "Corrientes",
+        "poblacion": 77000
+      }
+    }
   ]
 }

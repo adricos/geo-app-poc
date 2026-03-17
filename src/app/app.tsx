@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useViewerStore } from '@/shared/state/viewer-store';
 import { Shell, type ViewerType } from '@/shared/ui/shell';
 import { MapLibreViewer } from '@/viewer/maplibre/components/map-libre-viewer';
@@ -7,8 +7,13 @@ import { CesiumViewer } from '@/viewer/cesium/components/cesium-viewer';
 import { ArgentinaDemographicsDeckOverlay } from '@/features/argentina-demographics/components/argentina-demographics-deck-overlay';
 import { ArgentinaDemographicsCesiumLayer } from '@/features/argentina-demographics/components/argentina-demographics-cesium-layer';
 
+/** Delay (ms) before mounting the new viewer after a switch. Allows the previous viewer's WebGL context to be released and avoids "Too many active WebGL contexts" when switching from Cesium. */
+const VIEWER_SWITCH_DELAY_MS = 150;
+
 export function App() {
   const [viewerType, setViewerTypeState] = useState<ViewerType>('maplibre');
+  const [mountedViewerType, setMountedViewerType] = useState<ViewerType | null>('maplibre');
+  const viewerTypeRef = useRef<ViewerType>(viewerType);
   const setSelectedFeature = useViewerStore((s) => s.setSelectedFeature);
   const argentinaDemographicsEnabled = useViewerStore((s) => s.argentinaDemographicsEnabled);
 
@@ -20,14 +25,33 @@ export function App() {
     [setSelectedFeature],
   );
 
+  useEffect(() => {
+    if (viewerType === viewerTypeRef.current) return;
+    viewerTypeRef.current = viewerType;
+    setMountedViewerType(null);
+    const t = setTimeout(() => {
+      setMountedViewerType(viewerType);
+    }, VIEWER_SWITCH_DELAY_MS);
+    return () => clearTimeout(t);
+  }, [viewerType]);
+
   const demographicsOverlay = argentinaDemographicsEnabled ? <ArgentinaDemographicsDeckOverlay /> : null;
   const demographicsCesiumLayer = argentinaDemographicsEnabled ? <ArgentinaDemographicsCesiumLayer /> : null;
 
+  const viewer =
+    mountedViewerType === 'maplibre' ? (
+      <MapLibreViewer key="maplibre">{demographicsOverlay}</MapLibreViewer>
+    ) : mountedViewerType === 'mapbox' ? (
+      <MapboxViewer key="mapbox">{demographicsOverlay}</MapboxViewer>
+    ) : mountedViewerType === 'cesium' ? (
+      <CesiumViewer key="cesium">{demographicsCesiumLayer}</CesiumViewer>
+    ) : (
+      <div className="map-root" role="application" aria-label="Loading map" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#e5e7eb' }} />
+    );
+
   return (
     <Shell viewerType={viewerType} onViewerTypeChange={setViewerType}>
-      {viewerType === 'maplibre' && <MapLibreViewer>{demographicsOverlay}</MapLibreViewer>}
-      {viewerType === 'mapbox' && <MapboxViewer>{demographicsOverlay}</MapboxViewer>}
-      {viewerType === 'cesium' && <CesiumViewer>{demographicsCesiumLayer}</CesiumViewer>}
+      {viewer}
     </Shell>
   );
 }

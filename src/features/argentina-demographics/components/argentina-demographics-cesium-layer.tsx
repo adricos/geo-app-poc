@@ -7,6 +7,11 @@ import './argentina-demographics-tooltip.css';
 
 const TOOLTIP_OFFSET = 12;
 const TOOLTIP_HIDE_DELAY_MS = 80;
+/** Scale fill alpha so Cesium matches deck.gl visual (Cesium tends to appear more opaque). */
+const CESIUM_FILL_ALPHA_SCALE = 0.8;
+/** Radius range in meters; kept small so circles don't overlap into huge blobs (deck.gl uses 10–52 px). */
+const RADIUS_METERS_MIN = 2000;
+const RADIUS_METERS_MAX = 100000;
 
 function getEntityProp(entity: Cesium.Entity, name: string): string | number | undefined {
   const p = (entity.properties as Record<string, { getValue?: () => unknown }>)?.[name];
@@ -79,16 +84,19 @@ export function ArgentinaDemographicsCesiumLayer() {
         const rank = Number(getEntityProp(entity, 'rank') ?? 1);
         const colorT = (rank - 1) / (n - 1);
         const [r, g, b, a] = rankToRgba(colorT);
-        const color = Cesium.Color.fromBytes(r, g, b, a);
-        const outlineColor = Cesium.Color.BLACK.withAlpha(0.5);
+        const fillAlpha = Math.round(a * CESIUM_FILL_ALPHA_SCALE);
+        const color = Cesium.Color.fromBytes(r, g, b, fillAlpha);
+        const outlineColor = Cesium.Color.WHITE;
+        const outlineWidth = 2;
 
         const sizeT = maxPop > minPop ? (pop - minPop) / (maxPop - minPop) : 0;
-        const radiusMeters = 15000 + sizeT * 120000;
+        const radiusMeters = RADIUS_METERS_MIN + sizeT * (RADIUS_METERS_MAX - RADIUS_METERS_MIN);
 
         if (entity.polygon) {
           entity.polygon.material = new Cesium.ColorMaterialProperty(color);
           entity.polygon.outline = new Cesium.ConstantProperty(true);
           entity.polygon.outlineColor = new Cesium.ConstantProperty(outlineColor);
+          entity.polygon.outlineWidth = new Cesium.ConstantProperty(outlineWidth);
         }
         if (entity.position) {
           if (entity.billboard) {
@@ -103,7 +111,8 @@ export function ArgentinaDemographicsCesiumLayer() {
             material: new Cesium.ColorMaterialProperty(color),
             outline: new Cesium.ConstantProperty(true),
             outlineColor: new Cesium.ConstantProperty(outlineColor),
-            heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+            outlineWidth: new Cesium.ConstantProperty(outlineWidth),
+            height: new Cesium.ConstantProperty(0),
           });
         } else if (entity.ellipse) {
           entity.ellipse.semiMajorAxis = new Cesium.ConstantProperty(radiusMeters);
@@ -111,6 +120,8 @@ export function ArgentinaDemographicsCesiumLayer() {
           entity.ellipse.material = new Cesium.ColorMaterialProperty(color);
           entity.ellipse.outline = new Cesium.ConstantProperty(true);
           entity.ellipse.outlineColor = new Cesium.ConstantProperty(outlineColor);
+          entity.ellipse.outlineWidth = new Cesium.ConstantProperty(outlineWidth);
+          entity.ellipse.height = new Cesium.ConstantProperty(0);
         }
 
         const provLabel = provincia ? `, ${provincia}` : '';

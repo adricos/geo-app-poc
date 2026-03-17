@@ -186,7 +186,7 @@ export function MapLibreViewer({ children }: MapLibreViewerProps) {
         ref={(instance) => setMapRef(instance)}
         mapLib={import('maplibre-gl')}
         mapStyle={mapStyle}
-        reuseMaps
+        reuseMaps={false}
         initialViewState={INITIAL_VIEW_STATE}
         onMoveEnd={handleMoveEnd}
         onMove={handleViewStateChange}
