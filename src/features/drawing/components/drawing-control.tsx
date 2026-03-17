@@ -1,4 +1,5 @@
 import { useViewerStore } from '@/shared/state/viewer-store';
+import styles from './drawing-control.module.css';
 
 type ViewerType = 'maplibre' | 'mapbox' | 'cesium';
 
@@ -27,13 +28,13 @@ export function DrawingControl({ viewerType = 'maplibre' }: DrawingControlProps)
   ];
 
   return (
-    <div className="viewer-switcher" style={{ marginTop: 8 }}>
+    <div className={`viewer-switcher ${styles.root}`}>
       <label className="viewer-switcher__label" htmlFor="drawing-enabled">
         Drawing
       </label>
       {is2D ? (
         <>
-          <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer' }}>
+          <label className={styles.checkboxLabel} htmlFor="drawing-enabled">
             <input
               id="drawing-enabled"
               type="checkbox"
@@ -44,16 +45,15 @@ export function DrawingControl({ viewerType = 'maplibre' }: DrawingControlProps)
             <span>Terra Draw</span>
           </label>
           {enabled && (
-            <div style={{ marginTop: 8 }}>
-              <label htmlFor="drawing-mode" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>
+            <div className={styles.modeWrap}>
+              <label htmlFor="drawing-mode" className={styles.modeLabel}>
                 Mode
               </label>
               <select
                 id="drawing-mode"
                 value={mode}
                 onChange={(e) => setMode(e.target.value as DrawingMode)}
-                className="viewer-switcher__select"
-                style={{ width: '100%' }}
+                className={`viewer-switcher__select ${styles.select}`}
                 aria-label="Drawing mode"
               >
                 {modes.map((m) => (
@@ -62,14 +62,14 @@ export function DrawingControl({ viewerType = 'maplibre' }: DrawingControlProps)
                   </option>
                 ))}
               </select>
-              <p style={{ margin: 6, fontSize: 11, color: 'var(--muted, #666)' }}>
+              <p className={styles.hint}>
                 Click on the map to draw. Use <strong>Select</strong> mode to edit (select mode available in toolbar or add later).
               </p>
             </div>
           )}
         </>
       ) : (
-        <p style={{ fontSize: 12, color: 'var(--muted, #666)' }}>Not available in 3D (Cesium).</p>
+        <p className={styles.unavailable}>Not available in 3D (Cesium).</p>
       )}
     </div>
   );

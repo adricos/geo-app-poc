@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'cesium/Build/Cesium/Widgets/widgets.css';
-import './styles.css';
+import '@/styles/global.css';
 import { App } from '@/app/app';
 import { AppErrorBoundary } from '@/app/error-boundary';
 import { AppProviders } from '@/app/providers/app-providers';

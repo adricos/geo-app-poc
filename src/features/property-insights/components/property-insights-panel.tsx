@@ -1,4 +1,5 @@
 import { useViewerStore } from '@/shared/state/viewer-store';
+import styles from './property-insights-panel.module.css';
 
 export function PropertyInsightsPanel() {
   const selectedFeature = useViewerStore((s) => s.selectedFeature);
@@ -6,9 +7,9 @@ export function PropertyInsightsPanel() {
 
   if (!selectedFeature) {
     return (
-      <section className="property-insights-panel" aria-label="Property insights">
-        <h2 className="property-insights-panel__title">Property insights</h2>
-        <p className="property-insights-panel__empty">
+      <section className={styles.root} aria-label="Property insights">
+        <h2 className={styles.title}>Property insights</h2>
+        <p className={styles.empty}>
           No property selected. Click a feature on the map to see details.
         </p>
       </section>
@@ -21,42 +22,42 @@ export function PropertyInsightsPanel() {
   );
 
   return (
-    <section className="property-insights-panel" aria-label="Property insights">
-      <h2 className="property-insights-panel__title">Property insights</h2>
-      <div className="property-insights-panel__content">
-        <div className="property-insights-panel__meta">
+    <section className={styles.root} aria-label="Property insights">
+      <h2 className={styles.title}>Property insights</h2>
+      <div className={styles.content}>
+        <div className={styles.meta}>
           {layer && (
-            <span className="property-insights-panel__layer" title="Layer">
+            <span className={styles.layer} title="Layer">
               {layer}
             </span>
           )}
           {id && (
-            <span className="property-insights-panel__id" title="Feature ID">
+            <span className={styles.id} title="Feature ID">
               #{id}
             </span>
           )}
         </div>
         {entries.length > 0 ? (
-          <dl className="property-insights-panel__properties">
+          <dl className={styles.properties}>
             {entries.map(([key, value]) => (
-              <div key={key} className="property-insights-panel__row">
-                <dt className="property-insights-panel__key">{key}</dt>
-                <dd className="property-insights-panel__value">
+              <div key={key} className={styles.row}>
+                <dt className={styles.key}>{key}</dt>
+                <dd className={styles.value}>
                   {typeof value === 'object' ? JSON.stringify(value) : String(value)}
                 </dd>
               </div>
             ))}
           </dl>
         ) : (
-          <p className="property-insights-panel__no-props">No properties for this feature.</p>
+          <p className={styles.noProps}>No properties for this feature.</p>
         )}
-        <p className="property-insights-panel__source">
+        <p className={styles.source}>
           Source: {source}
           {sourceLayer ? ` / ${sourceLayer}` : ''}
         </p>
         <button
           type="button"
-          className="property-insights-panel__clear"
+          className={styles.clear}
           onClick={() => setSelectedFeature(null)}
           aria-label="Clear selection"
         >

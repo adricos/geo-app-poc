@@ -6,6 +6,7 @@ import {
   getCesiumImageryLabel,
   type CesiumImageryPresetKey,
 } from '@/viewer/cesium/config/cesium-imagery-presets';
+import styles from '@/viewer/core/styles/map-controls-widget.module.css';
 
 type ViewState = 'icon' | 'styles' | 'full';
 
@@ -35,23 +36,29 @@ function LayersIcon({ size = 14 }: { size?: number }) {
   );
 }
 
-function ChevronIcon({ direction }: { direction: 'right' | 'down' | 'up' }) {
-  const rotate = direction === 'right' ? 0 : direction === 'down' ? 90 : -90;
+function ChevronIcon({
+  direction,
+  className,
+}: {
+  direction: 'right' | 'down' | 'up';
+  className: string;
+}) {
   return (
-    <svg
-      width="8"
-      height="8"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-      style={{ transform: `rotate(${rotate}deg)` }}
-    >
-      <polyline points="9 18 15 12 9 6" />
-    </svg>
+    <span className={className} data-direction={direction}>
+      <svg
+        width="8"
+        height="8"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
+        <polyline points="9 18 15 12 9 6" />
+      </svg>
+    </span>
   );
 }
 
@@ -151,14 +158,14 @@ export function CesiumMapControlsWidget() {
 
   return (
     <div
-      className="map-controls-widget"
+      className={styles.widget}
       role="region"
       aria-label="Map style and layers"
     >
-      <div className="map-controls-widget__header">
+      <div className={styles.header}>
         <button
           type="button"
-          className={`map-controls-widget__icon-btn map-controls-widget__icon-btn--${viewState}`}
+          className={styles.iconBtn}
           onClick={cycleViewState}
           data-state={viewState}
           title={
@@ -178,17 +185,15 @@ export function CesiumMapControlsWidget() {
           }
         >
           <LayersIcon size={14} />
-          <span className="map-controls-widget__chevron">
-            <ChevronIcon direction={chevronDirection} />
-          </span>
+          <ChevronIcon direction={chevronDirection} className={styles.chevron} />
         </button>
         {showStyles && (
-          <div className="map-controls-widget__styles">
+          <div className={styles.styles}>
             <select
               id="cesium-map-controls-style-select"
               value={effectiveStyleKey}
               onChange={handleStyleChange}
-              className="map-controls-widget__select"
+              className={styles.select}
               title="Style"
               aria-label="Map style"
             >
@@ -203,19 +208,19 @@ export function CesiumMapControlsWidget() {
       </div>
       {showLayers && (
         <div
-          className={`map-controls-widget__layers ${layers.length <= 1 ? 'map-controls-widget__layers--single' : ''}`}
+          className={layers.length <= 1 ? `${styles.layers} ${styles.layersSingle}` : styles.layers}
           title="Layers"
           aria-label="Layers"
         >
           {layers.length > 1 && (
-            <div className="map-controls-widget__layers-header">
-              <label className="map-controls-widget__select-all">
+            <div className={styles.layersHeader}>
+              <label className={styles.selectAll}>
                 <input
                   ref={selectAllCheckboxRef}
                   type="checkbox"
                   checked={allVisible}
                   onChange={handleSelectAllChange}
-                  className="map-controls-widget__checkbox"
+                  className={styles.checkbox}
                   title={
                     allVisible ? 'Hide all layers' : noneVisible ? 'Show all layers' : 'Show all layers'
                   }
@@ -227,24 +232,24 @@ export function CesiumMapControlsWidget() {
                         : 'Some layers visible; click to show all'
                   }
                 />
-                <span className="map-controls-widget__select-all-text">
+                <span className={styles.selectAllText}>
                   {allVisible ? 'All' : noneVisible ? 'None' : 'Some'}
                 </span>
               </label>
             </div>
           )}
-          <div className="map-controls-widget__list-scroll">
-            <ul className="map-controls-widget__list">
+          <div className={styles.listScroll}>
+            <ul className={styles.list}>
               {layers.map((layer) => (
-                <li key={layer.id} className="map-controls-widget__item">
-                  <label className="map-controls-widget__label">
+                <li key={layer.id} className={styles.item}>
+                  <label className={styles.label}>
                     <input
                       type="checkbox"
                       checked={layer.show}
                       onChange={(e) => setLayerVisibility(layer.index, e.target.checked)}
-                      className="map-controls-widget__checkbox"
+                      className={styles.checkbox}
                     />
-                    <span className="map-controls-widget__name">{layer.name}</span>
+                    <span className={styles.name}>{layer.name}</span>
                   </label>
                 </li>
               ))}

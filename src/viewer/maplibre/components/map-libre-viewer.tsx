@@ -171,7 +171,6 @@ export function MapLibreViewer({ children }: MapLibreViewerProps) {
       className="map-root"
       role="application"
       aria-label="Map"
-      style={{ position: 'relative', width: '100%', height: '100%' }}
     >
       <Map
         ref={(instance) => setMapRef(instance)}
@@ -187,15 +186,7 @@ export function MapLibreViewer({ children }: MapLibreViewerProps) {
         <MapControlsWidget />
       </Map>
       {children != null && (
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            pointerEvents: 'none',
-            zIndex: 5,
-          }}
-          aria-hidden
-        >
+        <div className="map-overlay" aria-hidden>
           <MapOverlayProvider value={overlayContextValue}>
             {children}
           </MapOverlayProvider>

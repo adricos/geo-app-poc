@@ -5,6 +5,7 @@ import {
   MAPBOX_STYLE_PRESETS,
   type MapboxStylePresetKey,
 } from '@/viewer/mapbox/config/mapbox-style-presets';
+import styles from '@/viewer/core/styles/map-controls-widget.module.css';
 
 type ViewState = 'icon' | 'styles' | 'full';
 
@@ -62,12 +63,19 @@ function LayersIcon({ size = 14 }: { size?: number }) {
   );
 }
 
-function ChevronIcon({ direction }: { direction: 'right' | 'down' | 'up' }) {
-  const rotate = direction === 'right' ? 0 : direction === 'down' ? 90 : -90;
+function ChevronIcon({
+  direction,
+  className,
+}: {
+  direction: 'right' | 'down' | 'up';
+  className: string;
+}) {
   return (
-    <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden style={{ transform: `rotate(${rotate}deg)` }}>
-      <polyline points="9 18 15 12 9 6" />
-    </svg>
+    <span className={className} data-direction={direction}>
+      <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <polyline points="9 18 15 12 9 6" />
+      </svg>
+    </span>
   );
 }
 
@@ -159,11 +167,11 @@ export function MapboxMapControlsWidget() {
   const chevronDirection: 'right' | 'down' | 'up' = viewState === 'icon' ? 'right' : viewState === 'styles' ? 'down' : 'up';
 
   return (
-    <div className="map-controls-widget" role="region" aria-label="Map style and layers">
-      <div className="map-controls-widget__header">
+    <div className={styles.widget} role="region" aria-label="Map style and layers">
+      <div className={styles.header}>
         <button
           type="button"
-          className={`map-controls-widget__icon-btn map-controls-widget__icon-btn--${viewState}`}
+          className={styles.iconBtn}
           onClick={cycleViewState}
           data-state={viewState}
           title={viewState === 'icon' ? 'Show map style and layers' : viewState === 'styles' ? 'Show layers list' : 'Collapse'}
@@ -171,17 +179,15 @@ export function MapboxMapControlsWidget() {
           aria-label={viewState === 'icon' ? 'Expand to choose map style' : viewState === 'styles' ? 'Show layers' : 'Collapse to icon'}
         >
           <LayersIcon size={14} />
-          <span className="map-controls-widget__chevron">
-            <ChevronIcon direction={chevronDirection} />
-          </span>
+          <ChevronIcon direction={chevronDirection} className={styles.chevron} />
         </button>
         {showStyles && (
-          <div className="map-controls-widget__styles">
+          <div className={styles.styles}>
             <select
               id="mapbox-map-controls-style-select"
               value={mapStyleKeyMapbox}
               onChange={handleStyleChange}
-              className="map-controls-widget__select"
+              className={styles.select}
               title="Style"
               aria-label="Map style"
             >
@@ -195,35 +201,39 @@ export function MapboxMapControlsWidget() {
         )}
       </div>
       {showLayers && (
-        <div className={`map-controls-widget__layers ${layers.length <= 1 ? 'map-controls-widget__layers--single' : ''}`} title="Layers" aria-label="Layers">
+        <div
+          className={layers.length <= 1 ? `${styles.layers} ${styles.layersSingle}` : styles.layers}
+          title="Layers"
+          aria-label="Layers"
+        >
           {layers.length > 1 && (
-            <div className="map-controls-widget__layers-header">
-              <label className="map-controls-widget__select-all">
+            <div className={styles.layersHeader}>
+              <label className={styles.selectAll}>
                 <input
                   ref={selectAllCheckboxRef}
                   type="checkbox"
                   checked={allVisible}
                   onChange={handleSelectAllChange}
-                  className="map-controls-widget__checkbox"
+                  className={styles.checkbox}
                   title={allVisible ? 'Hide all layers' : noneVisible ? 'Show all layers' : 'Show all layers'}
                   aria-label={allVisible ? 'All layers visible; click to hide all' : noneVisible ? 'No layers visible; click to show all' : 'Some layers visible; click to show all'}
                 />
-                <span className="map-controls-widget__select-all-text">{allVisible ? 'All' : noneVisible ? 'None' : 'Some'}</span>
+                <span className={styles.selectAllText}>{allVisible ? 'All' : noneVisible ? 'None' : 'Some'}</span>
               </label>
             </div>
           )}
-          <div className="map-controls-widget__list-scroll">
-            <ul className="map-controls-widget__list">
+          <div className={styles.listScroll}>
+            <ul className={styles.list}>
               {layers.map((layer) => (
-                <li key={layer.id} className="map-controls-widget__item">
-                  <label className="map-controls-widget__label">
+                <li key={layer.id} className={styles.item}>
+                  <label className={styles.label}>
                     <input
                       type="checkbox"
                       checked={isLayerVisible(layer)}
                       onChange={(e) => setLayerVisibility(layer.id, e.target.checked)}
-                      className="map-controls-widget__checkbox"
+                      className={styles.checkbox}
                     />
-                    <span className="map-controls-widget__name">{getLayerDisplayName(layer)}</span>
+                    <span className={styles.name}>{getLayerDisplayName(layer)}</span>
                   </label>
                 </li>
               ))}

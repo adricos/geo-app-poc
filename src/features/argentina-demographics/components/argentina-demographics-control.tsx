@@ -1,4 +1,5 @@
 import { useViewerStore } from '@/shared/state/viewer-store';
+import styles from './argentina-demographics-control.module.css';
 
 type ViewerType = 'maplibre' | 'mapbox' | 'cesium';
 
@@ -16,11 +17,11 @@ export function ArgentinaDemographicsControl({ viewerType = 'maplibre' }: Argent
   const subtitle = viewerType === 'cesium' ? 'Cesium' : 'deck.gl';
 
   return (
-    <div className="viewer-switcher" style={{ marginTop: 8 }}>
+    <div className={`viewer-switcher ${styles.root}`}>
       <label className="viewer-switcher__label" htmlFor="argentina-demographics">
         Use case
       </label>
-      <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer' }}>
+      <label className={styles.checkboxLabel} htmlFor="argentina-demographics">
         <input
           id="argentina-demographics"
           type="checkbox"
@@ -30,51 +31,28 @@ export function ArgentinaDemographicsControl({ viewerType = 'maplibre' }: Argent
         />
         <span>Argentina demographics</span>
       </label>
-      <p style={{ margin: 4, fontSize: 12, color: 'var(--muted, #666)' }}>
+      <p className={styles.subtitle}>
         {subtitle} · INDEC 2022
       </p>
       {enabled && (
         <div
-          className="argentina-demographics-legend"
-          style={{
-            marginTop: 10,
-            padding: 10,
-            fontSize: 12,
-            background: 'var(--legend-bg, #f0f4f8)',
-            borderRadius: 6,
-            color: '#333',
-          }}
+          className={styles.legend}
           role="img"
           aria-label="Legend: circle size is population; color by city rank"
         >
-          <div style={{ fontWeight: 600, marginBottom: 6 }}>Legend (cities)</div>
-          <p style={{ margin: 0, marginBottom: 4 }}>
+          <div className={styles.legendTitle}>Legend (cities)</div>
+          <p className={styles.legendRow}>
             <strong>Circle size</strong> = population (proportional)
           </p>
-          <p style={{ margin: 0, marginBottom: 4 }}>
+          <p className={styles.legendRow}>
             <strong>Color</strong> = population rank (by city, for variety)
           </p>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 6,
-              marginTop: 6,
-              fontSize: 11,
-            }}
-          >
-            <span style={{ color: '#6496dc' }}>low</span>
-            <div
-              style={{
-                flex: 1,
-                height: 8,
-                borderRadius: 4,
-                background: 'linear-gradient(to right, #6496dc, #96e6e6, #e6c832, #e07828, #dc3232)',
-              }}
-            />
-            <span style={{ color: '#dc3232' }}>high</span>
+          <div className={styles.gradientRow}>
+            <span className={styles.gradientLow}>low</span>
+            <div className={styles.gradientBar} />
+            <span className={styles.gradientHigh}>high</span>
           </div>
-          <p style={{ margin: '6px 0 0', fontSize: 11, color: '#666' }}>
+          <p className={styles.legendFooter}>
             Cities · ~25k – 3.1M hab. (Censo 2022)
           </p>
         </div>

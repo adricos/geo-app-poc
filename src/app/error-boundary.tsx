@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import type { ErrorInfo, ReactNode } from 'react';
+import styles from './error-boundary.module.css';
 
 interface Props {
   children: ReactNode;
@@ -32,7 +33,7 @@ export class AppErrorBoundary extends Component<Props, State> {
         return this.props.fallback;
       }
       return (
-        <div className="error-boundary" role="alert">
+        <div className={styles.root} role="alert">
           <h1>Something went wrong</h1>
           <p>{this.state.error.message}</p>
           <button type="button" onClick={this.handleRetry}>

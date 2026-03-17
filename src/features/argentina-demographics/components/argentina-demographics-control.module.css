@@ -1,0 +1,63 @@
+.root {
+  margin-top: 8px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.subtitle {
+  margin: 4px 0;
+  font-size: 12px;
+  color: var(--muted, #666);
+}
+
+.legend {
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 12px;
+  background: var(--legend-bg, #f0f4f8);
+  border-radius: 6px;
+  color: #333;
+}
+
+.legendTitle {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.legendRow {
+  margin: 0 0 4px;
+}
+
+.gradientRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 11px;
+}
+
+.gradientLow {
+  color: #6496dc;
+}
+
+.gradientBar {
+  flex: 1;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(to right, #6496dc, #96e6e6, #e6c832, #e07828, #dc3232);
+}
+
+.gradientHigh {
+  color: #dc3232;
+}
+
+.legendFooter {
+  margin: 6px 0 0;
+  font-size: 11px;
+  color: #666;
+}

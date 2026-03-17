@@ -168,7 +168,7 @@ export function MapboxViewer({ children }: MapboxViewerProps) {
   if (!env.mapboxAccessToken) {
     return (
       <div className="map-root" role="application" aria-label="Map">
-        <div style={{ padding: 24, textAlign: 'center', color: '#666' }}>
+        <div className="map-token-message">
           <p>Mapbox viewer requires a Mapbox access token.</p>
           <p>Set <code>VITE_MAPBOX_ACCESS_TOKEN</code> in your <code>.env</code> or <code>.env.local</code>.</p>
           <p><a href="https://account.mapbox.com/access-tokens/" target="_blank" rel="noreferrer">Get a token at mapbox.com</a></p>
@@ -183,7 +183,6 @@ export function MapboxViewer({ children }: MapboxViewerProps) {
       className="map-root"
       role="application"
       aria-label="Map"
-      style={{ position: 'relative', width: '100%', height: '100%' }}
     >
       <Map
         ref={(instance) => setMapRef(instance)}
@@ -200,15 +199,7 @@ export function MapboxViewer({ children }: MapboxViewerProps) {
         <MapboxMapControlsWidget />
       </Map>
       {children != null && (
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            pointerEvents: 'none',
-            zIndex: 5,
-          }}
-          aria-hidden
-        >
+        <div className="map-overlay" aria-hidden>
           <MapOverlayProvider value={overlayContextValue}>
             {children}
           </MapOverlayProvider>
