@@ -62,6 +62,8 @@ export function ArgentinaDemographicsCesiumLayer() {
   const cancelledRef = useRef(false);
   const clearTooltipTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const hasFlownToRef = useRef(false);
+  /** Incremented each effect run so only the latest run's promise adds the layer (avoids stale add after viewer switch). */
+  const runIdRef = useRef(0);
   const n = geojson?.features?.length ?? 0;
   const [tooltip, setTooltip] = useState<{ text: string; x: number; y: number } | null>(null);
 
@@ -86,6 +88,8 @@ export function ArgentinaDemographicsCesiumLayer() {
     removeDataSource(viewer, prev);
     dataSourceRef.current = null;
 
+    runIdRef.current += 1;
+    const currentRunId = runIdRef.current;
     const [minPop, maxPop] = getPopulationExtent(geojson);
     cancelledRef.current = false;
     const dataSourcePromise = Cesium.GeoJsonDataSource.load(geojson, {
@@ -96,7 +100,7 @@ export function ArgentinaDemographicsCesiumLayer() {
     });
 
     dataSourcePromise.then((dataSource) => {
-      if (cancelledRef.current || !viewer) return;
+      if (currentRunId !== runIdRef.current || !viewer) return;
       dataSourceRef.current = dataSource;
       viewer.dataSources.add(dataSource);
 
@@ -117,7 +121,7 @@ export function ArgentinaDemographicsCesiumLayer() {
         const [r, g, b, a] = rankToRgba(colorT);
         const fillAlpha = Math.round(a * CESIUM_FILL_ALPHA_SCALE);
         const color = Cesium.Color.fromBytes(r, g, b, fillAlpha);
-        const outlineColor = Cesium.Color.WHITE;
+        const outlineColor = Cesium.Color.BLACK;
         const outlineWidth = 2;
 
         const sizeT = maxPop > minPop ? (pop - minPop) / (maxPop - minPop) : 0;

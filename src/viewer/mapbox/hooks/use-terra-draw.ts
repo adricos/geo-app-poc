@@ -10,7 +10,7 @@ import {
 import { TerraDrawMapboxGLAdapter } from 'terra-draw-mapbox-gl-adapter';
 import { useViewerStore } from '@/shared/state/viewer-store';
 
-export type TerraDrawMode = 'point' | 'linestring' | 'polygon';
+type TerraDrawMode = 'point' | 'linestring' | 'polygon';
 
 /**
  * Integrates Terra Draw with the Mapbox viewer. Must be called after the map

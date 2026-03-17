@@ -11,7 +11,7 @@ export type MapboxStylePresetKey =
   | 'light'
   | 'dark';
 
-export interface MapboxStylePreset {
+interface MapboxStylePreset {
   key: MapboxStylePresetKey;
   label: string;
   styleUrl: string;

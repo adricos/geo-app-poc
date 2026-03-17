@@ -86,7 +86,7 @@ export function ArgentinaDemographicsDeckOverlay() {
         filled: true,
         lineWidthUnits: 'pixels',
         getLineWidth: 2,
-        getLineColor: [255, 255, 255, 255],
+        getLineColor: [0, 0, 0, 255],
         getFillColor: (d: { properties?: { rank?: number } }) => {
           const rank = d.properties?.rank ?? 1;
           const t = (rank - 1) / (n - 1);

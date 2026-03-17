@@ -1,6 +1,6 @@
 export type MapStylePresetKey = 'default' | 'streets' | 'satellite' | 'terrain' | 'dark';
 
-export interface MapStylePreset {
+interface MapStylePreset {
   key: MapStylePresetKey;
   label: string;
   styleUrl: string;

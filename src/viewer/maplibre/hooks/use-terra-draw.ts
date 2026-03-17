@@ -10,7 +10,7 @@ import {
 import { TerraDrawMapLibreGLAdapter } from 'terra-draw-maplibre-gl-adapter';
 import { useViewerStore } from '@/shared/state/viewer-store';
 
-export type TerraDrawMode = 'point' | 'linestring' | 'polygon';
+type TerraDrawMode = 'point' | 'linestring' | 'polygon';
 
 /**
  * Integrates Terra Draw with the MapLibre viewer. Must be called after the map

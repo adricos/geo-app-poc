@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import type { Feature, FeatureCollection } from 'geojson';
 import staticLocalidades from '../data/argentina-localidades.geojson.json';
 
-export interface ArgentinaDemographicsData {
+interface ArgentinaDemographicsData {
   geojson: FeatureCollection | null;
   populationExtent: [number, number];
   loading: boolean;

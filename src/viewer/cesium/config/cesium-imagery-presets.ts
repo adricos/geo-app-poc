@@ -11,7 +11,7 @@ export type CesiumImageryPresetKey =
   | 'dark'
   | 'ion-world-imagery';
 
-export interface CesiumImageryPreset {
+interface CesiumImageryPreset {
   key: CesiumImageryPresetKey;
   label: string;
   /** Requires VITE_CESIUM_ION_ACCESS_TOKEN to be set. */
