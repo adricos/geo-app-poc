@@ -5,9 +5,11 @@ import { GeoJsonLayer } from '@deck.gl/layers';
 import { useMapOverlay } from '@/viewer/core/context/use-map-overlay';
 import { useArgentinaDemographicsData } from '../hooks/use-argentina-demographics-data';
 import { rankToRgba } from '../utils/rank-color';
+import './argentina-demographics-tooltip.css';
 
 const ARGENTINA_BOUNDS: [number, number, number, number] = [-73.5, -55, -53.5, -21];
 const TOOLTIP_OFFSET = 12;
+const TOOLTIP_HIDE_DELAY_MS = 80;
 
 function formatTooltipFromObject(object: unknown): string | null {
   if (!object || typeof (object as { properties?: unknown }).properties !== 'object') return null;
@@ -29,6 +31,7 @@ export function ArgentinaDemographicsDeckOverlay() {
   const { geojson, populationExtent, loading, error } = useArgentinaDemographicsData();
   const n = geojson?.features?.length ?? 0;
   const deckRef = useRef<DeckGLRef>(null);
+  const clearTooltipTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [tooltip, setTooltip] = useState<{ text: string; x: number; y: number } | null>(null);
 
   const didFitBounds = useRef(false);
@@ -43,17 +46,33 @@ export function ArgentinaDemographicsDeckOverlay() {
 
   const handleMapPointerMove = useCallback(
     (x: number, y: number) => {
+      if (clearTooltipTimeoutRef.current) {
+        clearTimeout(clearTooltipTimeoutRef.current);
+        clearTooltipTimeoutRef.current = null;
+      }
       const info = deckRef.current?.pickObject({ x, y }) ?? null;
       const text = info?.object != null ? formatTooltipFromObject(info.object) : null;
-      if (text) setTooltip({ text, x: x + TOOLTIP_OFFSET, y: y + TOOLTIP_OFFSET });
-      else setTooltip(null);
+      if (text) {
+        setTooltip({ text, x: x + TOOLTIP_OFFSET, y: y + TOOLTIP_OFFSET });
+      } else {
+        clearTooltipTimeoutRef.current = setTimeout(() => {
+          clearTooltipTimeoutRef.current = null;
+          setTooltip(null);
+        }, TOOLTIP_HIDE_DELAY_MS);
+      }
     },
     [],
   );
 
   useEffect(() => {
     overlay?.setMapPointerMoveHandler(handleMapPointerMove);
-    return () => overlay?.setMapPointerMoveHandler(null);
+    return () => {
+      if (clearTooltipTimeoutRef.current) {
+        clearTimeout(clearTooltipTimeoutRef.current);
+        clearTooltipTimeoutRef.current = null;
+      }
+      overlay?.setMapPointerMoveHandler(null);
+    };
   }, [overlay, handleMapPointerMove]);
 
   const layers = useMemo(() => {
@@ -119,20 +138,7 @@ export function ArgentinaDemographicsDeckOverlay() {
         <div
           className="argentina-demographics-tooltip"
           role="tooltip"
-          style={{
-            position: 'absolute',
-            left: tooltip.x,
-            top: tooltip.y,
-            pointerEvents: 'none',
-            zIndex: 10,
-            padding: '8px 10px',
-            backgroundColor: '#29323c',
-            color: '#e0e0e0',
-            fontSize: '12px',
-            borderRadius: '4px',
-            whiteSpace: 'nowrap',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.25)',
-          }}
+          style={{ left: tooltip.x, top: tooltip.y }}
         >
           {tooltip.text}
         </div>
