@@ -13,7 +13,8 @@ The implementation includes:
 * **Cesium** implementation using Resium, with the same style/layer controls pattern
 * map style presets per viewer (MapLibre, Mapbox, Cesium) stored separately in the viewer store
 * **Argentina demographics** use case: city-level population (INDEC 2022) as a **deck.gl** overlay on 2D viewers and a **Cesium** GeoJSON layer on the 3D viewer; feature is decoupled from viewers via **MapOverlayContext** and composition (overlay/layer passed as viewer `children` from the app)
-* separation between domain logic, viewer infrastructure, and user-facing features
+* **Map interaction**: click on the map fills **Property insights** with basemap/vector feature attributes (MapLibre/Mapbox via `queryRenderedFeatures`) or Cesium picks (entities, 3D Tiles, or globe position); Argentina layer uses **hover tooltips** on 2D/3D for city stats
+* clear layering between viewer infrastructure and user-facing features
 
 ---
 
@@ -65,7 +66,7 @@ The project is organized into distinct layers:
 
 * `app/` → bootstrap, providers, composition
 * `shared/` → generic application-wide utilities and shell components
-* `domain/` → business/domain models and schemas
+* `domain/` → business/domain models and schemas *(add `src/domain/` when the first models land; see [`docs/PROJECT-SCAFFOLDING.md`](docs/PROJECT-SCAFFOLDING.md))*
 * `viewer/` → viewer contracts and concrete implementations
 * `features/` → user-facing product capabilities
 
@@ -87,108 +88,25 @@ To reduce inconsistency across contributors and avoid case-sensitivity issues ac
 
 ## Project structure
 
+**Target layout as the app grows** (layers, per-engine folders, feature slices) is documented in **[`docs/PROJECT-SCAFFOLDING.md`](docs/PROJECT-SCAFFOLDING.md)**. Empty placeholder directories are not kept in the repo—add `router/`, `domain/property/`, `features/map-explorer/`, etc. when the first file belongs there.
+
+**Implemented tree (summary):**
+
 ```text
 src/
-  app/
-    app.tsx
-    main.tsx
-    providers/
-      app-providers.tsx
-    router/
-
-  shared/
-    config/
-      env.ts
-      map-style-presets.ts
-    ui/
-      shell.tsx
-    state/
-      viewer-store.ts
-    lib/
-
-  domain/
-    property/
-      property.types.ts
-      property.schemas.ts
-    imagery/
-      imagery.types.ts
-      imagery.schemas.ts
-    annotation/
-      annotation.types.ts
-
+  app/           app.tsx, error-boundary, providers/
+  shared/        config/, state/, ui/shell.tsx
   viewer/
-    core/
-      contracts/
-        viewer-adapter.ts
-        viewer-layer.ts
-      context/
-        map-overlay-context.tsx   # 2D overlay viewState + requestFitBounds
-        use-map-overlay.ts
-        use-viewer-registry.ts
-        viewer-registry-context.tsx
-      types/
-        geo.types.ts
-        viewer.types.ts
-      services/
-        viewer-registry.ts
-
-    maplibre/
-      components/
-        map-libre-viewer.tsx
-        map-controls-widget.tsx
-      adapter/
-        map-libre-viewer-adapter.ts
-      hooks/
-        use-map-libre-viewer-adapter.ts
-        use-terra-draw.ts
-
-    mapbox/
-      components/
-        mapbox-viewer.tsx
-        mapbox-map-controls-widget.tsx
-      adapter/
-        mapbox-viewer-adapter.ts
-      config/
-        mapbox-style-presets.ts
-      hooks/
-        use-mapbox-viewer-adapter.ts
-        use-terra-draw.ts
-
-    cesium/
-      components/
-        cesium-viewer.tsx
-        cesium-map-controls-widget.tsx
-      config/
-        cesium-imagery-presets.ts
-      adapter/
-        cesium-viewer-adapter.ts
-      hooks/
-        use-cesium-viewer-adapter.ts
-
+    core/        contracts, context, types, services
+    maplibre/    components, adapter, hooks, (config via shared presets)
+    mapbox/      components, adapter, config, hooks
+    cesium/      components, adapter, config, hooks, utils
   features/
-    argentina-demographics/
-      components/
-        argentina-demographics-control.tsx    # sidebar checkbox + legend
-        argentina-demographics-deck-overlay.tsx
-        argentina-demographics-cesium-layer.tsx
-      hooks/
-        use-argentina-demographics-data.ts
-      utils/
-        rank-color.ts
-      data/
-        argentina-localidades.geojson.json
-
-    property-insights/
-      components/
-        property-insights-panel.tsx
-      hooks/
-      api/
-
-    drawing/
-      components/
-        drawing-control.tsx      # sidebar: Terra Draw toggle + mode (point/line/polygon)
-
-    (map-explorer, measurements, annotations: placeholders)
+    argentina-demographics/   components, hooks, utils, data
+    drawing/                  components/drawing-control
+    property-insights/        components/property-insights-panel
+  styles/        global.css
+  main.tsx
 ```
 
 ---
@@ -333,22 +251,24 @@ What is implemented:
 * **Mapbox**: `MapboxViewer`, `MapboxViewerAdapter`, and **MapboxMapControlsWidget** (same pattern; requires `VITE_MAPBOX_ACCESS_TOKEN`). Mapbox style presets (default, streets, satellite, satellite-streets, outdoors, light, dark) via `mapStyleKeyMapbox`. Same overlay `children` + **MapOverlayContext** pattern as MapLibre.
 * **Cesium**: `CesiumViewer`, `CesiumViewerAdapter`, and the same **map controls widget** pattern (style presets, imagery layer visibility). Accepts `children` (e.g. feature layers) for composition.
 * **MapLibre** style presets (default, streets, satellite, terrain, dark) via style JSON URLs; **Mapbox** style presets via Mapbox Styles API; **Cesium** imagery presets (same labels plus optional “Cesium World Imagery” when Ion token is set). Each viewer has its own store key (`mapStyleKey` / `mapStyleKeyMapbox` / `mapStyleKeyCesium`) so switching viewers keeps the correct style per engine.
-* Viewer registry and layer registration (used by MapLibre)
+* Viewer registry and layer registration (MapLibre and Mapbox)
 * **Argentina demographics** feature (decoupled from viewers):
   * **Data**: city-level GeoJSON (localidades, INDEC 2022) with population; rank computed in `useArgentinaDemographicsData`.
   * **2D (MapLibre/Mapbox)**: `ArgentinaDemographicsDeckOverlay` — deck.gl GeoJsonLayer, uses `useMapOverlay()` for viewState/size and `requestFitBounds` to fly to Argentina when enabled; circle size by population, color by rank (shared `rankToRgba`).
   * **3D (Cesium)**: `ArgentinaDemographicsCesiumLayer` — GeoJsonDataSource with ellipses and info balloon; same color/size logic.
   * **Shell**: `ArgentinaDemographicsControl` in the sidebar (checkbox + legend). App composes overlay/layer as viewer `children` when the store flag is enabled; viewers do not import the feature.
+  * **Inspect**: hover tooltips on localidades (deck.gl `pickObject` on 2D; Cesium `MOUSE_MOVE` on 3D).
+* **Property insights** (`features/property-insights`): sidebar panel bound to `viewer-store.selectedFeature` — shows layer/source and properties, or lat/lng (and terrain height when available) on empty clicks; dismiss clears selection. Wired from **MapLibre**/**Mapbox** map clicks and **Cesium** left-click (`cesium-pick-to-feature`).
 * **Terra Draw** (MapLibre/Mapbox only):
   * **Viewer**: `useTerraDraw(mapRef, drawingEnabled)` in `viewer/maplibre` and `viewer/mapbox` initializes Terra Draw after `style.load`, with point, linestring, polygon, and select modes.
   * **Store**: `drawingEnabled`, `drawingMode` in the viewer store.
   * **Shell**: `DrawingControl` in the sidebar (toggle + mode selector). When Cesium is selected, the control shows “Not available in 3D”.
 
-What is still thin or placeholder:
+What is still thin or to be built:
 
-* Highlight strategy
-* Feature interaction model (click-to-inspect, etc.)
-* Domain schemas beyond placeholders
+* **Visual highlight** on the map for the selected feature (panel works; no persistent map styling/selection ring yet)
+* **Deck.gl → Property insights**: clicks on the Argentina overlay show tooltips on hover; clicking a city does not yet push that feature into `selectedFeature` (only basemap/vector picks do on 2D)
+* Domain models under `src/domain/` (see scaffolding doc)
 
 ---
 
@@ -390,11 +310,10 @@ If a feature needs something from the viewer, define it as a contract in `viewer
 Recommended next implementation steps:
 
 1. Extend the source/layer registration model in `viewer/core` and align Cesium with it where useful
-2. Implement feature highlighting strategy for MapLibre (and Cesium if needed)
-3. Add click-to-inspect or selection behavior
-4. Introduce domain schemas for property and imagery data
-5. Add more overlay use cases via MapOverlayContext (2D) and viewer children (Cesium) as needed
-6. Optionally add Cesium Ion terrain or more imagery options when 3D requirements grow
+2. Implement **map highlight** for the selected feature (2D + Cesium) and optionally wire **deck.gl picks** into `selectedFeature` for overlay-only features
+3. Introduce domain schemas for property and imagery data
+4. Add more overlay use cases via MapOverlayContext (2D) and viewer children (Cesium) as needed
+5. Optionally add Cesium Ion terrain or more imagery options when 3D requirements grow
 
 ---
 
