@@ -1,17 +1,17 @@
 import * as Cesium from 'cesium';
 import { rankToRgba } from './rank-color';
 
-export const TOOLTIP_OFFSET = 12;
-export const TOOLTIP_HIDE_DELAY_MS = 80;
+const TOOLTIP_OFFSET = 12;
+const TOOLTIP_HIDE_DELAY_MS = 80;
 /** Scale fill alpha so Cesium matches deck.gl visual (Cesium tends to appear more opaque). */
-export const CESIUM_FILL_ALPHA_SCALE = 0.8;
+const CESIUM_FILL_ALPHA_SCALE = 0.8;
 /** Radius range in meters; kept small so circles don't overlap into huge blobs (deck.gl uses 10–52 px). */
-export const RADIUS_METERS_MIN = 2000;
-export const RADIUS_METERS_MAX = 100000;
+const RADIUS_METERS_MIN = 2000;
+const RADIUS_METERS_MAX = 100000;
 
 const ARGENTINA_RECTANGLE_DEGREES = { west: -73.5, south: -55, east: -53.5, north: -21 } as const;
 
-export function getEntityProp(entity: Cesium.Entity, name: string): string | number | undefined {
+function getEntityProp(entity: Cesium.Entity, name: string): string | number | undefined {
   const p = (entity.properties as Record<string, { getValue?: () => unknown }>)?.[name];
   if (!p) return undefined;
   const v = typeof (p as { getValue?: () => unknown }).getValue === 'function'
@@ -20,7 +20,7 @@ export function getEntityProp(entity: Cesium.Entity, name: string): string | num
   return v as string | number | undefined;
 }
 
-export function formatTooltipFromEntity(entity: Cesium.Entity): string {
+function formatTooltipFromEntity(entity: Cesium.Entity): string {
   const nombre = String(getEntityProp(entity, 'nombre') ?? entity.name ?? 'Unknown');
   const provincia = getEntityProp(entity, 'provincia');
   const pop = Number(getEntityProp(entity, 'poblacion') ?? 0);
@@ -36,7 +36,7 @@ export function getPopulationExtent(geojson: { features: Array<{ properties?: un
   return [Math.min(...pops), Math.max(...pops)];
 }
 
-export function removeDataSource(
+function removeDataSource(
   viewer: Cesium.Viewer | undefined,
   dataSource: Cesium.GeoJsonDataSource | null,
 ): void {
@@ -47,7 +47,7 @@ export function removeDataSource(
 }
 
 /** Stops picking tooltips for this layer (MOUSE_MOVE). Safe if handler missing. */
-export function removeDemographicsMouseMoveHandler(viewer: Cesium.Viewer | undefined): void {
+function removeDemographicsMouseMoveHandler(viewer: Cesium.Viewer | undefined): void {
   viewer?.screenSpaceEventHandler?.removeInputAction(Cesium.ScreenSpaceEventType.MOUSE_MOVE);
 }
 
@@ -155,7 +155,7 @@ export function flyToArgentinaBoundsOnce(
   viewer.camera.flyTo({ destination: rectangle, duration: 1 });
 }
 
-export type HideTooltipTimeoutRef = { current: ReturnType<typeof setTimeout> | null };
+type HideTooltipTimeoutRef = { current: ReturnType<typeof setTimeout> | null };
 
 /**
  * MOUSE_MOVE handler: show tooltip over our entities; delayed hide when pointer leaves.
