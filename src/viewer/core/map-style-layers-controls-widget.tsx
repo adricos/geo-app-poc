@@ -16,7 +16,8 @@ import styles from '@/viewer/core/styles/map-controls-widget.module.css';
 /** Minimal map API used for style layer toggling (Mapbox GL / MapLibre). */
 type MapStyleLayersMapRef = {
   getMap: () => {
-    isStyleLoaded: () => boolean;
+    /** MapLibre types this as `boolean | void`; Mapbox is `boolean`. */
+    isStyleLoaded: () => boolean | void;
     getStyle: () => { layers?: unknown[] } | null | undefined;
     /** Only visibility is used; literal key/value matches Mapbox/MapLibre layout typings. */
     setLayoutProperty: (
@@ -67,7 +68,8 @@ export function MapStyleLayersControlsWidget({
     const map = mapRef.getMap();
     if (map.isStyleLoaded()) refreshLayers();
     const onStyleData = () => {
-      if (map.getStyle().layers?.length) refreshLayers();
+      const style = map.getStyle();
+      if (style?.layers != null && style.layers.length > 0) refreshLayers();
     };
     map.on('style.load', refreshLayers);
     map.on('styledata', onStyleData);
