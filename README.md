@@ -1,5 +1,7 @@
 # Geo App
 
+**Technical architecture (for engineers):** see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — mental model, layers, data flow, and POC boundaries.
+
 ## Purpose
 
 This project is a React + TypeScript geospatial application that supports **MapLibre (2D)**, **Mapbox (2D)**, and **Cesium (3D)** viewers behind a shared abstraction. The app is MapLibre-first for day-to-day 2D workflows, with Mapbox and Cesium available as alternative 2D and 3D options.
