@@ -1,16 +1,15 @@
 import type { MapRef } from 'react-map-gl/maplibre';
-import type { ViewerAdapter, ViewerFeature } from '@/viewer/core/contracts/viewer-adapter';
-import type { Bounds, CameraState } from '@/viewer/core/types/geo.types';
+import type { ViewerAdapter } from '@/viewer/core/contracts/viewer-adapter';
+import type { CameraState } from '@/viewer/core/types/geo.types';
 
 export class MapLibreViewerAdapter implements ViewerAdapter {
   constructor(private readonly mapRef: MapRef) {}
 
   getCamera(): CameraState {
-    const center = this.mapRef.getCenter();
-
+    const c = this.mapRef.getCenter();
     return {
-      lng: center.lng,
-      lat: center.lat,
+      lng: c.lng,
+      lat: c.lat,
       zoom: this.mapRef.getZoom(),
       bearing: this.mapRef.getBearing(),
       pitch: this.mapRef.getPitch(),
@@ -18,53 +17,31 @@ export class MapLibreViewerAdapter implements ViewerAdapter {
   }
 
   setCamera(next: Partial<CameraState>): void {
+    const cur = this.getCamera();
     this.mapRef.jumpTo({
       center:
-        next.lng !== undefined && next.lat !== undefined
-          ? [next.lng, next.lat]
-          : undefined,
-      zoom: next.zoom,
-      bearing: next.bearing,
-      pitch: next.pitch,
+        next.lng !== undefined && next.lat !== undefined ? [next.lng, next.lat] : undefined,
+      zoom: next.zoom ?? cur.zoom,
+      bearing: next.bearing ?? cur.bearing ?? 0,
+      pitch: next.pitch ?? cur.pitch ?? 0,
     });
   }
 
   flyTo(target: Partial<CameraState> & { lng: number; lat: number }): void {
-    this.mapRef.flyTo({
-      center: [target.lng, target.lat],
-      zoom: target.zoom,
-      bearing: target.bearing,
-      pitch: target.pitch,
-      essential: true,
-    });
+    const map = this.mapRef.getMap();
+    const run = () => {
+      const cur = this.getCamera();
+      // MapLibre animates bearing/pitch; undefined breaks internal matrix math (setBearing crash).
+      this.mapRef.flyTo({
+        center: [target.lng, target.lat],
+        zoom: target.zoom ?? cur.zoom,
+        bearing: target.bearing ?? cur.bearing ?? 0,
+        pitch: target.pitch ?? cur.pitch ?? 0,
+      });
+    };
+    if (map.loaded()) run();
+    else map.once('load', run);
   }
 
-  fitBounds(bounds: Bounds, options?: { padding?: number; maxZoom?: number }): void {
-    this.mapRef.fitBounds(
-      [
-        [bounds[0], bounds[1]],
-        [bounds[2], bounds[3]],
-      ],
-      {
-        padding: options?.padding ?? 32,
-        maxZoom: options?.maxZoom,
-      },
-    );
-  }
-
-  /** Optional / engine-specific. Implement via feature-state or temporary layer when needed. */
-  highlightFeatures(_features: ViewerFeature[]): void {
-    // Placeholder.
-  }
-
-  /** Optional / engine-specific. Clear highlight layer or feature-state. */
-  clearHighlights(): void {
-    // Placeholder.
-  }
-
-  /**
-   * No-op for React-owned map: MapLibre instance is managed by react-map-gl.
-   * Other adapters (e.g. Cesium) may perform real cleanup here.
-   */
   destroy(): void {}
 }

@@ -7,6 +7,7 @@ import type { MapboxStylePresetKey } from '@/viewer/mapbox/config/mapbox-style-p
 import type { SelectedMapFeature } from '@/viewer/core/types/viewer.types';
 
 interface ViewerStoreState {
+  /** Active map engine (set by the mounted MapLibre / Mapbox / Cesium viewer). */
   adapter: ViewerAdapter | null;
   setAdapter: (adapter: ViewerAdapter | null) => void;
   /** Last known camera after move end; single source of truth for permalinks/panels. */
@@ -49,7 +50,8 @@ export const useViewerStore = create<ViewerStoreState>((set) => ({
   selectedFeature: null,
   setSelectedFeature: (selectedFeature) => set({ selectedFeature }),
   argentinaDemographicsEnabled: false,
-  setArgentinaDemographicsEnabled: (argentinaDemographicsEnabled) => set({ argentinaDemographicsEnabled }),
+  setArgentinaDemographicsEnabled: (argentinaDemographicsEnabled) =>
+    set({ argentinaDemographicsEnabled }),
   drawingEnabled: false,
   setDrawingEnabled: (drawingEnabled) => set({ drawingEnabled }),
   drawingMode: 'point',

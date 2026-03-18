@@ -22,9 +22,14 @@ describe('viewer-store', () => {
   });
 
   it('setAdapter updates adapter', () => {
-    const mockAdapter = { getCamera: () => ({}), setCamera: () => {}, flyTo: () => {}, fitBounds: () => {}, highlightFeatures: () => {}, clearHighlights: () => {}, destroy: () => {} };
-    useViewerStore.getState().setAdapter(mockAdapter as never);
-    expect(useViewerStore.getState().adapter).toBe(mockAdapter);
+    const mock = {
+      getCamera: () => ({ lng: 0, lat: 0, zoom: 1 }),
+      setCamera: () => {},
+      flyTo: () => {},
+      destroy: () => {},
+    };
+    useViewerStore.getState().setAdapter(mock);
+    expect(useViewerStore.getState().adapter).toBe(mock);
   });
 
   it('setCamera updates camera', () => {

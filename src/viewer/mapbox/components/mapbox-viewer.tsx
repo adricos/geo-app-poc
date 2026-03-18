@@ -5,11 +5,10 @@ import type { MapRef } from 'react-map-gl/mapbox';
 import type { MapPointerMoveHandler } from '@/viewer/core/context/map-overlay-context';
 import { env } from '@/shared/config/env';
 import { useViewerStore } from '@/shared/state/viewer-store';
-import { useViewerRegistry } from '@/viewer/core/context/use-viewer-registry';
 import { MapOverlayProvider } from '@/viewer/core/context/map-overlay-context';
 import type { Bounds } from '@/viewer/core/types/geo.types';
-import { useMapboxViewerAdapter } from '@/viewer/mapbox/hooks/use-mapbox-viewer-adapter';
 import { useTerraDraw } from '@/viewer/mapbox/hooks/use-terra-draw';
+import { useMapboxViewerAdapter } from '@/viewer/mapbox/hooks/use-mapbox-viewer-adapter';
 import { getMapboxStyleUrl } from '@/viewer/mapbox/config/mapbox-style-presets';
 import { MapboxMapControlsWidget } from '@/viewer/mapbox/components/mapbox-map-controls-widget';
 
@@ -35,9 +34,8 @@ export function MapboxViewer({ children }: MapboxViewerProps) {
   const mapStyleKeyMapbox = useViewerStore((s) => s.mapStyleKeyMapbox);
   const camera = useViewerStore((s) => s.camera);
   const drawingEnabled = useViewerStore((s) => s.drawingEnabled);
-  const registry = useViewerRegistry();
-
   useTerraDraw(mapRef, drawingEnabled);
+  useMapboxViewerAdapter(mapRef);
 
   useEffect(() => {
     const el = mapContainerRef.current;
@@ -49,16 +47,6 @@ export function MapboxViewer({ children }: MapboxViewerProps) {
     return () => ro.disconnect();
   }, []);
 
-  useMapboxViewerAdapter(mapRef);
-
-  useEffect(() => {
-    registry.registerLayer({
-      id: 'base',
-      type: 'raster',
-      sourceId: 'default',
-      visible: true,
-    });
-  }, [registry]);
 
   const mapStyle = useMemo(
     () => getMapboxStyleUrl(mapStyleKeyMapbox),

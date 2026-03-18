@@ -110,3 +110,45 @@ body {
   white-space: nowrap;
   border: 0;
 }
+
+/* Viewer adapter POC demo (sidebar) */
+.viewer-adapter-demo {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border, #e5e7eb);
+}
+.viewer-adapter-demo__title {
+  font-size: 0.95rem;
+  margin: 0 0 0.5rem;
+}
+.viewer-adapter-demo__text {
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--color-muted, #6b7280);
+  margin: 0 0 0.75rem;
+}
+.viewer-adapter-demo__text code {
+  font-size: 0.75rem;
+}
+.viewer-adapter-demo__btn {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-border, #d1d5db);
+  background: var(--color-surface, #f9fafb);
+  cursor: pointer;
+}
+.viewer-adapter-demo__btn:hover:not(:disabled) {
+  background: #eef2ff;
+  border-color: #a5b4fc;
+}
+.viewer-adapter-demo__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.viewer-adapter-demo__muted {
+  font-size: 0.75rem;
+  color: var(--color-muted, #9ca3af);
+  margin: 0.5rem 0 0;
+}

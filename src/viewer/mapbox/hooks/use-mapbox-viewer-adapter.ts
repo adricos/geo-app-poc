@@ -4,13 +4,11 @@ import { useViewerStore } from '@/shared/state/viewer-store';
 import { MapboxViewerAdapter } from '@/viewer/mapbox/adapter/mapbox-viewer-adapter';
 
 export function useMapboxViewerAdapter(mapRef: MapRef | null) {
-  const setAdapter = useViewerStore((state) => state.setAdapter);
-
-  const adapter = useMemo(() => {
-    if (!mapRef) return null;
-    return new MapboxViewerAdapter(mapRef);
-  }, [mapRef]);
-
+  const setAdapter = useViewerStore((s) => s.setAdapter);
+  const adapter = useMemo(
+    () => (mapRef ? new MapboxViewerAdapter(mapRef) : null),
+    [mapRef],
+  );
   useEffect(() => {
     setAdapter(adapter);
     return () => {
@@ -18,6 +16,5 @@ export function useMapboxViewerAdapter(mapRef: MapRef | null) {
       setAdapter(null);
     };
   }, [adapter, setAdapter]);
-
   return adapter;
 }

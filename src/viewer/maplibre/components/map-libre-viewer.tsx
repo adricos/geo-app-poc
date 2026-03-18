@@ -6,11 +6,10 @@ import type { MapPointerMoveHandler } from '@/viewer/core/context/map-overlay-co
 import { env } from '@/shared/config/env';
 import { getMapStyleUrl } from '@/shared/config/map-style-presets';
 import { useViewerStore } from '@/shared/state/viewer-store';
-import { useViewerRegistry } from '@/viewer/core/context/use-viewer-registry';
 import { MapOverlayProvider } from '@/viewer/core/context/map-overlay-context';
 import type { Bounds } from '@/viewer/core/types/geo.types';
-import { useMapLibreViewerAdapter } from '@/viewer/maplibre/hooks/use-map-libre-viewer-adapter';
 import { useTerraDraw } from '@/viewer/maplibre/hooks/use-terra-draw';
+import { useMapLibreViewerAdapter } from '@/viewer/maplibre/hooks/use-map-libre-viewer-adapter';
 import { MapControlsWidget } from '@/viewer/maplibre/components/map-controls-widget';
 
 const INITIAL_VIEW_STATE: ViewState = {
@@ -35,9 +34,8 @@ export function MapLibreViewer({ children }: MapLibreViewerProps) {
   const mapStyleKey = useViewerStore((s) => s.mapStyleKey);
   const camera = useViewerStore((s) => s.camera);
   const drawingEnabled = useViewerStore((s) => s.drawingEnabled);
-  const registry = useViewerRegistry();
-
   useTerraDraw(mapRef, drawingEnabled);
+  useMapLibreViewerAdapter(mapRef);
 
   useEffect(() => {
     const el = mapContainerRef.current;
@@ -49,16 +47,6 @@ export function MapLibreViewer({ children }: MapLibreViewerProps) {
     return () => ro.disconnect();
   }, []);
 
-  useMapLibreViewerAdapter(mapRef);
-
-  useEffect(() => {
-    registry.registerLayer({
-      id: 'base',
-      type: 'raster',
-      sourceId: 'default',
-      visible: true,
-    });
-  }, [registry]);
 
   const mapStyle = useMemo(
     () => env.mapStyleUrl ?? getMapStyleUrl(mapStyleKey),

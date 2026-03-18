@@ -1,7 +1,7 @@
 import type { Viewer } from 'cesium';
 import * as Cesium from 'cesium';
-import type { ViewerAdapter, ViewerFeature } from '@/viewer/core/contracts/viewer-adapter';
-import type { Bounds, CameraState } from '@/viewer/core/types/geo.types';
+import type { ViewerAdapter } from '@/viewer/core/contracts/viewer-adapter';
+import type { CameraState } from '@/viewer/core/types/geo.types';
 
 const WGS84_RADIUS = 6378137;
 const DEG2RAD = Math.PI / 180;
@@ -27,34 +27,27 @@ export class CesiumViewerAdapter implements ViewerAdapter {
     const carto = cam.positionCartographic;
     const lng = Cesium.Math.toDegrees(carto.longitude);
     const lat = Cesium.Math.toDegrees(carto.latitude);
-    const height = carto.height;
-    const zoom = heightToZoom(height, lat);
-    const heading = cam.heading;
-    const pitch = cam.pitch;
-    const bearing = Cesium.Math.toDegrees(heading);
-    const pitchDeg = Cesium.Math.toDegrees(pitch);
     return {
       lng,
       lat,
-      zoom,
-      bearing,
-      pitch: pitchDeg,
+      zoom: heightToZoom(carto.height, lat),
+      bearing: Cesium.Math.toDegrees(cam.heading),
+      pitch: Cesium.Math.toDegrees(cam.pitch),
     };
   }
 
   setCamera(next: Partial<CameraState>): void {
     const cam = this.viewer.scene.camera;
-    const current = this.getCamera();
-    const lng = next.lng ?? current.lng;
-    const lat = next.lat ?? current.lat;
-    const zoom = next.zoom ?? current.zoom;
-    const height = zoomToHeight(zoom, lat);
-    const position = Cesium.Cartesian3.fromDegrees(lng, lat, height);
+    const cur = this.getCamera();
+    const lng = next.lng ?? cur.lng;
+    const lat = next.lat ?? cur.lat;
+    const zoom = next.zoom ?? cur.zoom;
+    const position = Cesium.Cartesian3.fromDegrees(lng, lat, zoomToHeight(zoom, lat));
     cam.setView({
       destination: position,
       orientation: {
-        heading: next.bearing != null ? (next.bearing * DEG2RAD) : cam.heading,
-        pitch: next.pitch != null ? (next.pitch * DEG2RAD) : cam.pitch,
+        heading: next.bearing != null ? next.bearing * DEG2RAD : cam.heading,
+        pitch: next.pitch != null ? next.pitch * DEG2RAD : cam.pitch,
         roll: cam.roll,
       },
     });
@@ -62,10 +55,10 @@ export class CesiumViewerAdapter implements ViewerAdapter {
 
   flyTo(target: Partial<CameraState> & { lng: number; lat: number }): void {
     const cam = this.viewer.scene.camera;
-    const height = target.zoom != null ? zoomToHeight(target.zoom, target.lat) : 10000;
-    const destination = Cesium.Cartesian3.fromDegrees(target.lng, target.lat, height);
+    const height =
+      target.zoom != null ? zoomToHeight(target.zoom, target.lat) : 1500;
     cam.flyTo({
-      destination,
+      destination: Cesium.Cartesian3.fromDegrees(target.lng, target.lat, height),
       orientation: {
         heading: target.bearing != null ? target.bearing * DEG2RAD : 0,
         pitch: target.pitch != null ? target.pitch * DEG2RAD : -90 * DEG2RAD,
@@ -75,24 +68,5 @@ export class CesiumViewerAdapter implements ViewerAdapter {
     });
   }
 
-  fitBounds(bounds: Bounds, _options?: { padding?: number; maxZoom?: number }): void {
-    const [west, south, east, north] = bounds;
-    const rectangle = Cesium.Rectangle.fromDegrees(west, south, east, north);
-    this.viewer.camera.flyTo({
-      destination: rectangle,
-      duration: 1,
-    });
-  }
-
-  highlightFeatures(_features: ViewerFeature[]): void {
-    // Placeholder.
-  }
-
-  clearHighlights(): void {
-    // Placeholder.
-  }
-
-  destroy(): void {
-    // Viewer is owned by React/Resium.
-  }
+  destroy(): void {}
 }

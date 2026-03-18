@@ -2,6 +2,7 @@ import type { PropsWithChildren } from 'react';
 import { ArgentinaDemographicsControl } from '@/features/argentina-demographics/components/argentina-demographics-control';
 import { DrawingControl } from '@/features/drawing/components/drawing-control';
 import { PropertyInsightsPanel } from '@/features/property-insights/components/property-insights-panel';
+import { ViewerAdapterArchitectureDemo } from '@/viewer/core/viewer-adapter-architecture-demo';
 
 export type ViewerType = 'maplibre' | 'mapbox' | 'cesium';
 
@@ -38,6 +39,7 @@ export function Shell({ children, viewerType = 'maplibre', onViewerTypeChange }:
         )}
         <ArgentinaDemographicsControl viewerType={viewerType} />
         <DrawingControl viewerType={viewerType} />
+        <ViewerAdapterArchitectureDemo />
         <PropertyInsightsPanel />
       </aside>
       <main id="main-content" className="content" role="main">
