@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useViewerStore } from '@/shared/state/viewer-store';
 import { Shell, type ViewerType } from '@/shared/ui/shell';
+import styles from './app.module.css';
 import { MapLibreViewer } from '@/viewer/maplibre/components/map-libre-viewer';
 import { MapboxViewer } from '@/viewer/mapbox/components/mapbox-viewer';
 import { CesiumViewer } from '@/viewer/cesium/components/cesium-viewer';
@@ -47,7 +48,7 @@ export function App() {
     ) : mountedViewerType === 'cesium' ? (
       <CesiumViewer key="cesium">{demographicsCesiumLayer}</CesiumViewer>
     ) : (
-      <div className="map-root" role="application" aria-label="Loading map" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#e5e7eb' }} />
+      <div className={`map-root ${styles.mapRootLoading}`} role="application" aria-label="Loading map" />
     );
 
   return (
