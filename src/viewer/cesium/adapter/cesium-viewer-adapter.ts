@@ -6,6 +6,7 @@ import type { CameraState } from '@/viewer/core/types/geo.types';
 const WGS84_RADIUS = 6378137;
 const DEG2RAD = Math.PI / 180;
 
+/** Convert camera height (m) to zoom level for 2D-style permalinks; uses Web Mercator tile scale at latitude. */
 function heightToZoom(heightMeters: number, latDeg: number): number {
   const cosLat = Math.cos(latDeg * DEG2RAD);
   const tilesAtZoom0 = (2 * Math.PI * WGS84_RADIUS * cosLat) / 256;
@@ -13,6 +14,7 @@ function heightToZoom(heightMeters: number, latDeg: number): number {
   return Math.max(0, Math.min(25, zoom));
 }
 
+/** Inverse of heightToZoom: zoom level → camera height in meters. */
 function zoomToHeight(zoom: number, latDeg: number): number {
   const cosLat = Math.cos(latDeg * DEG2RAD);
   const tilesAtZoom0 = (2 * Math.PI * WGS84_RADIUS * cosLat) / 256;

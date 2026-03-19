@@ -29,6 +29,7 @@ function CesiumViewerInner({ children }: CesiumViewerInnerProps) {
   const setSelectedFeature = useViewerStore((s) => s.setSelectedFeature);
   useCesiumViewerAdapter(viewer);
 
+  // Left-click: entity/3D Tiles feature first, else globe position (lat/lng/height) for property insights.
   useEffect(() => {
     if (!viewer) return;
     const handler = viewer.screenSpaceEventHandler;
@@ -63,6 +64,7 @@ export function CesiumViewer({ children }: CesiumViewerProps) {
   const [containerReady, setContainerReady] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Imagery preset can be sync or async (e.g. Ion); ignore result if preset changes before resolve.
   useEffect(() => {
     const result = createCesiumImageryProvider(mapStyleKeyCesium);
     if (result instanceof Promise) {
@@ -78,6 +80,7 @@ export function CesiumViewer({ children }: CesiumViewerProps) {
     return undefined;
   }, [mapStyleKeyCesium]);
 
+  // Wait for container to have non-zero size (ResizeObserver), with 100ms fallback so we don't block in tests or when initially hidden.
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
