@@ -1,5 +1,5 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
   "tags": ["-lintignore"],
-  "ignore": ["vite.config.d.ts"]
+  "ignore": ["vite.config.d.ts", "vitest.config.d.ts"]
 }
