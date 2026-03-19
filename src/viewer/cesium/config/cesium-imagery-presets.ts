@@ -33,9 +33,15 @@ export function getCesiumImageryPresets(): CesiumImageryPreset[] {
   return BASE_PRESETS.filter((p) => !p.requiresIon || hasToken);
 }
 
-function createOsmProvider(): ImageryProvider {
+function createOsmProvider(key: CesiumImageryPresetKey = 'default'): ImageryProvider {
+  let url = 'https://a.tile.openstreetmap.org/';
+  if (key === 'dark') {
+    url = 'https://tiles.stadiamaps.com/tiles/stamen_toner/';
+  } else if (key === 'terrain') {
+    url = 'https://tiles.stadiamaps.com/tiles/stamen_terrain/';
+  }
   return new Cesium.OpenStreetMapImageryProvider({
-    url: 'https://a.tile.openstreetmap.org/',
+    url
   });
 }
 
@@ -59,7 +65,7 @@ export function createCesiumImageryProvider(
     case 'dark':
     case 'terrain':
     default:
-      return createOsmProvider();
+      return createOsmProvider(key)
   }
 }
 
