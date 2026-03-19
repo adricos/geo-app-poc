@@ -8,7 +8,7 @@ import {
 } from 'terra-draw';
 import { useViewerStore } from '@/shared/state/viewer-store';
 
-export type TerraDrawMode = 'point' | 'linestring' | 'polygon';
+type TerraDrawMode = 'point' | 'linestring' | 'polygon';
 
 /** Adapter type that TerraDraw accepts (from constructor options). */
 type TerraDrawAdapterType = ConstructorParameters<typeof TerraDraw>[0]['adapter'];
@@ -27,11 +27,11 @@ export interface TerraDrawStyleLoadableMap {
 /**
  * Ref-like object that exposes the underlying map (MapLibre or Mapbox).
  */
-export interface TerraDrawMapRef {
+interface TerraDrawMapRef {
   getMap(): TerraDrawStyleLoadableMap | null;
 }
 
-export type CreateTerraDrawAdapter = (
+type CreateTerraDrawAdapter = (
   map: TerraDrawStyleLoadableMap
 ) => TerraDrawAdapterType;
 
