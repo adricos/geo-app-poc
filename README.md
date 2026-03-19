@@ -171,6 +171,30 @@ npm install
 
 ## Running the application
 
+### Base path (subdirectory deployment)
+
+Optional env **`VITE_BASE`** sets where the app is served (Vite `base` → **`import.meta.env.BASE_URL`**, used for `public/` assets such as the MapLibre satellite style JSON). **If unset or empty, the app uses the site root `/`.**
+
+Examples in `.env` or `.env.local`:
+
+```bash
+# Root (default) — e.g. http://localhost:5173/
+# VITE_BASE=
+
+# Subpath — e.g. http://localhost:5173/geo-app-poc/
+VITE_BASE=/geo-app-poc/
+```
+
+Leading/trailing slashes are normalized in `vite.config.ts` (a trailing slash is added for non-root paths).
+
+- **Cesium (3D):** `vite-plugin-cesium` copies Workers/Assets under `dist/<base-segment>/cesium/` when using a subpath. After `vite build`, **`scripts/reposition-cesium-dist.mjs`** moves that tree to **`dist/cesium/`** (next to `index.html` and `assets/`), matching how the app is usually deployed. The script reads **`VITE_BASE`** from the environment or `.env` / `.env.local` (same as the Vite build). Set **`VITE_BUILD_OUT_DIR`** if you change Vite’s `build.outDir` from `dist`.
+
+- **Development:** with a subpath, open **`http://localhost:5173/<your-base>/`** (not the bare origin).
+- **Production:** deploy so the app is available at that path, or use a reverse proxy.
+- **React Router:** if you add a router later, set **`basename={import.meta.env.BASE_URL}`** (or strip the trailing slash if your API requires it).
+
+---
+
 Start the development server:
 
 ```bash
@@ -217,6 +241,8 @@ The project currently supports:
 
 | Variable | Description |
 |----------|-------------|
+| `VITE_BASE` | Optional. Public path when the app is **not** served at the domain root (e.g. `/geo-app-poc/`). Sets Vite’s `base` and `import.meta.env.BASE_URL`. **Omit or leave empty for `/`.** |
+| `VITE_BUILD_OUT_DIR` | Optional. Used only by `scripts/reposition-cesium-dist.mjs` after `vite build`. Set if `build.outDir` is not `dist` (must match Vite). |
 | `VITE_MAP_STYLE_URL` | Optional. Overrides the selected map style for MapLibre when set. When unset, the app uses the chosen preset from the viewer store for MapLibre (Mapbox and Cesium use their own store keys). |
 | `VITE_CESIUM_ION_ACCESS_TOKEN` | Optional. Cesium Ion default access token. When set, enables Ion imagery and terrain in the Cesium (3D) viewer. Get a token at [ion.cesium.com/tokens](https://ion.cesium.com/tokens). |
 | `VITE_ARCGIS_ACCESS_TOKEN` | Optional. ArcGIS API key. When set, assigned to `Cesium.ArcGisMapService.defaultAccessToken` so the app stops using the default token and the warning goes away. Get a key at [developers.arcgis.com](https://developers.arcgis.com). |
@@ -231,6 +257,8 @@ cp .env.example .env.local
 Example:
 
 ```bash
+# Optional subdirectory deploy (omit for root)
+# VITE_BASE=/geo-app-poc/
 VITE_MAP_STYLE_URL=https://demotiles.maplibre.org/style.json
 # Optional, for Cesium (3D viewer)
 VITE_CESIUM_ION_ACCESS_TOKEN=your_ion_token_here
