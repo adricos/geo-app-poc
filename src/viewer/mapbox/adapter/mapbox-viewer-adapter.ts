@@ -27,13 +27,20 @@ export class MapboxViewerAdapter implements ViewerAdapter {
   }
 
   flyTo(target: Partial<CameraState> & { lng: number; lat: number }): void {
-    this.mapRef.flyTo({
-      center: [target.lng, target.lat],
-      zoom: target.zoom,
-      bearing: target.bearing,
-      pitch: target.pitch,
-      essential: true,
-    });
+    const map = this.mapRef.getMap();
+    const run = () => {
+      const cur = this.getCamera();
+      // Match MapLibre adapter: undefined bearing/pitch can break camera animation internals.
+      this.mapRef.flyTo({
+        center: [target.lng, target.lat],
+        zoom: target.zoom ?? cur.zoom,
+        bearing: target.bearing ?? cur.bearing ?? 0,
+        pitch: target.pitch ?? cur.pitch ?? 0,
+        essential: true,
+      });
+    };
+    if (map.loaded()) run();
+    else map.once('load', run);
   }
 
   destroy(): void {}
