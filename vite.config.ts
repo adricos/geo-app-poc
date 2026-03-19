@@ -3,6 +3,9 @@ import react from '@vitejs/plugin-react';
 import checker from 'vite-plugin-checker';
 import cesium from 'vite-plugin-cesium';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 /**
  * Public base path for the app (`import.meta.env.BASE_URL`).
@@ -24,7 +27,10 @@ export default defineConfig(({ mode }) => {
       alias: {
         '@': path.resolve(__dirname, './src'),
         // Ensure mapbox-gl CSS resolves (some setups fail on bare subpath)
-        'mapbox-gl/dist/mapbox-gl.css': path.resolve(__dirname, 'node_modules/mapbox-gl/dist/mapbox-gl.css'),
+        'mapbox-gl/dist/mapbox-gl.css': path.resolve(
+          __dirname,
+          'node_modules/mapbox-gl/dist/mapbox-gl.css',
+        ),
       },
     },
   };

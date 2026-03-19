@@ -13,27 +13,27 @@ interface ShellProps extends PropsWithChildren {
 
 export function Shell({ children, viewerType = 'maplibre', onViewerTypeChange }: ShellProps) {
   return (
-    <div className="app-shell">
-      <a href="#main-content" className="skip-link">
+    <div className='app-shell'>
+      <a href='#main-content' className='skip-link'>
         Skip to map
       </a>
-      <aside className="sidebar" aria-label="App navigation and tools">
+      <aside className='sidebar' aria-label='App navigation and tools'>
         <h1>Geo App POC</h1>
         {onViewerTypeChange && (
-          <div className="viewer-switcher">
-            <label htmlFor="viewer-type" className="viewer-switcher__label">
+          <div className='viewer-switcher'>
+            <label htmlFor='viewer-type' className='viewer-switcher__label'>
               View
             </label>
             <select
-              id="viewer-type"
+              id='viewer-type'
               value={viewerType}
               onChange={(e) => onViewerTypeChange(e.target.value as ViewerType)}
-              className="viewer-switcher__select"
-              aria-label="Select map viewer"
+              className='viewer-switcher__select'
+              aria-label='Select map viewer'
             >
-              <option value="maplibre">MapLibre (2D)</option>
-              <option value="mapbox">Mapbox (2D)</option>
-              <option value="cesium">Cesium (3D)</option>
+              <option value='maplibre'>MapLibre (2D)</option>
+              <option value='mapbox'>Mapbox (2D)</option>
+              <option value='cesium'>Cesium (3D)</option>
             </select>
           </div>
         )}
@@ -42,7 +42,7 @@ export function Shell({ children, viewerType = 'maplibre', onViewerTypeChange }:
         <ViewerAdapterArchitectureDemo />
         <PropertyInsightsPanel />
       </aside>
-      <main id="main-content" className="content" role="main">
+      <main id='main-content' className='content' role='main'>
         {children}
       </main>
     </div>

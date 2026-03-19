@@ -18,8 +18,7 @@ export class MapboxViewerAdapter implements ViewerAdapter {
 
   setCamera(next: Partial<CameraState>): void {
     this.mapRef.jumpTo({
-      center:
-        next.lng !== undefined && next.lat !== undefined ? [next.lng, next.lat] : undefined,
+      center: next.lng !== undefined && next.lat !== undefined ? [next.lng, next.lat] : undefined,
       zoom: next.zoom,
       bearing: next.bearing,
       pitch: next.pitch,

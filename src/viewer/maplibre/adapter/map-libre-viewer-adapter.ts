@@ -19,8 +19,7 @@ export class MapLibreViewerAdapter implements ViewerAdapter {
   setCamera(next: Partial<CameraState>): void {
     const cur = this.getCamera();
     this.mapRef.jumpTo({
-      center:
-        next.lng !== undefined && next.lat !== undefined ? [next.lng, next.lat] : undefined,
+      center: next.lng !== undefined && next.lat !== undefined ? [next.lng, next.lat] : undefined,
       zoom: next.zoom ?? cur.zoom,
       bearing: next.bearing ?? cur.bearing ?? 0,
       pitch: next.pitch ?? cur.pitch ?? 0,

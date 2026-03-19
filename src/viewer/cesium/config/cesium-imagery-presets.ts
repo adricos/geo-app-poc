@@ -24,7 +24,11 @@ const BASE_PRESETS: CesiumImageryPreset[] = [
   { key: 'satellite', label: 'Satellite' },
   { key: 'terrain', label: 'Terrain' },
   { key: 'dark', label: 'Dark' },
-  { key: 'ion-world-imagery', label: 'Cesium World Imagery', requiresIon: true },
+  {
+    key: 'ion-world-imagery',
+    label: 'Cesium World Imagery',
+    requiresIon: true,
+  },
 ];
 
 /** Presets available in the Cesium style dropdown. Excludes Ion-only presets when no token is set. */
@@ -41,7 +45,7 @@ function createOsmProvider(key: CesiumImageryPresetKey = 'default'): ImageryProv
     url = 'https://tiles.stadiamaps.com/tiles/stamen_terrain/';
   }
   return new Cesium.OpenStreetMapImageryProvider({
-    url
+    url,
   });
 }
 
@@ -65,7 +69,7 @@ export function createCesiumImageryProvider(
     case 'dark':
     case 'terrain':
     default:
-      return createOsmProvider(key)
+      return createOsmProvider(key);
   }
 }
 

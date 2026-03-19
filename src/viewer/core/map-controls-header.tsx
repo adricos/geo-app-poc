@@ -1,9 +1,6 @@
 import type { ChangeEvent } from 'react';
 import type { MapControlsViewState } from '@/viewer/core/map-controls-view-state';
-import {
-  MapControlsChevronIcon,
-  MapControlsLayersIcon,
-} from '@/viewer/core/map-controls-icons';
+import { MapControlsChevronIcon, MapControlsLayersIcon } from '@/viewer/core/map-controls-icons';
 import { mapControlsChevronDirection } from '@/viewer/core/map-controls-view-state';
 import styles from '@/viewer/core/styles/map-controls-widget.module.css';
 
@@ -34,7 +31,7 @@ export function MapControlsHeader({
   return (
     <div className={styles.header}>
       <button
-        type="button"
+        type='button'
         className={styles.iconBtn}
         onClick={onCycleView}
         data-state={viewState}
@@ -64,8 +61,8 @@ export function MapControlsHeader({
             value={styleValue}
             onChange={onStyleChange}
             className={styles.select}
-            title="Style"
-            aria-label="Map style"
+            title='Style'
+            aria-label='Map style'
           >
             {presets.map((preset) => (
               <option key={preset.key} value={preset.key}>

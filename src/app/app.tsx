@@ -36,19 +36,25 @@ export function App() {
     return () => clearTimeout(t);
   }, [viewerType]);
 
-  const demographicsOverlay = argentinaDemographicsEnabled ? <ArgentinaDemographicsDeckOverlay /> : null;
+  const demographicsOverlay = argentinaDemographicsEnabled ? (
+    <ArgentinaDemographicsDeckOverlay />
+  ) : null;
   /** Always mount Cesium layer when on Cesium; it adds/removes the data source from the store flag so toggling doesn't stack layers. */
   const demographicsCesiumLayer = <ArgentinaDemographicsCesiumLayer />;
 
   const viewer =
     mountedViewerType === 'maplibre' ? (
-      <MapLibreViewer key="maplibre">{demographicsOverlay}</MapLibreViewer>
+      <MapLibreViewer key='maplibre'>{demographicsOverlay}</MapLibreViewer>
     ) : mountedViewerType === 'mapbox' ? (
-      <MapboxViewer key="mapbox">{demographicsOverlay}</MapboxViewer>
+      <MapboxViewer key='mapbox'>{demographicsOverlay}</MapboxViewer>
     ) : mountedViewerType === 'cesium' ? (
-      <CesiumViewer key="cesium">{demographicsCesiumLayer}</CesiumViewer>
+      <CesiumViewer key='cesium'>{demographicsCesiumLayer}</CesiumViewer>
     ) : (
-      <div className={`map-root ${styles.mapRootLoading}`} role="application" aria-label="Loading map" />
+      <div
+        className={`map-root ${styles.mapRootLoading}`}
+        role='application'
+        aria-label='Loading map'
+      />
     );
 
   return (

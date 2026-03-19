@@ -7,7 +7,7 @@ export function PropertyInsightsPanel() {
 
   if (!selectedFeature) {
     return (
-      <section className={styles.root} aria-label="Property insights">
+      <section className={styles.root} aria-label='Property insights'>
         <h2 className={styles.title}>Property insights</h2>
         <p className={styles.empty}>
           No property selected. Click a feature on the map to see details.
@@ -22,17 +22,17 @@ export function PropertyInsightsPanel() {
   );
 
   return (
-    <section className={styles.root} aria-label="Property insights">
+    <section className={styles.root} aria-label='Property insights'>
       <h2 className={styles.title}>Property insights</h2>
       <div className={styles.content}>
         <div className={styles.meta}>
           {layer && (
-            <span className={styles.layer} title="Layer">
+            <span className={styles.layer} title='Layer'>
               {layer}
             </span>
           )}
           {id && (
-            <span className={styles.id} title="Feature ID">
+            <span className={styles.id} title='Feature ID'>
               #{id}
             </span>
           )}
@@ -56,10 +56,10 @@ export function PropertyInsightsPanel() {
           {sourceLayer ? ` / ${sourceLayer}` : ''}
         </p>
         <button
-          type="button"
+          type='button'
           className={styles.clear}
           onClick={() => setSelectedFeature(null)}
-          aria-label="Clear selection"
+          aria-label='Clear selection'
         >
           Clear selection
         </button>

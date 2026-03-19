@@ -1,11 +1,8 @@
 import { defineConfig } from 'vite';
-import type { InlineConfig } from 'vitest';
 import react from '@vitejs/plugin-react';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-
-const __dirname = fileURLToPath(new URL('.', import.meta.url));
-
+var __dirname = fileURLToPath(new URL('.', import.meta.url));
 export default defineConfig({
   plugins: [react()],
   test: {
@@ -35,4 +32,4 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-} as import('vite').UserConfig & { test: InlineConfig });
+});

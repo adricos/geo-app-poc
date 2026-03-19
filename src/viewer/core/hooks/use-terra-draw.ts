@@ -31,9 +31,7 @@ interface TerraDrawMapRef {
   getMap(): TerraDrawStyleLoadableMap | null;
 }
 
-type CreateTerraDrawAdapter = (
-  map: TerraDrawStyleLoadableMap
-) => TerraDrawAdapterType;
+type CreateTerraDrawAdapter = (map: TerraDrawStyleLoadableMap) => TerraDrawAdapterType;
 
 /**
  * Shared Terra Draw integration. Must be called after the map has loaded;
@@ -45,7 +43,7 @@ type CreateTerraDrawAdapter = (
 export function useTerraDraw(
   mapRef: TerraDrawMapRef | null,
   enabled: boolean,
-  createAdapter: CreateTerraDrawAdapter
+  createAdapter: CreateTerraDrawAdapter,
 ) {
   const drawRef = useRef<TerraDraw | null>(null);
   const drawingMode = useViewerStore((s) => s.drawingMode);
@@ -110,7 +108,7 @@ export function useTerraDraw(
       setDrawingMode(mode);
       if (drawRef.current) drawRef.current.setMode(mode);
     },
-    [setDrawingMode]
+    [setDrawingMode],
   );
 
   const getSnapshot = useCallback(() => {

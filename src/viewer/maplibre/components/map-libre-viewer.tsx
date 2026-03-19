@@ -1,6 +1,10 @@
 import type { ReactNode } from 'react';
 import { useMemo, useCallback, useState, useEffect, useRef } from 'react';
-import Map, { NavigationControl, type ViewState, type ViewStateChangeEvent } from 'react-map-gl/maplibre';
+import Map, {
+  NavigationControl,
+  type ViewState,
+  type ViewStateChangeEvent,
+} from 'react-map-gl/maplibre';
 import type { MapRef } from 'react-map-gl/maplibre';
 import type { MapPointerMoveHandler } from '@/viewer/core/context/map-overlay-context';
 import { env } from '@/shared/config/env';
@@ -47,11 +51,7 @@ export function MapLibreViewer({ children }: MapLibreViewerProps) {
     return () => ro.disconnect();
   }, []);
 
-
-  const mapStyle = useMemo(
-    () => env.mapStyleUrl ?? getMapStyleUrl(mapStyleKey),
-    [mapStyleKey],
-  );
+  const mapStyle = useMemo(() => env.mapStyleUrl ?? getMapStyleUrl(mapStyleKey), [mapStyleKey]);
 
   const handleViewStateChange = useCallback(
     (event: ViewStateChangeEvent) => {
@@ -95,8 +95,14 @@ export function MapLibreViewer({ children }: MapLibreViewerProps) {
           id: String(f.id ?? (f.properties && (f.properties as Record<string, unknown>).id) ?? ''),
           source: f.source ?? '',
           sourceLayer: f.sourceLayer ?? undefined,
-          layer: typeof f.layer === 'object' && f.layer && 'id' in f.layer ? String((f.layer as { id: string }).id) : undefined,
-          properties: { ...positionProps, ...((f.properties as Record<string, unknown>) ?? {}) },
+          layer:
+            typeof f.layer === 'object' && f.layer && 'id' in f.layer
+              ? String((f.layer as { id: string }).id)
+              : undefined,
+          properties: {
+            ...positionProps,
+            ...((f.properties as Record<string, unknown>) ?? {}),
+          },
         });
       } else {
         setSelectedFeature({
@@ -160,16 +166,17 @@ export function MapLibreViewer({ children }: MapLibreViewerProps) {
       requestFitBounds,
       setMapPointerMoveHandler,
     }),
-    [overlayViewState, overlaySize.width, overlaySize.height, requestFitBounds, setMapPointerMoveHandler],
+    [
+      overlayViewState,
+      overlaySize.width,
+      overlaySize.height,
+      requestFitBounds,
+      setMapPointerMoveHandler,
+    ],
   );
 
   return (
-    <div
-      ref={mapContainerRef}
-      className="map-root"
-      role="application"
-      aria-label="Map"
-    >
+    <div ref={mapContainerRef} className='map-root' role='application' aria-label='Map'>
       <Map
         ref={(instance) => setMapRef(instance)}
         mapLib={import('maplibre-gl')}
@@ -181,14 +188,12 @@ export function MapLibreViewer({ children }: MapLibreViewerProps) {
         onMouseMove={handleMapPointerMove}
         onClick={handleClick}
       >
-        <NavigationControl position="top-right" />
+        <NavigationControl position='top-right' />
         <MapControlsWidget />
       </Map>
       {children != null && (
-        <div className="map-overlay" aria-hidden>
-          <MapOverlayProvider value={overlayContextValue}>
-            {children}
-          </MapOverlayProvider>
+        <div className='map-overlay' aria-hidden>
+          <MapOverlayProvider value={overlayContextValue}>{children}</MapOverlayProvider>
         </div>
       )}
     </div>

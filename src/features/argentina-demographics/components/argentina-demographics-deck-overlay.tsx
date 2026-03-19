@@ -13,7 +13,9 @@ const TOOLTIP_HIDE_DELAY_MS = 80;
 
 function formatTooltipFromObject(object: unknown): string | null {
   if (!object || typeof (object as { properties?: unknown }).properties !== 'object') return null;
-  const f = object as { properties?: { nombre?: string; provincia?: string; poblacion?: number } };
+  const f = object as {
+    properties?: { nombre?: string; provincia?: string; poblacion?: number };
+  };
   const nombre = f.properties?.nombre ?? 'Unknown';
   const prov = f.properties?.provincia;
   const pop = f.properties?.poblacion ?? 0;
@@ -32,7 +34,11 @@ export function ArgentinaDemographicsDeckOverlay() {
   const n = geojson?.features?.length ?? 0;
   const deckRef = useRef<DeckGLRef>(null);
   const clearTooltipTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const [tooltip, setTooltip] = useState<{ text: string; x: number; y: number } | null>(null);
+  const [tooltip, setTooltip] = useState<{
+    text: string;
+    x: number;
+    y: number;
+  } | null>(null);
 
   const didFitBounds = useRef(false);
   useEffect(() => {
@@ -44,25 +50,22 @@ export function ArgentinaDemographicsDeckOverlay() {
     return () => clearTimeout(t);
   }, [overlay?.requestFitBounds]);
 
-  const handleMapPointerMove = useCallback(
-    (x: number, y: number) => {
-      if (clearTooltipTimeoutRef.current) {
-        clearTimeout(clearTooltipTimeoutRef.current);
+  const handleMapPointerMove = useCallback((x: number, y: number) => {
+    if (clearTooltipTimeoutRef.current) {
+      clearTimeout(clearTooltipTimeoutRef.current);
+      clearTooltipTimeoutRef.current = null;
+    }
+    const info = deckRef.current?.pickObject({ x, y }) ?? null;
+    const text = info?.object != null ? formatTooltipFromObject(info.object) : null;
+    if (text) {
+      setTooltip({ text, x: x + TOOLTIP_OFFSET, y: y + TOOLTIP_OFFSET });
+    } else {
+      clearTooltipTimeoutRef.current = setTimeout(() => {
         clearTooltipTimeoutRef.current = null;
-      }
-      const info = deckRef.current?.pickObject({ x, y }) ?? null;
-      const text = info?.object != null ? formatTooltipFromObject(info.object) : null;
-      if (text) {
-        setTooltip({ text, x: x + TOOLTIP_OFFSET, y: y + TOOLTIP_OFFSET });
-      } else {
-        clearTooltipTimeoutRef.current = setTimeout(() => {
-          clearTooltipTimeoutRef.current = null;
-          setTooltip(null);
-        }, TOOLTIP_HIDE_DELAY_MS);
-      }
-    },
-    [],
-  );
+        setTooltip(null);
+      }, TOOLTIP_HIDE_DELAY_MS);
+    }
+  }, []);
 
   useEffect(() => {
     overlay?.setMapPointerMoveHandler(handleMapPointerMove);
@@ -136,8 +139,8 @@ export function ArgentinaDemographicsDeckOverlay() {
       />
       {tooltip && (
         <div
-          className="argentina-demographics-tooltip"
-          role="tooltip"
+          className='argentina-demographics-tooltip'
+          role='tooltip'
           style={{ left: tooltip.x, top: tooltip.y }}
         >
           {tooltip.text}

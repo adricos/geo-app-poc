@@ -33,10 +33,10 @@ export class AppErrorBoundary extends Component<Props, State> {
         return this.props.fallback;
       }
       return (
-        <div className={styles.root} role="alert">
+        <div className={styles.root} role='alert'>
           <h1>Something went wrong</h1>
           <p>{this.state.error.message}</p>
-          <button type="button" onClick={this.handleRetry}>
+          <button type='button' onClick={this.handleRetry}>
             Try again
           </button>
         </div>

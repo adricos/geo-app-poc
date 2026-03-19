@@ -18,12 +18,36 @@ interface MapboxStylePreset {
 }
 
 export const MAPBOX_STYLE_PRESETS: MapboxStylePreset[] = [
-  { key: 'default', label: 'Default', styleUrl: 'mapbox://styles/mapbox/streets-v12' },
-  { key: 'streets', label: 'Streets', styleUrl: 'mapbox://styles/mapbox/streets-v12' },
-  { key: 'satellite', label: 'Satellite', styleUrl: 'mapbox://styles/mapbox/satellite-v9' },
-  { key: 'satellite-streets', label: 'Satellite streets', styleUrl: 'mapbox://styles/mapbox/satellite-streets-v12' },
-  { key: 'outdoors', label: 'Outdoors', styleUrl: 'mapbox://styles/mapbox/outdoors-v12' },
-  { key: 'light', label: 'Light', styleUrl: 'mapbox://styles/mapbox/light-v11' },
+  {
+    key: 'default',
+    label: 'Default',
+    styleUrl: 'mapbox://styles/mapbox/streets-v12',
+  },
+  {
+    key: 'streets',
+    label: 'Streets',
+    styleUrl: 'mapbox://styles/mapbox/streets-v12',
+  },
+  {
+    key: 'satellite',
+    label: 'Satellite',
+    styleUrl: 'mapbox://styles/mapbox/satellite-v9',
+  },
+  {
+    key: 'satellite-streets',
+    label: 'Satellite streets',
+    styleUrl: 'mapbox://styles/mapbox/satellite-streets-v12',
+  },
+  {
+    key: 'outdoors',
+    label: 'Outdoors',
+    styleUrl: 'mapbox://styles/mapbox/outdoors-v12',
+  },
+  {
+    key: 'light',
+    label: 'Light',
+    styleUrl: 'mapbox://styles/mapbox/light-v11',
+  },
   { key: 'dark', label: 'Dark', styleUrl: 'mapbox://styles/mapbox/dark-v11' },
 ];
 

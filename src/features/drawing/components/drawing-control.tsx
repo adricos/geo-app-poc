@@ -29,32 +29,32 @@ export function DrawingControl({ viewerType = 'maplibre' }: DrawingControlProps)
 
   return (
     <div className={`viewer-switcher ${styles.root}`}>
-      <label className="viewer-switcher__label" htmlFor="drawing-enabled">
+      <label className='viewer-switcher__label' htmlFor='drawing-enabled'>
         Drawing
       </label>
       {is2D ? (
         <>
-          <label className={styles.checkboxLabel} htmlFor="drawing-enabled">
+          <label className={styles.checkboxLabel} htmlFor='drawing-enabled'>
             <input
-              id="drawing-enabled"
-              type="checkbox"
+              id='drawing-enabled'
+              type='checkbox'
               checked={enabled}
               onChange={(e) => setEnabled(e.target.checked)}
-              aria-label="Enable map drawing (Terra Draw)"
+              aria-label='Enable map drawing (Terra Draw)'
             />
             <span>Terra Draw</span>
           </label>
           {enabled && (
             <div className={styles.modeWrap}>
-              <label htmlFor="drawing-mode" className={styles.modeLabel}>
+              <label htmlFor='drawing-mode' className={styles.modeLabel}>
                 Mode
               </label>
               <select
-                id="drawing-mode"
+                id='drawing-mode'
                 value={mode}
                 onChange={(e) => setMode(e.target.value as DrawingMode)}
                 className={`viewer-switcher__select ${styles.select}`}
-                aria-label="Drawing mode"
+                aria-label='Drawing mode'
               >
                 {modes.map((m) => (
                   <option key={m.value} value={m.value}>
@@ -63,7 +63,8 @@ export function DrawingControl({ viewerType = 'maplibre' }: DrawingControlProps)
                 ))}
               </select>
               <p className={styles.hint}>
-                Click on the map to draw. Use <strong>Select</strong> mode to edit (select mode available in toolbar or add later).
+                Click on the map to draw. Use <strong>Select</strong> mode to edit (select mode
+                available in toolbar or add later).
               </p>
             </div>
           )}

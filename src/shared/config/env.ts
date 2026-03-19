@@ -4,7 +4,7 @@ const envSchema = z.object({
   VITE_MAP_STYLE_URL: z
     .string()
     .optional()
-    .transform((s) => ((typeof s === 'string' ? s.trim() : '') || undefined))
+    .transform((s) => (typeof s === 'string' ? s.trim() : '') || undefined)
     .pipe(z.url().optional()),
   VITE_CESIUM_ION_ACCESS_TOKEN: z
     .string()

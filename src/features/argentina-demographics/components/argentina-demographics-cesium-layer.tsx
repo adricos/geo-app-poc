@@ -37,7 +37,11 @@ export function ArgentinaDemographicsCesiumLayer() {
   /** Incremented each effect run so only the latest run's promise adds the layer (avoids stale add after viewer switch). */
   const runIdRef = useRef(0);
   const n = geojson?.features?.length ?? 0;
-  const [tooltip, setTooltip] = useState<{ text: string; x: number; y: number } | null>(null);
+  const [tooltip, setTooltip] = useState<{
+    text: string;
+    x: number;
+    y: number;
+  } | null>(null);
 
   useEffect(() => {
     if (!viewer) return;
@@ -97,8 +101,8 @@ export function ArgentinaDemographicsCesiumLayer() {
   if (!tooltip) return null;
   return (
     <div
-      className="argentina-demographics-tooltip"
-      role="tooltip"
+      className='argentina-demographics-tooltip'
+      role='tooltip'
       style={{ left: tooltip.x, top: tooltip.y }}
     >
       {tooltip.text}

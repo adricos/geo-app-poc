@@ -5,10 +5,7 @@ import { MapLibreViewerAdapter } from '@/viewer/maplibre/adapter/map-libre-viewe
 
 export function useMapLibreViewerAdapter(mapRef: MapRef | null) {
   const setAdapter = useViewerStore((s) => s.setAdapter);
-  const adapter = useMemo(
-    () => (mapRef ? new MapLibreViewerAdapter(mapRef) : null),
-    [mapRef],
-  );
+  const adapter = useMemo(() => (mapRef ? new MapLibreViewerAdapter(mapRef) : null), [mapRef]);
   useEffect(() => {
     setAdapter(adapter);
     return () => {

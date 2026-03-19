@@ -57,8 +57,7 @@ export class CesiumViewerAdapter implements ViewerAdapter {
 
   flyTo(target: Partial<CameraState> & { lng: number; lat: number }): void {
     const cam = this.viewer.scene.camera;
-    const height =
-      target.zoom != null ? zoomToHeight(target.zoom, target.lat) : 1500;
+    const height = target.zoom != null ? zoomToHeight(target.zoom, target.lat) : 1500;
     cam.flyTo({
       destination: Cesium.Cartesian3.fromDegrees(target.lng, target.lat, height),
       orientation: {

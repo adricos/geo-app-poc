@@ -17,7 +17,7 @@ export function MapboxMapControlsWidget() {
       presets={MAPBOX_STYLE_PRESETS}
       styleKey={mapStyleKeyMapbox}
       onStyleKeyChange={(key) => setMapStyleKeyMapbox(key as MapboxStylePresetKey)}
-      styleSelectId="mapbox-map-controls-style-select"
+      styleSelectId='mapbox-map-controls-style-select'
     />
   );
 }

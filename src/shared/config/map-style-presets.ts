@@ -17,11 +17,31 @@ const baseUrl = typeof import.meta.env?.BASE_URL === 'string' ? import.meta.env.
  * - Satellite: local style with ESRI World Imagery
  */
 export const MAP_STYLE_PRESETS: MapStylePreset[] = [
-  { key: 'default', label: 'Default', styleUrl: 'https://demotiles.maplibre.org/style.json' },
-  { key: 'streets', label: 'Streets', styleUrl: 'https://tiles.openfreemap.org/styles/bright' },
-  { key: 'satellite', label: 'Satellite', styleUrl: `${baseUrl}styles/satellite.json` },
-  { key: 'terrain', label: 'Terrain', styleUrl: 'https://tiles.openfreemap.org/styles/fiord' },
-  { key: 'dark', label: 'Dark', styleUrl: 'https://tiles.openfreemap.org/styles/dark' },
+  {
+    key: 'default',
+    label: 'Default',
+    styleUrl: 'https://demotiles.maplibre.org/style.json',
+  },
+  {
+    key: 'streets',
+    label: 'Streets',
+    styleUrl: 'https://tiles.openfreemap.org/styles/bright',
+  },
+  {
+    key: 'satellite',
+    label: 'Satellite',
+    styleUrl: `${baseUrl}styles/satellite.json`,
+  },
+  {
+    key: 'terrain',
+    label: 'Terrain',
+    styleUrl: 'https://tiles.openfreemap.org/styles/fiord',
+  },
+  {
+    key: 'dark',
+    label: 'Dark',
+    styleUrl: 'https://tiles.openfreemap.org/styles/dark',
+  },
 ];
 
 export function getMapStyleUrl(presetKey: MapStylePresetKey): string {

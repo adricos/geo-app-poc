@@ -106,12 +106,12 @@ export function CesiumMapControlsWidget() {
   if (!viewer) return null;
 
   return (
-    <div className={styles.widget} role="region" aria-label="Map style and layers">
+    <div className={styles.widget} role='region' aria-label='Map style and layers'>
       <MapControlsHeader
         viewState={viewState}
         onCycleView={cycleViewState}
         showStyles={showStyles}
-        styleSelectId="cesium-map-controls-style-select"
+        styleSelectId='cesium-map-controls-style-select'
         styleValue={effectiveStyleKey}
         onStyleChange={handleStyleChange}
         presets={cesiumPresets}

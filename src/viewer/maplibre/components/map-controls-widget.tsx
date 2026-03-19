@@ -14,7 +14,7 @@ export function MapControlsWidget() {
       presets={MAP_STYLE_PRESETS}
       styleKey={mapStyleKey}
       onStyleKeyChange={(key) => setMapStyleKey(key as MapStylePresetKey)}
-      styleSelectId="map-controls-style-select"
+      styleSelectId='map-controls-style-select'
     />
   );
 }

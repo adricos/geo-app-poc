@@ -5,10 +5,7 @@ import { MapboxViewerAdapter } from '@/viewer/mapbox/adapter/mapbox-viewer-adapt
 
 export function useMapboxViewerAdapter(mapRef: MapRef | null) {
   const setAdapter = useViewerStore((s) => s.setAdapter);
-  const adapter = useMemo(
-    () => (mapRef ? new MapboxViewerAdapter(mapRef) : null),
-    [mapRef],
-  );
+  const adapter = useMemo(() => (mapRef ? new MapboxViewerAdapter(mapRef) : null), [mapRef]);
   useEffect(() => {
     setAdapter(adapter);
     return () => {

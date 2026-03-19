@@ -11,34 +11,34 @@ interface ArgentinaDemographicsControlProps {
 /**
  * Sidebar control: checkbox to enable Argentina demographics and legend.
  */
-export function ArgentinaDemographicsControl({ viewerType = 'maplibre' }: ArgentinaDemographicsControlProps) {
+export function ArgentinaDemographicsControl({
+  viewerType = 'maplibre',
+}: ArgentinaDemographicsControlProps) {
   const enabled = useViewerStore((s) => s.argentinaDemographicsEnabled);
   const setEnabled = useViewerStore((s) => s.setArgentinaDemographicsEnabled);
   const subtitle = viewerType === 'cesium' ? 'Cesium' : 'deck.gl';
 
   return (
     <div className={`viewer-switcher ${styles.root}`}>
-      <label className="viewer-switcher__label" htmlFor="argentina-demographics">
+      <label className='viewer-switcher__label' htmlFor='argentina-demographics'>
         Use case
       </label>
-      <label className={styles.checkboxLabel} htmlFor="argentina-demographics">
+      <label className={styles.checkboxLabel} htmlFor='argentina-demographics'>
         <input
-          id="argentina-demographics"
-          type="checkbox"
+          id='argentina-demographics'
+          type='checkbox'
           checked={enabled}
           onChange={(e) => setEnabled(e.target.checked)}
-          aria-label="Show Argentina demographics (deck.gl / Cesium)"
+          aria-label='Show Argentina demographics (deck.gl / Cesium)'
         />
         <span>Argentina demographics</span>
       </label>
-      <p className={styles.subtitle}>
-        {subtitle} · INDEC 2022
-      </p>
+      <p className={styles.subtitle}>{subtitle} · INDEC 2022</p>
       {enabled && (
         <div
           className={styles.legend}
-          role="img"
-          aria-label="Legend: circle size is population; color by city rank"
+          role='img'
+          aria-label='Legend: circle size is population; color by city rank'
         >
           <div className={styles.legendTitle}>Legend (cities)</div>
           <p className={styles.legendRow}>
@@ -52,9 +52,7 @@ export function ArgentinaDemographicsControl({ viewerType = 'maplibre' }: Argent
             <div className={styles.gradientBar} />
             <span className={styles.gradientHigh}>high</span>
           </div>
-          <p className={styles.legendFooter}>
-            Cities · ~25k – 3.1M hab. (Censo 2022)
-          </p>
+          <p className={styles.legendFooter}>Cities · ~25k – 3.1M hab. (Censo 2022)</p>
         </div>
       )}
     </div>

@@ -9,14 +9,20 @@ const CESIUM_FILL_ALPHA_SCALE = 0.8;
 const RADIUS_METERS_MIN = 2000;
 const RADIUS_METERS_MAX = 100000;
 
-const ARGENTINA_RECTANGLE_DEGREES = { west: -73.5, south: -55, east: -53.5, north: -21 } as const;
+const ARGENTINA_RECTANGLE_DEGREES = {
+  west: -73.5,
+  south: -55,
+  east: -53.5,
+  north: -21,
+} as const;
 
 function getEntityProp(entity: Cesium.Entity, name: string): string | number | undefined {
   const p = (entity.properties as Record<string, { getValue?: () => unknown }>)?.[name];
   if (!p) return undefined;
-  const v = typeof (p as { getValue?: () => unknown }).getValue === 'function'
-    ? (p as { getValue: () => unknown }).getValue()
-    : p;
+  const v =
+    typeof (p as { getValue?: () => unknown }).getValue === 'function'
+      ? (p as { getValue: () => unknown }).getValue()
+      : p;
   return v as string | number | undefined;
 }
 
@@ -28,7 +34,9 @@ function formatTooltipFromEntity(entity: Cesium.Entity): string {
   return `${label}: ${pop.toLocaleString('es-AR')} hab.`;
 }
 
-export function getPopulationExtent(geojson: { features: Array<{ properties?: unknown }> }): [number, number] {
+export function getPopulationExtent(geojson: {
+  features: Array<{ properties?: unknown }>;
+}): [number, number] {
   const pops = geojson.features
     .map((f) => (f.properties as { poblacion?: number } | null)?.poblacion)
     .filter((p): p is number => typeof p === 'number');
@@ -71,7 +79,9 @@ function pickEntityInDataSource(
         ? picked
         : (picked as { id?: Cesium.Entity }).id
       : undefined;
-  return rawEntity instanceof Cesium.Entity && dataSource.entities.contains(rawEntity) ? rawEntity : null;
+  return rawEntity instanceof Cesium.Entity && dataSource.entities.contains(rawEntity)
+    ? rawEntity
+    : null;
 }
 
 /**

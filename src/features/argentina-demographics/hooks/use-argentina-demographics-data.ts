@@ -43,7 +43,11 @@ function getExtent(fc: FeatureCollection): [number, number] {
 
 /** City-level (localidades) static GeoJSON with population and rank. */
 export function useArgentinaDemographicsData(): ArgentinaDemographicsData {
-  const { data: raw, isLoading, error } = useQuery({
+  const {
+    data: raw,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ['argentina-localidades-geojson'],
     queryFn: async (): Promise<FeatureCollection> => {
       const fc = staticLocalidades as FeatureCollection;

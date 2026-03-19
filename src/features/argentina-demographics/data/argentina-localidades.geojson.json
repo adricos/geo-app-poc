@@ -5,10 +5,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.3816,
-          -34.6037
-        ]
+        "coordinates": [-58.3816, -34.6037]
       },
       "properties": {
         "id": "caba",
@@ -21,10 +18,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -64.1888,
-          -31.4167
-        ]
+        "coordinates": [-64.1888, -31.4167]
       },
       "properties": {
         "id": "cordoba",
@@ -37,10 +31,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -60.6397,
-          -32.9443
-        ]
+        "coordinates": [-60.6397, -32.9443]
       },
       "properties": {
         "id": "rosario",
@@ -53,10 +44,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -57.9545,
-          -34.9215
-        ]
+        "coordinates": [-57.9545, -34.9215]
       },
       "properties": {
         "id": "la-plata",
@@ -69,10 +57,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -60.7000,
-          -31.6200
-        ]
+        "coordinates": [-60.7, -31.62]
       },
       "properties": {
         "id": "santa-fe",
@@ -85,10 +70,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -68.8458,
-          -32.8895
-        ]
+        "coordinates": [-68.8458, -32.8895]
       },
       "properties": {
         "id": "mendoza",
@@ -101,10 +83,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -65.2043,
-          -26.8300
-        ]
+        "coordinates": [-65.2043, -26.83]
       },
       "properties": {
         "id": "san-miguel-tucuman",
@@ -117,10 +96,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -65.4109,
-          -24.7821
-        ]
+        "coordinates": [-65.4109, -24.7821]
       },
       "properties": {
         "id": "salta",
@@ -133,10 +109,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.2635,
-          -34.7214
-        ]
+        "coordinates": [-58.2635, -34.7214]
       },
       "properties": {
         "id": "quilmes",
@@ -149,10 +122,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.5080,
-          -34.4754
-        ]
+        "coordinates": [-58.508, -34.4754]
       },
       "properties": {
         "id": "san-isidro",
@@ -165,10 +135,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.3697,
-          -34.6644
-        ]
+        "coordinates": [-58.3697, -34.6644]
       },
       "properties": {
         "id": "avellaneda",
@@ -181,10 +148,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -63.2388,
-          -32.4137
-        ]
+        "coordinates": [-63.2388, -32.4137]
       },
       "properties": {
         "id": "villa-nueva",
@@ -197,10 +161,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.3900,
-          -34.7000
-        ]
+        "coordinates": [-58.39, -34.7]
       },
       "properties": {
         "id": "lanus",
@@ -213,10 +174,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.5791,
-          -34.4267
-        ]
+        "coordinates": [-58.5791, -34.4267]
       },
       "properties": {
         "id": "tigre",
@@ -229,10 +187,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.4077,
-          -34.7607
-        ]
+        "coordinates": [-58.4077, -34.7607]
       },
       "properties": {
         "id": "lomas-de-zamora",
@@ -245,10 +200,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.5670,
-          -34.6730
-        ]
+        "coordinates": [-58.567, -34.673]
       },
       "properties": {
         "id": "la-matanza",
@@ -261,10 +213,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.5458,
-          -34.5804
-        ]
+        "coordinates": [-58.5458, -34.5804]
       },
       "properties": {
         "id": "san-martin",
@@ -277,10 +226,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.7300,
-          -34.6600
-        ]
+        "coordinates": [-58.73, -34.66]
       },
       "properties": {
         "id": "merlo",
@@ -293,10 +239,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.7900,
-          -34.6200
-        ]
+        "coordinates": [-58.79, -34.62]
       },
       "properties": {
         "id": "moreno",
@@ -309,10 +252,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.3965,
-          -34.7506
-        ]
+        "coordinates": [-58.3965, -34.7506]
       },
       "properties": {
         "id": "banfield",
@@ -325,10 +265,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.7400,
-          -34.5100
-        ]
+        "coordinates": [-58.74, -34.51]
       },
       "properties": {
         "id": "jose-c-paz",
@@ -341,10 +278,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.3965,
-          -34.7506
-        ]
+        "coordinates": [-58.3965, -34.7506]
       },
       "properties": {
         "id": "temperley",
@@ -357,10 +291,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.7100,
-          -34.5400
-        ]
+        "coordinates": [-58.71, -34.54]
       },
       "properties": {
         "id": "san-miguel",
@@ -373,10 +304,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.6200,
-          -34.6500
-        ]
+        "coordinates": [-58.62, -34.65]
       },
       "properties": {
         "id": "moron",
@@ -389,10 +317,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.2100,
-          -34.7700
-        ]
+        "coordinates": [-58.21, -34.77]
       },
       "properties": {
         "id": "berazategui",
@@ -405,10 +330,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.9100,
-          -34.4600
-        ]
+        "coordinates": [-58.91, -34.46]
       },
       "properties": {
         "id": "pilar",
@@ -421,10 +343,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.2600,
-          -34.7800
-        ]
+        "coordinates": [-58.26, -34.78]
       },
       "properties": {
         "id": "florencio-varela",
@@ -437,10 +356,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.6800,
-          -34.6600
-        ]
+        "coordinates": [-58.68, -34.66]
       },
       "properties": {
         "id": "ituzaingo",
@@ -453,10 +369,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.6700,
-          -34.6500
-        ]
+        "coordinates": [-58.67, -34.65]
       },
       "properties": {
         "id": "castelar",
@@ -469,10 +382,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.6000,
-          -34.7000
-        ]
+        "coordinates": [-58.6, -34.7]
       },
       "properties": {
         "id": "rafael-castillo",
@@ -485,10 +395,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -57.5576,
-          -38.0040
-        ]
+        "coordinates": [-57.5576, -38.004]
       },
       "properties": {
         "id": "mar-del-plata",
@@ -501,10 +408,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -62.2700,
-          -38.7200
-        ]
+        "coordinates": [-62.27, -38.72]
       },
       "properties": {
         "id": "bahia-blanca",
@@ -517,10 +421,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -60.5283,
-          -31.7317
-        ]
+        "coordinates": [-60.5283, -31.7317]
       },
       "properties": {
         "id": "parana",
@@ -533,10 +434,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.8333,
-          -27.4667
-        ]
+        "coordinates": [-58.8333, -27.4667]
       },
       "properties": {
         "id": "corrientes",
@@ -549,10 +447,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -55.8971,
-          -27.3672
-        ]
+        "coordinates": [-55.8971, -27.3672]
       },
       "properties": {
         "id": "posadas",
@@ -565,10 +460,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -64.2647,
-          -27.7951
-        ]
+        "coordinates": [-64.2647, -27.7951]
       },
       "properties": {
         "id": "santiago-estero",
@@ -581,10 +473,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -65.3000,
-          -24.1833
-        ]
+        "coordinates": [-65.3, -24.1833]
       },
       "properties": {
         "id": "san-salvador-jujuy",
@@ -597,10 +486,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -68.5255,
-          -31.5375
-        ]
+        "coordinates": [-68.5255, -31.5375]
       },
       "properties": {
         "id": "san-juan",
@@ -613,10 +499,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -66.3377,
-          -33.3000
-        ]
+        "coordinates": [-66.3377, -33.3]
       },
       "properties": {
         "id": "san-luis",
@@ -629,10 +512,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -65.7167,
-          -33.6833
-        ]
+        "coordinates": [-65.7167, -33.6833]
       },
       "properties": {
         "id": "villa-mercedes",
@@ -645,10 +525,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -68.0641,
-          -38.9516
-        ]
+        "coordinates": [-68.0641, -38.9516]
       },
       "properties": {
         "id": "neuquen",
@@ -661,10 +538,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -65.0999,
-          -43.3000
-        ]
+        "coordinates": [-65.0999, -43.3]
       },
       "properties": {
         "id": "rawson",
@@ -677,10 +551,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -67.5800,
-          -39.0300
-        ]
+        "coordinates": [-67.58, -39.03]
       },
       "properties": {
         "id": "general-roca",
@@ -693,10 +564,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -65.0427,
-          -42.7663
-        ]
+        "coordinates": [-65.0427, -42.7663]
       },
       "properties": {
         "id": "puerto-madryn",
@@ -709,10 +577,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -68.0000,
-          -38.9333
-        ]
+        "coordinates": [-68.0, -38.9333]
       },
       "properties": {
         "id": "cipolletti",
@@ -725,10 +590,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -71.3000,
-          -41.1333
-        ]
+        "coordinates": [-71.3, -41.1333]
       },
       "properties": {
         "id": "san-carlos-bariloche",
@@ -741,10 +603,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -62.9900,
-          -40.8100
-        ]
+        "coordinates": [-62.99, -40.81]
       },
       "properties": {
         "id": "viedma",
@@ -757,10 +616,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -69.3167,
-          -51.6217
-        ]
+        "coordinates": [-69.3167, -51.6217]
       },
       "properties": {
         "id": "rio-gallegos",
@@ -773,10 +629,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -68.3000,
-          -54.8000
-        ]
+        "coordinates": [-68.3, -54.8]
       },
       "properties": {
         "id": "ushuaia",
@@ -789,10 +642,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.2333,
-          -32.4833
-        ]
+        "coordinates": [-58.2333, -32.4833]
       },
       "properties": {
         "id": "concepcion-uruguay",
@@ -805,10 +655,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -61.4900,
-          -34.5000
-        ]
+        "coordinates": [-61.49, -34.5]
       },
       "properties": {
         "id": "rafaela",
@@ -821,10 +668,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -61.9667,
-          -34.6833
-        ]
+        "coordinates": [-61.9667, -34.6833]
       },
       "properties": {
         "id": "venado-tuerto",
@@ -837,10 +681,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.5167,
-          -33.0000
-        ]
+        "coordinates": [-58.5167, -33.0]
       },
       "properties": {
         "id": "gualeguaychu",
@@ -853,10 +694,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -59.6500,
-          -29.1500
-        ]
+        "coordinates": [-59.65, -29.15]
       },
       "properties": {
         "id": "reconquista",
@@ -869,10 +707,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -61.5167,
-          -33.3333
-        ]
+        "coordinates": [-61.5167, -33.3333]
       },
       "properties": {
         "id": "casilda",
@@ -885,10 +720,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -64.3500,
-          -33.1250
-        ]
+        "coordinates": [-64.35, -33.125]
       },
       "properties": {
         "id": "rio-cuarto",
@@ -901,10 +733,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -64.4267,
-          -31.6500
-        ]
+        "coordinates": [-64.4267, -31.65]
       },
       "properties": {
         "id": "villa-maria",
@@ -917,10 +746,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -64.4200,
-          -31.6500
-        ]
+        "coordinates": [-64.42, -31.65]
       },
       "properties": {
         "id": "alta-gracia",
@@ -933,10 +759,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -64.3333,
-          -23.1333
-        ]
+        "coordinates": [-64.3333, -23.1333]
       },
       "properties": {
         "id": "oran",
@@ -949,10 +772,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -63.8167,
-          -22.5167
-        ]
+        "coordinates": [-63.8167, -22.5167]
       },
       "properties": {
         "id": "tartagal",
@@ -965,10 +785,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -62.1000,
-          -32.6833
-        ]
+        "coordinates": [-62.1, -32.6833]
       },
       "properties": {
         "id": "marcos-juarez",
@@ -981,10 +798,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -59.0333,
-          -34.1000
-        ]
+        "coordinates": [-59.0333, -34.1]
       },
       "properties": {
         "id": "zarate",
@@ -997,10 +811,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -60.5700,
-          -33.9100
-        ]
+        "coordinates": [-60.57, -33.91]
       },
       "properties": {
         "id": "pergamino",
@@ -1013,10 +824,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -60.0167,
-          -35.0167
-        ]
+        "coordinates": [-60.0167, -35.0167]
       },
       "properties": {
         "id": "chivilcoy",
@@ -1029,10 +837,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -58.9667,
-          -34.1667
-        ]
+        "coordinates": [-58.9667, -34.1667]
       },
       "properties": {
         "id": "campana",
@@ -1045,10 +850,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -59.2500,
-          -29.1500
-        ]
+        "coordinates": [-59.25, -29.15]
       },
       "properties": {
         "id": "goya",

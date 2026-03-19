@@ -4,25 +4,22 @@ This document describes **how the repo is organized today** and **where to put c
 
 ## Layering model
 
-
 | Layer         | Path            | Responsibility                                                           |
 | ------------- | --------------- | ------------------------------------------------------------------------ |
 | **App shell** | `src/app/`      | Bootstrap, root layout, providers, routing when added                    |
 | **Shared**    | `src/shared/`   | Cross-cutting UI, config, global client state - not feature logic        |
-| **Domain**    | `src/domain/`   | *(Create when needed.)* Types, schemas, pure logic for business concepts |
+| **Domain**    | `src/domain/`   | _(Create when needed.)_ Types, schemas, pure logic for business concepts |
 | **Viewer**    | `src/viewer/`   | Map engines + shared viewer contracts (`core/`)                          |
 | **Features**  | `src/features/` | User-facing product capabilities (sidebar, panels, overlays)             |
 
-
 **Dependency direction (ideal):**  
 `features` → `viewer/core` contracts + `domain` + `shared`  
-`viewer/`* engines → `viewer/core`  
+`viewer/`\* engines → `viewer/core`  
 Avoid: feature modules importing `maplibre-gl`, `mapbox-gl`, or `cesium` directly unless unavoidable (e.g. a dedicated engine-specific subfolder).
 
 ---
 
 ## `src/app/`
-
 
 | Area                            | Purpose                                                          |
 | ------------------------------- | ---------------------------------------------------------------- |
@@ -30,11 +27,9 @@ Avoid: feature modules importing `maplibre-gl`, `mapbox-gl`, or `cesium` directl
 | `providers/`                    | React Query, theme, future auth                                  |
 | `router/`                       | **When you add routes:** `routes.tsx`, layout routes, lazy pages |
 
-
 ---
 
 ## `src/shared/`
-
 
 | Area      | Purpose                                                                                                 |
 | --------- | ------------------------------------------------------------------------------------------------------- |
@@ -42,7 +37,6 @@ Avoid: feature modules importing `maplibre-gl`, `mapbox-gl`, or `cesium` directl
 | `state/`  | App-wide client state (e.g. viewer store)                                                               |
 | `ui/`     | Shell, layout primitives                                                                                |
 | `lib/`    | **When needed:** small helpers (formatting, geo helpers)—keep thin; prefer `domain/` for business rules |
-
 
 ---
 
@@ -71,7 +65,6 @@ Contracts and shared behavior: `contracts/`, `context/` (e.g. overlay, registry)
 
 Typical subfolders as complexity grows:
 
-
 | Subfolder                       | Use when                                                              |
 | ------------------------------- | --------------------------------------------------------------------- |
 | `components/`                   | Viewer root, controls                                                 |
@@ -80,7 +73,6 @@ Typical subfolders as complexity grows:
 | `config/`                       | Style/imagery presets                                                 |
 | `layers/`                       | **Cesium:** entity layers, datasources colocated by engine            |
 | `sources/`, `layers/`, `utils/` | **MapLibre:** GeoJSON sources, layer factories, pick/hit-test helpers |
-
 
 ---
 
@@ -100,14 +92,12 @@ features/
 
 Examples of **future** features (create the folder when you add the first file):
 
-
 | Feature              | Role                                                  |
 | -------------------- | ----------------------------------------------------- |
 | `map-explorer/`      | Search, recents, layer catalog UX                     |
 | `measurements/`      | Distance, area on map                                 |
 | `annotations/`       | Save/edit user annotations                            |
 | `property-insights/` | Panel in shell; add `hooks/`, `api/` when wiring data |
-
 
 ---
 

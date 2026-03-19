@@ -28,9 +28,5 @@ interface MapOverlayProviderProps {
 }
 
 export function MapOverlayProvider({ value, children }: MapOverlayProviderProps) {
-  return (
-    <MapOverlayContext.Provider value={value}>
-      {children}
-    </MapOverlayContext.Provider>
-  );
+  return <MapOverlayContext.Provider value={value}>{children}</MapOverlayContext.Provider>;
 }

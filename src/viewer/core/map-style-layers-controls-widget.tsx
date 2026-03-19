@@ -14,21 +14,24 @@ import { useMapControlsSelectAll } from '@/viewer/core/use-map-controls-select-a
 import styles from '@/viewer/core/styles/map-controls-widget.module.css';
 
 /** Minimal map API used for style layer toggling (Mapbox GL / MapLibre). */
-type MapStyleLayersMapRef = {
-  getMap: () => {
-    /** MapLibre types this as `boolean | void`; Mapbox is `boolean`. */
-    isStyleLoaded: () => boolean | void;
-    getStyle: () => { layers?: unknown[] } | null | undefined;
-    /** Only visibility is used; literal key/value matches Mapbox/MapLibre layout typings. */
-    setLayoutProperty: (
-      layerId: string,
-      prop: 'visibility',
-      value: 'visible' | 'none',
-    ) => unknown;
-    on: (event: string, fn: () => void) => void;
-    off: (event: string, fn: () => void) => void;
-  };
-} | null | undefined;
+type MapStyleLayersMapRef =
+  | {
+      getMap: () => {
+        /** MapLibre types this as `boolean | void`; Mapbox is `boolean`. */
+        isStyleLoaded: () => boolean | void;
+        getStyle: () => { layers?: unknown[] } | null | undefined;
+        /** Only visibility is used; literal key/value matches Mapbox/MapLibre layout typings. */
+        setLayoutProperty: (
+          layerId: string,
+          prop: 'visibility',
+          value: 'visible' | 'none',
+        ) => unknown;
+        on: (event: string, fn: () => void) => void;
+        off: (event: string, fn: () => void) => void;
+      };
+    }
+  | null
+  | undefined;
 
 interface MapStyleLayersPreset {
   key: string;
@@ -88,7 +91,13 @@ export function MapStyleLayersControlsWidget({
         setLayers((prev) =>
           prev.map((l) =>
             l.id === layerId
-              ? { ...l, layout: { ...l.layout, visibility: visible ? 'visible' : 'none' } }
+              ? {
+                  ...l,
+                  layout: {
+                    ...l.layout,
+                    visibility: visible ? 'visible' : 'none',
+                  },
+                }
               : l,
           ),
         );
@@ -128,7 +137,7 @@ export function MapStyleLayersControlsWidget({
   }));
 
   return (
-    <div className={styles.widget} role="region" aria-label="Map style and layers">
+    <div className={styles.widget} role='region' aria-label='Map style and layers'>
       <MapControlsHeader
         viewState={viewState}
         onCycleView={cycleViewState}

@@ -27,19 +27,21 @@ export function MapControlsLayersPanel({
   return (
     <div
       className={layers.length <= 1 ? `${styles.layers} ${styles.layersSingle}` : styles.layers}
-      title="Layers"
-      aria-label="Layers"
+      title='Layers'
+      aria-label='Layers'
     >
       {showHeader && (
         <div className={styles.layersHeader}>
           <label className={styles.selectAll}>
             <input
               ref={selectAllCheckboxRef}
-              type="checkbox"
+              type='checkbox'
               checked={allVisible}
               onChange={onSelectAllChange}
               className={styles.checkbox}
-              title={allVisible ? 'Hide all layers' : noneVisible ? 'Show all layers' : 'Show all layers'}
+              title={
+                allVisible ? 'Hide all layers' : noneVisible ? 'Show all layers' : 'Show all layers'
+              }
               aria-label={
                 allVisible
                   ? 'All layers visible; click to hide all'
@@ -60,7 +62,7 @@ export function MapControlsLayersPanel({
             <li key={layer.id} className={styles.item}>
               <label className={styles.label}>
                 <input
-                  type="checkbox"
+                  type='checkbox'
                   checked={layer.checked}
                   data-layer-id={layer.id}
                   onChange={(e) => onLayerChange(layer.id, e.target.checked)}

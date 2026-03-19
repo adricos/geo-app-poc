@@ -1,8 +1,6 @@
 export type MapControlsViewState = 'icon' | 'styles' | 'full';
 
-export function cycleMapControlsViewState(
-  prev: MapControlsViewState,
-): MapControlsViewState {
+export function cycleMapControlsViewState(prev: MapControlsViewState): MapControlsViewState {
   if (prev === 'icon') return 'styles';
   if (prev === 'styles') return 'full';
   return 'icon';

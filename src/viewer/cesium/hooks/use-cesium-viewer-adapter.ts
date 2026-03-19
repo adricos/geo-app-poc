@@ -5,10 +5,7 @@ import { CesiumViewerAdapter } from '@/viewer/cesium/adapter/cesium-viewer-adapt
 
 export function useCesiumViewerAdapter(viewer: Viewer | undefined) {
   const setAdapter = useViewerStore((s) => s.setAdapter);
-  const adapter = useMemo(
-    () => (viewer ? new CesiumViewerAdapter(viewer) : null),
-    [viewer],
-  );
+  const adapter = useMemo(() => (viewer ? new CesiumViewerAdapter(viewer) : null), [viewer]);
   useEffect(() => {
     setAdapter(adapter);
     return () => {

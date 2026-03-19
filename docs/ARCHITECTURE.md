@@ -55,15 +55,13 @@ This document is for engineers who need a **mental model** of the project: why i
 
 ## 3. Layered folder model
 
-
-| Layer              | Path                     | Role                                                                                                     |
-| ------------------ | ------------------------ | -------------------------------------------------------------------------------------------------------- |
-| **App**            | `src/app/`               | Bootstrap, providers, root composition (`app.tsx` wires viewer + children).                              |
-| **Shared**         | `src/shared/`            | Shell UI, env/config (Zod), **viewer store** (Zustand)—cross-cutting, not business features.             |
-| **Viewer core**    | `src/viewer/core/`       | **Contracts** (`ViewerAdapter`), geo types, shared map controls UI, **MapOverlayContext** (2D overlays). |
-| **Viewer engines** | `src/viewer/maplibre`    | mapbox                                                                                                   |
-| **Features**       | `src/features/*/`        | Product capabilities: panels, toggles, **decoupled** overlays/layers composed from `app.tsx`.            |
-
+| Layer              | Path                  | Role                                                                                                     |
+| ------------------ | --------------------- | -------------------------------------------------------------------------------------------------------- |
+| **App**            | `src/app/`            | Bootstrap, providers, root composition (`app.tsx` wires viewer + children).                              |
+| **Shared**         | `src/shared/`         | Shell UI, env/config (Zod), **viewer store** (Zustand)—cross-cutting, not business features.             |
+| **Viewer core**    | `src/viewer/core/`    | **Contracts** (`ViewerAdapter`), geo types, shared map controls UI, **MapOverlayContext** (2D overlays). |
+| **Viewer engines** | `src/viewer/maplibre` | mapbox                                                                                                   |
+| **Features**       | `src/features/*/`     | Product capabilities: panels, toggles, **decoupled** overlays/layers composed from `app.tsx`.            |
 
 **Dependency rule (target):**  
 `features` → `viewer/core` + `shared` (+ future `domain`).  
@@ -90,7 +88,6 @@ Each engine implements this in its **adapter** (`map-libre-viewer-adapter.ts`, `
 
 `src/shared/state/viewer-store.ts` holds:
 
-
 | State                                                     | Purpose                                                                                              |
 | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `adapter`                                                 | Active `ViewerAdapter` (null when no viewer mounted).                                                |
@@ -99,7 +96,6 @@ Each engine implements this in its **adapter** (`map-libre-viewer-adapter.ts`, `
 | `selectedFeature`                                         | Result of map pick (basemap/vector on 2D; Cesium pick pipeline on 3D). Drives **Property insights**. |
 | `argentinaDemographicsEnabled`                            | Toggles demographics use case.                                                                       |
 | `drawingEnabled` / `drawingMode`                          | Terra Draw (2D only).                                                                                |
-
 
 The store is the **integration bus** between map interactions and sidebar UI.
 
@@ -121,7 +117,7 @@ So: **viewers stay generic**; **app** decides which feature subtree is active.
 `src/viewer/core/context/map-overlay-context.tsx` exposes:
 
 - Current **view state** and **width/height** (for deck.gl and similar).
-- `**requestFitBounds`** — fly map to a region (e.g. Argentina when enabling the layer).
+- `**requestFitBounds`\*\* — fly map to a region (e.g. Argentina when enabling the layer).
 - Optional pointer-move hook for hover tooltips.
 
 MapLibre and Mapbox viewers wrap overlay children with this provider. Cesium does not use this pattern; 3D layers use different primitives (e.g. `GeoJsonDataSource`).
@@ -172,7 +168,6 @@ On switch, **selected feature** is cleared to avoid showing stale pick data from
 
 ## 11. Technology map (concise)
 
-
 | Concern                   | Choice                                            |
 | ------------------------- | ------------------------------------------------- |
 | App shell                 | React 19 + TypeScript + Vite                      |
@@ -185,11 +180,9 @@ On switch, **selected feature** is cleared to avoid showing stale pick data from
 | 2D vector overlay example | deck.gl                                           |
 | Drawing (2D)              | Terra Draw + engine adapters                      |
 
-
 ---
 
 ## 12. Where to look in the repo
-
 
 | Question                         | Start here                                                                    |
 | -------------------------------- | ----------------------------------------------------------------------------- |
@@ -202,7 +195,6 @@ On switch, **selected feature** is cleared to avoid showing stale pick data from
 | Demographics feature             | `src/features/argentina-demographics/`                                        |
 | Property panel                   | `src/features/property-insights/`                                             |
 | Target growth layout             | `docs/PROJECT-SCAFFOLDING.md`                                                 |
-
 
 ---
 
@@ -218,4 +210,4 @@ Useful for scoping conversations:
 
 ## Summary
 
-This POC demonstrates **one app, multiple map engines**, with **features composed at the root**, **engine code isolated under `viewer/{maplibre,mapbox,cesium}`**, and **shared behavior** expressed through **Zustand**, `**ViewerAdapter`**, and **MapOverlayContext** (2D). The technological challenge is **not** “wrap every GL API”—it is **clear boundaries** so the team can ship MapLibre-first workflows while keeping Mapbox and Cesium as first-class alternatives without entangling product code in three SDKs.
+This POC demonstrates **one app, multiple map engines**, with **features composed at the root**, **engine code isolated under `viewer/{maplibre,mapbox,cesium}`**, and **shared behavior** expressed through **Zustand**, `**ViewerAdapter`**, and **MapOverlayContext** (2D). The technological challenge is **not** “wrap every GL API”—it is **clear boundaries\*\* so the team can ship MapLibre-first workflows while keeping Mapbox and Cesium as first-class alternatives without entangling product code in three SDKs.
