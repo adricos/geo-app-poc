@@ -1,16 +1,10 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useCallback } from 'react';
 import type { MapRef } from 'react-map-gl/mapbox';
-import {
-  TerraDraw,
-  TerraDrawPointMode,
-  TerraDrawLineStringMode,
-  TerraDrawPolygonMode,
-  TerraDrawSelectMode,
-} from 'terra-draw';
 import { TerraDrawMapboxGLAdapter } from 'terra-draw-mapbox-gl-adapter';
-import { useViewerStore } from '@/shared/state/viewer-store';
-
-type TerraDrawMode = 'point' | 'linestring' | 'polygon';
+import {
+  useTerraDraw as useTerraDrawCore,
+  type TerraDrawStyleLoadableMap,
+} from '@/viewer/core/hooks/use-terra-draw';
 
 /**
  * Integrates Terra Draw with the Mapbox viewer. Must be called after the map
@@ -18,81 +12,10 @@ type TerraDrawMode = 'point' | 'linestring' | 'polygon';
  * When drawingEnabled is false, the hook does nothing. When toggled off, draw.stop() is called.
  */
 export function useTerraDraw(mapRef: MapRef | null, enabled: boolean) {
-  const drawRef = useRef<TerraDraw | null>(null);
-  const drawingMode = useViewerStore((s) => s.drawingMode);
-
-  useEffect(() => {
-    if (!enabled || !mapRef) {
-      if (drawRef.current) {
-        drawRef.current.stop();
-        drawRef.current = null;
-      }
-      return;
-    }
-
-    const map = mapRef.getMap();
-    if (!map) return;
-
-    const onStyleLoad = () => {
-      if (drawRef.current) {
-        drawRef.current.stop();
-        drawRef.current = null;
-      }
-
-      const adapter = new TerraDrawMapboxGLAdapter({
-        map,
-      });
-
-      const draw = new TerraDraw({
-        adapter,
-        modes: [
-          new TerraDrawPointMode(),
-          new TerraDrawLineStringMode(),
-          new TerraDrawPolygonMode(),
-          new TerraDrawSelectMode(),
-        ],
-      });
-
-      drawRef.current = draw;
-      draw.start();
-      draw.setMode(useViewerStore.getState().drawingMode);
-    };
-
-    if (map.isStyleLoaded()) {
-      onStyleLoad();
-    } else {
-      map.once('style.load', onStyleLoad);
-    }
-
-    return () => {
-      map.off('style.load', onStyleLoad);
-      if (drawRef.current) {
-        drawRef.current.stop();
-        drawRef.current = null;
-      }
-    };
-  }, [enabled, mapRef]);
-
-  useEffect(() => {
-    if (!enabled || !drawRef.current) return;
-    drawRef.current.setMode(drawingMode);
-  }, [enabled, drawingMode]);
-
-  const setMode = useCallback(
-    (mode: TerraDrawMode) => {
-      useViewerStore.getState().setDrawingMode(mode);
-      if (drawRef.current) drawRef.current.setMode(mode);
-    },
-    [],
-  );
-
-  const getSnapshot = useCallback(() => {
-    return drawRef.current?.getSnapshot() ?? [];
+  const createAdapter = useCallback((map: TerraDrawStyleLoadableMap) => {
+    // map is the same instance as mapRef.getMap() (full Mapbox map)
+    return new TerraDrawMapboxGLAdapter({ map: map as never });
   }, []);
 
-  const clear = useCallback(() => {
-    drawRef.current?.clear();
-  }, []);
-
-  return { setMode, getSnapshot, clear };
+  return useTerraDrawCore(mapRef, enabled, createAdapter);
 }
